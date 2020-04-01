@@ -512,7 +512,7 @@
     - 定义的局部变量arr只存数组实体的地址(引用型变量)；
     - 实体对象在堆内存中，通过new来开辟空间。
   - java中的内存分配图解：
-    - ![java中的内存分配图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/Java%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%9B%BE%E8%A7%A3.bmp)
+![java中的内存分配图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/Java%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%9B%BE%E8%A7%A3.bmp)
   - 一个数组的内存图：
     - ![一个数组的内存图](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.bmp)
   - 两个数组的内存图：
