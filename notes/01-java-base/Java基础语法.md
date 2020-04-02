@@ -429,19 +429,19 @@
     - 定义的局部变量arr只存数组实体的地址(引用型变量)；
     - 实体对象在堆内存中，通过new来开辟空间。
   - java中的内存分配图解：
-    - ![java中的内存分配图解]()
+    ![java中的内存分配图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/Java%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%9B%BE%E8%A7%A3.bmp)
   - 一个数组的内存图：
-    - ![一个数组的内存图]()
+    ![一个数组的内存图](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.bmp)
   - 两个数组的内存图：
-    - ![两个数组的内存图]()
+    ![两个数组的内存图](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.bmp)
   - 两个数组指向同一个地址的内存图：
-    - ![两个数组指向同一个地址的内存图]()
+    ![两个数组指向同一个地址的内存图](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%8C%87%E5%90%91%E5%90%8C%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.bmp)
   - 静态初始化内存图
-    - ![静态初始化内存图]()
+    ![静态初始化内存图](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%86%85%E5%AD%98%E5%9B%BE.bmp)
   - 数组操作的两个常见小问题
-    - ![数组操作的两个常见小问题]()
+    ![数组操作的两个常见小问题](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%B8%B8%E8%A7%81%E5%B0%8F%E9%97%AE%E9%A2%98.bmp)
   - 数组操作之获取最值图解
-    - ![数组操作之获取最值图解]()
+    ![数组操作之获取最值图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/arrays/%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C%E4%B9%8B%E8%8E%B7%E5%8F%96%E6%9C%80%E5%80%BC%E5%9B%BE%E8%A7%A3.bmp)
 
 
 
