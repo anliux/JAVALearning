@@ -7,7 +7,7 @@
 - [Java介绍](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E4%BB%8B%E7%BB%8D.md)
 - [eclipse的基本使用](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/eclipse%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.md)
 - [Java基础语法](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95.md)
-- [Java面向对象]()
+- [Java面向对象](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md)
 - [Java常用API]()
 - [Java集合]()
 - [IO流]()
