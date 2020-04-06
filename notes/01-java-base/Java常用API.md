@@ -4,9 +4,9 @@
 
 
 <!--GFM-TOC -->
-* []()
-* []()
-* []()
+* [API概述](#api概述)
+* [String类](#string类)
+* [StringBuilder](#stringbuilder)
 * []()
 * []()
 * []()
@@ -89,7 +89,7 @@
     - 通过构造方法创建字符串对象是在堆内存；
     - 通过直接赋值创建对象是在方法区的常量池。
   - 图解
-    ![字符串对象构造方法创建和直接赋值的区别]()
+    ![字符串对象构造方法创建和直接赋值的区别](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/api/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%B9%E8%B1%A1%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA%E5%92%8C%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E7%9A%84%E5%8C%BA%E5%88%AB.bmp)
 
 - ### Object类
   - Object是类层次结构的根类，所有的类都直接或间接继承自该类。
@@ -213,7 +213,7 @@
   - 字符串拼接的弊端
     - 每次拼接，都会构建一个新的String对象，既耗时，又浪费空间。
     - 图解：
-    ![String拼接浪费空间]()
+    ![String拼接浪费空间](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/api/String%E6%8B%BC%E6%8E%A5%E6%B5%AA%E8%B4%B9%E7%A9%BA%E9%97%B4.bmp)
     - 而StringBuilder就可以解决这个问题。
 
 - ### StringBuilder和String的区别?
