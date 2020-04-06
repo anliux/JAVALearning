@@ -85,7 +85,8 @@
   - 导包：手动`import java.util.Scanner;` 快捷键：`ctrl+shift+o`
     - 位置放到class定义的上面：`package>import>class`
   - 创建对象: `Scanner sc = new Scanner(System.in);`
-  - 接收数据: `int x = sc.nextInt(); //对象调用方法`
+  - 接收int数据: `int x = sc.nextInt(); //对象调用方法`
+  - 接受String数据：`String s = sc.nextLine(); //获取键盘录入的字符串数据`
 
 - ### 参考链接：
   - [github: OJ输入输出总结](https://github.com/anliux/PracticePool/blob/master/base/docs/io.md)
