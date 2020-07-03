@@ -4,10 +4,10 @@
 
 
 <!--GFM-TOC -->
-* []()
-* []()
-* []()
-* []()
+* [对象数组的练习](#对象数组的练习)
+* [为什么出现集合类](#为什么出现集合类)
+* [ArrayList](#arraylist)
+* [ArrayList案例分析](#arraylist案例分析)
 * []()
 * []()
 * []()
@@ -313,15 +313,92 @@ public class ArrayListTest {
     - 将键盘录入方法进行封装
   - 代码：
    ```
+//Student.java
+
+package com.itcast01;
+
+public class Student {
+	private String name;
+	private String age;
+	public Student() {
+		
+	}
+	public Student(String name, String age) {
+		this.name = name;
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}	
+}
 
    ```
 
-- ###
+   ```
+//ArrayListTest2.java
 
+package com.itcast01;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ArrayListTest2 {
+	public static void main(String[] args) {
+		ArrayList<Student> array = new ArrayList<Student>();
+		
+		//调用方法：调用一次方法，执行一次
+		addStudent(array);
+		addStudent(array);
+		addStudent(array);
+
+		for(int i = 0; i < array.size(); i++) {
+			Student s = array.get(i);
+			System.out.println(s.getName() + "--" + s.getAge());
+		}
+	}
+	
+	/*	为了提高代码复用性，进行封装。
+	 * 
+	 * 	写方法：两个明确
+	 * 		返回值类型： void
+	 * 		参数列表：ArrayList<Student> array
+	 * */
+	private static void addStudent(ArrayList<Student> array) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("请输入学生姓名：");
+		String name = sc.nextLine();
+		System.out.println("请输入学生年龄：");
+		String age = sc.nextLine();
+		
+		Student s = new Student();
+		s.setName(name);
+		s.setAge(age);
+		
+		array.add(s);
+
+	}
+	
+}
+   ```
 
 
 
 ## 学生管理系统
+
+
+
+
+
+
+
 
 ### END
