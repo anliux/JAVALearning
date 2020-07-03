@@ -1,5 +1,6 @@
 # eclipse的基本使用
 
+
 ## 基本使用
 	A:创建Java项目：
 		点击File或者在最左侧空白处，选择Java项目，在界面中写一个项目名称，然后Finish即可。
@@ -13,7 +14,9 @@
 	F:运行
 		选择要运行的文件或者在要运行的文件内容中
 		右键 -- Run as - Java Application即可
+
 		
+
 ## 基本配置
 	A:行号的显示和隐藏
 		显示：在代码区域的最左边的空白区域，右键 -- Show Line Numbers即可。
@@ -33,6 +36,7 @@
 	D:控制台找不到了，怎么办?
 		Window--Show View—Console
 
+	
 		
 ## 快捷键
 
@@ -40,11 +44,28 @@
 		main	然后alt+/
 		syso	然后alt+/
   
+	提供解决方案	ctrl+1（数字1）
+		对小红叉提供解决方案：导包；异常处理；光标定位变量并重命名。
+		大红叉是语法错误，必须修改代码。
 	快捷键
 		注释
-		单行	选中内容，ctrl+/, 再来一次取消
-		多行	选中内容，ctrl+shift+/, ctrl+shift+\
+			单行	选中内容，ctrl+/, 再来一次取消
+			多行	选中内容，ctrl+shift+/, 取消 ctrl+shift+\
 		格式化	ctrl+shift+f 或者 右键 -- source -- format
+		导包    ctrl+shift+o
+		光标	shift+enter	将光标切换至下一行起始处。
+		复制	ctrl+alt+向上箭头	光标处代码向上复制
+			ctrl+alt+向下箭头	光标处代码向下复制
+		移动	ctrl+向上/向下箭头	光标处的代码向上或向下移动
+		删除	ctrl+d	删除选中行
+				注：单行光标定位，多行选中，可不全选
+		大小写	ctrl+shift+x	选中部分全部大写
+			ctrl+shift+y	选中部分全部小写
+		source	alt+shift+s	调出source快捷菜单
+		看源码	光标定位+ctrl+双击	打开定位处的源码
+		打印	选中+alt+/：可选自动把选中部分放入输出语句中
+				    即，可以通过生成的菜单选中sysout将选中语句放入输出语句
+		tab	tab或者shift+tab	选中代码整体后移或者前移
 
 
 ## 删除和导入项目
@@ -58,6 +79,24 @@
 			Existing Projects into Workspace
 		点击next,然后选择你要导入的项目
 			注意：这里选择的是项目名称
+
+
+
+## 自动生成构成函数和getset方法
+	A：自动生成构成方法：
+		代码区域右键 -- Source -- Generate Constructors from Superclass.. ： 无参构造函数
+		代码区域右键 -- Source -- Generate Constructors using Fields...: 带参构造函数
+	B：自动生成get、set方法：
+		代码区域右键 -- Source -- Generate Getters and Setters.. -- select all
+
+
+## 已创建类的重命名
+- 1.首先要进行选中java类名称，然后进行右键
+- 2.弹出了下拉菜单中,进行选择为refactor的选项。
+- 3.弹出了下一个菜单中进行选择为rename的选项。
+- 4.弹出了一个提示,那么就可以对类名进行重新修改。
+- 5.修改完成之后,然后进行按键盘中的enter的键
+
 
 
 ## 参考链接：
