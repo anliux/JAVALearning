@@ -18,12 +18,13 @@
 
 
 ## 发展史
-- 略
+- 发展史：SUN->推出各个版本->oracle收购
+- Java语言平台：J2SE, J2ME,J2EE
 
 
 
 ## Java语言跨平台原理
-- 平台：操作系统
+- 平台：操作系统 (windows, linux, mac)
 - 跨平台：Java程序可以在任意操作系统上运行，一次编写到处运行
 - 原理：实现跨平台需要依赖Java的虚拟机 JVM （Java Virtual Machine），在不同的系统安装jvm即可运行Java程序。
 - JVM：Java虚拟机
