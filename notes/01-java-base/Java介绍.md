@@ -26,10 +26,10 @@
 ## Java语言跨平台原理
 - 平台：操作系统 (windows, linux, mac)
 - 跨平台：Java程序可以在任意操作系统上运行，一次编写到处运行
-- 原理：实现跨平台需要依赖Java的虚拟机 JVM （Java Virtual Machine），在不同的系统安装jvm即可运行Java程序。
-- JVM：Java虚拟机
-- JRE：Java运行环境 = jvm + 核心类库 
-- JDK：Java开发工具包 = jre + 开发工具
+- 原理：实现跨平台需要依赖Java的虚拟机 JVM，在不同的系统安装jvm即可运行Java程序。
+- JVM (Java Virtual Machine)：Java虚拟机 
+- JRE (Java Runtime Environment)：Java运行环境 = JVM + 核心类库 
+- JDK (Jave Development Kit)：Java开发工具包 = JRE + 开发工具
 
 
 
