@@ -8,6 +8,7 @@
 * [常用dos命令](#常用dos命令)
 * [JDK下载安装与路径配置](#jdk下载安装与路径配置)
 * [Java程序执行流程](#java程序执行流程)
+* [HelloWorld](#HelloWorld)
 * [notepad安装与配置](#notepad安装与配置)
 * [键盘录入](#键盘录入)
 * [输出语句](#输出语句)
@@ -75,6 +76,16 @@
 - 代码常见错误：单词大小写；非法中文字符比如中文分号等。
 
 
+
+## HelloWorld
+```
+
+public class HelloWorld{
+	public static void main(String[] args){
+		System.out.println(“HelloWorld”);
+	}
+}
+```
 
 ## notepad安装与配置
 - 官网下载 -- 傻瓜式安装
