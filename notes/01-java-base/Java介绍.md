@@ -89,7 +89,7 @@ public class HelloWorld{
 
 ## notepad安装与配置
 - 官网下载 -- 傻瓜式安装
-- 配置：设置-- 首选项 -- 新建 -- 默认语言与编码
+- 配置：设置-- 首选项 -- 新建 -- 默认语言与编码: 系统(windows or mac); 默认语言Java；编码ANSI.
 
 
 
