@@ -30,6 +30,7 @@
 - JVM (Java Virtual Machine)：Java虚拟机 
 - JRE (Java Runtime Environment)：Java运行环境 = JVM + 核心类库 
 - JDK (Jave Development Kit)：Java开发工具包 = JRE + 开发工具
+- 概述为：使用JDK写完的开发程序，交给JRE中运行，有JRE中的JVM保证运行
 
 
 
@@ -40,7 +41,7 @@
   - dir(directory): 列出当前目录下的文件以及文件夹
   - cd (change directory)改变指定目录(进入指定目录)
     - 进入  cd 目录；cd 多级目录
-    - 回退  cd..；cd\ 回退多级
+    - 回退  cd..；cd\ 回退多级 (注：使用单杠’/‘或双杠'//'分割不同级文件夹均可)
   - cls : (clear screen)清屏
   - exit : 退出dos命令行
 
