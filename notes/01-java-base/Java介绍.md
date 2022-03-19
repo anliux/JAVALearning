@@ -8,7 +8,7 @@
 * [常用dos命令](#常用dos命令)
 * [JDK下载安装与路径配置](#jdk下载安装与路径配置)
 * [Java程序执行流程](#java程序执行流程)
-* [HelloWorld](#HelloWorld)
+* [HelloWorld](#helloworld)
 * [notepad安装与配置](#notepad安装与配置)
 * [键盘录入](#键盘录入)
 * [输出语句](#输出语句)
@@ -79,8 +79,7 @@
 
 
 ## HelloWorld
-```
-
+```java
 public class HelloWorld{
 	public static void main(String[] args){
 		System.out.println(“HelloWorld”);
