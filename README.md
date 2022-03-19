@@ -3,8 +3,10 @@
 
 ## 目录
 
-### 00-数据结构小结
+### 00-基础知识
 - [数据结构小结..待整理]()
+- [Git使用小结]()
+- [Linux常用命令小结]()
 
 ### 01-Java基础
 - [Java介绍](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E4%BB%8B%E7%BB%8D.md)
