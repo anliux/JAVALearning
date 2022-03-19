@@ -281,6 +281,9 @@
     - 第三方：`temp = a; a = b; b = temp`
     - 通过和(可能超出范围，慎用)：`a = a+b; b = a-b; a = a-b; //和-自己=另一个数`
     - 通过异或：`a=a^b; b=a^b; a=a^b; //a^b^b=a`
+      - `a=a^b;`
+      - `b=a^b=(a^b)^b=a;`
+      - `a=a^b=(a^b)^a=(b^a)^a=b;` (根据两数异或的原理，可知交换律符合，故可得) 
     
 - ### [运算符优先级](https://www.cnblogs.com/anliux/p/12342676.html)
 
