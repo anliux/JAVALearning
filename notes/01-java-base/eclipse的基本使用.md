@@ -1,10 +1,27 @@
 # eclipse的基本使用
 
 
+## eclipse的概述
+- 是一个集成开发环境 IDE (integrated development environment)
+- 集成了代码的编写功能，分析功能，编译功能，调试功能等一体化的开发软件。
+- 特点：免费，纯Java语言编写，免安装(解压使用)，扩展性强(可以添加各种功能的插件)
+- 下载和安装：http://eclipse.org/ ; 绿色版，解压就可以使用。
+- 使用：
+  - exe启动 - workspace选择 - 新建project项目(项目配置) - 新建package包(注意命名唯一性) - 包新建class类(类配置) - 写代码(实时编译，只需手动运行即可) - 运行 (run as: java application) - 下方控制台显示结果 
+  - 详见下方第一个图文参考博文
+
+
+
+## 图文参考链接：
+- [【JAVA】eclipse-使用入门及常用快捷键](https://www.cnblogs.com/anliux/p/11525981.html)
+- [【学习总结】Eclipse常用快捷键](https://www.cnblogs.com/anliux/p/11436568.html)	
+
+
+
 ## 基本使用
 	A:创建Java项目：
 		点击File或者在最左侧空白处，选择Java项目，在界面中写一个项目名称，然后Finish即可。
-	B:创建包：展开项目，在源包src下建立一个包com.itheima
+	B:创建包：展开项目，在**源包src下**建立一个包com.itheima
 	C:创建类：在com.ithiema包下建立一个类HelloWorld
 		在界面中写一个类名：HelloWorld，然后finish即可。
 	D:编写代码
@@ -15,7 +32,7 @@
 		选择要运行的文件或者在要运行的文件内容中
 		右键 -- Run as - Java Application即可
 
-		
+
 
 ## 基本配置
 	A:行号的显示和隐藏
@@ -99,6 +116,4 @@
 
 
 
-## 参考链接：
-- [【JAVA】eclipse-使用入门及常用快捷键](https://www.cnblogs.com/anliux/p/11525981.html)
-- [【学习总结】Eclipse常用快捷键](https://www.cnblogs.com/anliux/p/11436568.html)
+
