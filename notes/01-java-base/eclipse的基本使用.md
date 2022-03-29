@@ -46,6 +46,8 @@
 			window -- Preferences -- General -- Appearance -- Colors And Fonts -- Debug -- Console font
 		c:其他文件
 			window -- Preferences -- General -- Appearance -- Colors And Fonts -- Basic -- Text Font
+		- mac里的字体编辑：(相似，大致一样，有一些不同)
+			Eclipse(上方第一个) -- Preferences -- Genaral -- Appearance -- Colors and Fonts -- Basic -- Text Font -- edit或双击进行选择 -- ...
 			
 	C:窗体给弄乱了，怎么办?
 		window -- Perspective -- Reset Perspective
@@ -57,7 +59,7 @@
 		
 ## 快捷键
 
-	内容辅助键	alt+/
+	内容辅助键	alt+/  (Mac: option+/ 效果同)
 		main	然后alt+/
 		syso	然后alt+/
   
@@ -66,8 +68,9 @@
 		大红叉是语法错误，必须修改代码。
 	快捷键
 		注释
-			单行	选中内容，ctrl+/, 再来一次取消
-			多行	选中内容，ctrl+shift+/, 取消 ctrl+shift+\
+			单行	选中内容，ctrl+/ (Mac: command+/), 再来一次取消
+			多行	选中内容，ctrl+shift+/ (Mac: Shift+command+/), 取消 ctrl+shift+\
+			- [mac下设置多行注释快捷键](https://www.cnblogs.com/maijunjin/archive/2013/04/24/3039463.html)
 		格式化	ctrl+shift+f 或者 右键 -- source -- format
 		导包    ctrl+shift+o
 		光标	shift+enter	将光标切换至下一行起始处。
