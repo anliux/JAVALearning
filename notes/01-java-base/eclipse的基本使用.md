@@ -70,6 +70,7 @@
 		注释
 			单行	选中内容，ctrl+/ (Mac: command+/), 再来一次取消
 			多行	选中内容，ctrl+shift+/ (Mac: Shift+command+/), 取消 ctrl+shift+\
+			- Mac多行快捷键不灵，设置以后仍然是没反应，还取消了系统原来的help，先这样吧。。
 			- [mac下设置多行注释快捷键](https://www.cnblogs.com/maijunjin/archive/2013/04/24/3039463.html)
 		格式化	ctrl+shift+f 或者 右键 -- source -- format
 		导包    ctrl+shift+o
