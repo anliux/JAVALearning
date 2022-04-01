@@ -175,7 +175,7 @@
     - Random(): 产生是的0到n-1的数，则1-100 可以在原来基础上+1
     - `int i = r.nextInt(100)+1;`
   - 猜数字小游戏：系统产生一个1-100的随机数，猜出这个数：
-  ```
+  	```
   	package test.demo;
 	import java.util.Random;
 	import java.util.Scanner;
@@ -200,7 +200,7 @@
 
 	}
   
-  ```
+ 	 ```
 
 
 
