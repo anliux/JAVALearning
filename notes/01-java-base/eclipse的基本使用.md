@@ -169,7 +169,38 @@
   - 获取随机数：`int number = r.nextInt(10);`
     - 产生的数据在0到10之间，包括0，不包括10。(惯例左闭右开)
     - 括号里面的参数n：产生0-n的左闭右开区间内的数据。
-  - 产生1-100的随机数：`int i = r.nextInt(100)+1;`
+
+- ### 示例：
+  - 产生1-100的随机数：
+    - Random(): 产生是的0到n-1的数，则1-100 可以在原来基础上+1
+    - `int i = r.nextInt(100)+1;`
+  - 猜数字小游戏：系统产生一个1-100的随机数，猜出这个数：
+  ```
+  	package test.demo;
+	import java.util.Random;
+	import java.util.Scanner;
+	public class RandomDeom {
+		public static void main(String[] args) {
+			Random r = new Random();		
+			int i = r.nextInt(100)+1;
+			while(true) {
+				System.out.println("输入要猜的数：");
+				Scanner sc = new Scanner(System.in);
+				int guessNum = sc.nextInt();
+				if(guessNum > i) {
+					System.out.println("输入的数"+guessNum+"太大了");
+				}else if(guessNum < i) {
+					System.out.println("输入的数"+guessNum+"太小了");
+				}else {
+					System.out.println("猜对啦！");
+					break;
+				}		
+			}
+		}
+
+	}
+  
+  ```
 
 
 
