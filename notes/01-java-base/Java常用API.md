@@ -4,8 +4,8 @@
 
 
 <!--GFM-TOC -->
-* [API概述](#api概述)
-* [String类](#string类)
+* [API概述](#api概述): API概述，Scanner获取字符串
+* [String类](#string类): 
 * [StringBuilder](#stringbuilder)
 * []()
 * []()
@@ -25,27 +25,36 @@
 ## API概述
 - ### 定义
   - API(Application Programming Interface)：应用程序编程接口
+    - 类似于厂商已经定义好，现在直接提供给我们使用的类
+    - 我们只需要了解如何使用这些类即可 
   - Java API指的就是JDK中提供的各种功能的Java类。
-  - 这些类将底层的实现封装了起来，不需要关心这些类是如何实现的，只需要学习这些类如何使用。
+    - 这些类将底层的实现封装了起来
+    - 不需要关心这些类是如何实现的，只需要学习这些类如何使用。
   - 可以通过查帮助文档来了解Java提供的API如何使用
+    - 相当于厂商Java给定义好的类的说明书
 
-- ### API使用
+- ### API使用 (以Random为例)
   - 1:打开帮助文档。
   - 2:点击显示，找到索引，看到输入框。
   - 3:在搜索框中里面输入需要学习的内容。
     - 举例：Random
-  - 4:看包：java.lang包下的类在使用的时候是不需要导包的，其他均需要。
+  - 4:看包：”java.lang包“下的类在使用的时候是不需要导包的，其他均需要。
   - 5:看类的描述：
     - Random类是用于生成随机数的类
   - 6:看构造方法：
     - Random():无参构造方法 -- `Random r = new Random();`
   - 7:看成员方法
-    - `public int nextInt(int n)`:产生的是一个[0,n)范围内的随机数
+    - `public int nextInt(int n)`: 产生的是一个[0,n)范围内的随机数
   - 8:调用方法：
     - 看返回值类型：返回什么类型，就用什么类型接收
     - 看方法名：名字不要写错了
     - 看形式参数：要几个参数，就给几个，要什么数据类型的，就给什么数据类型的
-    - 示例：`int number = r.nextInt(100);`
+    - 示例：根据第7点 成员方法的形式，给出调用 `int number = r.nextInt(100);`
+
+- ### Scanner获取字符串
+  - Scanner: 用于获取键盘录入的数据（基本数据类型，字符串类型）
+  - public String nextLine(): 获取键盘录入的字符串数据
+  - 接受String数据：`String s = sc.nextLine(); //获取键盘录入的字符串数据`
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -56,11 +65,10 @@
 ## String类
 - ### String类概述
   - lang包中的类
-  - 字符串是由多个字符组成的一串数据
-  - 字符串可以看成是字符数组
-  - 字符串是一种比较特殊的引用数据类型，直接输出字符串对象输出的是该对象中的数据。
+  - 字符串是由多个字符组成的一串数据，字符串可以看成是”字符数组“
+  - 字符串是一种比较特殊的引用数据类型，直接输出字符串对象输出的是该对象中的数据(即字符串数据，而不是地址值)。
 
-- ### 构造方法
+- ### 构造方法：通过构造方法创建字符串对象的4种方法
   - 方式1：`public String(String original)`
     - 把字符串数据original封装成字符串对象
     - 示例：`String s1 = new String("helloworld");//s1=hello`
@@ -72,7 +80,8 @@
     - 把字符数组value中的一部分数据封装成字符串对象，index是开始的索引，count是截取的长度(即字符串长度)。
     - `char[] chs = {'h','e','l','l','o'};`
     - `String s3 = new String(chs, 0, chs.length);//s3=hello`
-  - 方式4：直接赋值也可以是一个对象
+    - `String s3 = new String(chs, 1, 3);//s3=ell`
+  - 方式4：直接赋值也可以是一个对象 <最简单最常用>
     - `String s4 = "hello";//s4=hello`
 
 - ### String创建的两种方法对比
@@ -86,12 +95,13 @@
     - 基本数据类型：比较的是基本数据类型的值是否相等。
     - 引用数据类型：比较的是引用数据类型的地址值是否相等。
   - 比较结果：`s1==s2:false;` `s1==s3:false;` `s2==s3:true;`:
-    - 字符串的内容("hello")是存储在方法区的常量池中的，为了方便字符串的重复使用。
+    - s1: new存入堆内存中地址值为001并开辟空间，而这个空间里存的不是"hello", 而是这个字符串在方法区的常量池中的地址值002
+      - 字符串的内容("hello")是存储在方法区的常量池中的，为了方便字符串的重复使用。
     - 直接赋值：存储在常量池。
-    - 多次直接赋值：将存储在常量池中的"hello"的地址传递给s变量，且常量池已有字符串公用。
+    - 多次直接赋值：将存储在常量池中的"hello"的地址传递给s变量，且常量池已有的字符串公用。
   - 总结：
     - 通过构造方法创建字符串对象是在堆内存；
-    - 通过直接赋值创建对象是在方法区的常量池。
+    - 通过直接赋值创建对象是在方法区的常量池 <方便字符串的重复使用>。
   - 图解
     ![字符串对象构造方法创建和直接赋值的区别](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/api/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%B9%E8%B1%A1%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA%E5%92%8C%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E7%9A%84%E5%8C%BA%E5%88%AB.bmp)
 
@@ -104,14 +114,60 @@
   - `boolean equals(Object obj)`：
     - 功能：比较字符串的内容是否相同，严格区分大小写。
     - 与"=="区别(比较地址值)，且本方法可以重写。
+    - 示例：
+      - 定义字符串：`s1 = "hello;"`,`s2="hello;"`,`s3="Hello."//大小写的不同`
+      - 判断：`Boolean b1 = s1.equals(s2);//true`,`Boolean b2 = s1.equals(s3);//false`
   - boolean equalsIgnoreCase(String str)
     - 功能：比较字符串的内容是否相同，且忽略大小写。
+    - 示例：
+      - 判断：`Boolean b1 = s1.equalsIgnoreCase(s2);//true`,`Boolean b2 = s1.equalsIgnoreCase(s3);//true`
   - boolean startsWith(String str)
     - 功能：判断字符串对象是否以指定的str开头。
-    - 示例：`s = "hello"; syso(s.startsWith("he");//true`
+    - 示例：
+      - `s = "hello"; syso(s.startsWith("he");//true`，`Boolean b = s.startWith("abc");//false`
   - boolean endsWith(String str)
     - 功能：判断字符串对象是否以指定的str结尾。
+    - 示例: 同上
+- ### 模拟用户登录案例（使用String的判断功能）
+  ```java
+    import java.util.Scanner;
+    public class StringEqual {
+    /*
+     * 模拟登录，给三次机会，并提示还有几次
+     * 
+     * 分析:
+     * 		A: 定义两个字符串对象，用于存储已经存在的用户名和密码
+     * 		B: 键盘录入用户名和密码
+     * 		C: 进行比较，相同则登录成功，不同则显示登录失败，并提示还有几次机会
+     * */
+    public static void main(String[] args) {
+      //定义字符串对象，存储已经存在的用户名和密码
+      String usename = "admin";
+      String password = "admin";
 
+      //控制循环三次
+      for(int i = 0; i < 3; i++) {
+        //键盘录入用户名和密码
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入用户名：");
+        String name = sc.nextLine();
+        System.out.println("请输入密码：");
+        String pwd = sc.nextLine();
+
+        if((name.equals(usename)) && (pwd.equals(password))) {
+          System.out.println("登录成功!");
+          break;//登录成功要及时推出循环
+        }else {
+          if((2-i)==0)
+            System.out.println("账户被锁定，请与管理员联系");
+          else
+            System.out.println("登录失败，你还有"+(2-i)+"次机会");//2,1,0
+          }
+        }
+      }
+    }
+  ```
+  
 - ### String的获取功能
   - `int length()`：
     - 功能：获取字符串的长度，即字符个数。
