@@ -172,17 +172,18 @@
   - `int length()`：
     - 功能：获取字符串的长度，即字符个数。
     - 非常常用。
+    - 注意区分属性`arr.length`和方法`str.length()` - 有无小括号
   - `char charAt(int index)`：
     - 功能：获取指定索引处的字符。
     - 可用于对字符串进行遍历。
     - 注：如果传入的索引值越界，会报错`StringIndexOutOfBoundsException`
   - `int indexOf(String str)`：
-    - 功能：获取str在字符串对象中第一次出现的索引。
+    - 功能：获取str在字符串对象中第一次出现的索引 <注意：返回的是小字符串的第一个字符的索引值>。
     - 没找到时返回-1.
   - `String substring(int start)`：
-    - 功能：从start开始截取字符串(默认截取到末尾)。
+    - 功能：从索引值start开始截取字符串(默认截取到末尾)。
   - `String substring(int start,int end)`：
-    - 功能：从start开始，到end结束截取字符串，左闭右开。
+    - 功能：从索引值start开始，到索引值end结束截取字符串，左闭右开<不包含end索引值对应的字符>。
     - 注：如果传入的索引值越界，会报错`StringIndexOutOfBoundsException`
   - 注意：字符串子串截取功能的索引值：超出一个边界值不报错。
     - 例如，当字符串为空时，substring(0)不报错，截取到的子串为空；
@@ -191,10 +192,13 @@
 - ### String的转换功能
   - `char[] toCharArray()`
     - 功能：把字符串转换为字符数组。
+    - 示例：`char[] chs = s.toCharArray(); `
   - `String toLowerCase()`
     - 功能：把字符串转换为小写字符串。
+    - 示例：`"helloWORLD".toLowerCase();`
   - `String toUpperCase()`
     - 功能：把字符串转换为大写字符串。
+    - 示例：`"helloWORLD".toUpperCase();`
   - 注：转换大小写时，若字符串中有除字母外的其他字符，则其他字符不变。
 
 - ### String的其他功能
@@ -215,7 +219,7 @@
     - 注意：本方法的返回值类型是字符串数组。
 
 - ### 典型问题
-  - 遍历字符串：
+  - 遍历字符串 <字符串获取/字符串转换>
     - 法1：循环；获取长度作为循环边界；获取指定索引字符并传入循环参数进行遍历。
       - `for(int i = 0; i < s.length(); i++){syso(s.charAt(i));}`
     - 法2：先转为字符数组，然后对字符数组进行遍历。
@@ -226,6 +230,7 @@
       - 大写：ch>='A' && ch<='Z';
       - 小写：ch>='a' && ch<='z';
       - 数字：ch>='0' && ch<='9';
+      - 注：最初反应是对应A-65,a-97的设定，后来发现直接用字符本体判断即可了。
  
   - #### 打印数组名特例
     - 数值型数组如int型数组：初始化后直接打印数组名，输出的是地址值。
