@@ -5,7 +5,7 @@
 
 <!--GFM-TOC -->
 * [API概述](#api概述): API概述，Scanner获取字符串
-* [String类](#string类): 
+* [String类](#string类): String概述, 构造方法(4种)及对比, 判断功能(4种), 获取功能(5种), 转换功能(3种), 其他功能(2种), 相关典型问题
 * [StringBuilder](#stringbuilder)
 * []()
 * []()
@@ -273,21 +273,21 @@
 
 
 ## StringBuilder
-- ### StringBuilder类概述
-  - 字符串缓冲区，可变字符串。
-  - 字符串拼接的弊端
-    - 每次拼接，都会构建一个新的String对象，既耗时，又浪费空间。
-    - 图解：
-    ![String拼接浪费空间](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/api/String%E6%8B%BC%E6%8E%A5%E6%B5%AA%E8%B4%B9%E7%A9%BA%E9%97%B4.bmp)
-    - 而StringBuilder就可以解决这个问题。
-
 - ### StringBuilder和String的区别?
   - String: 内容固定，不可变。
   - StringBuilder：可变字符串。
   
+- ### StringBuilder类概述
+  - 字符串缓冲区，可变字符串。
+  - 字符串拼接的弊端
+    - String每次拼接，都会构建一个新的String对象，既耗时，又浪费空间；而StringBuilder就可以解决这个问题。
+    - 图解：
+    ![String拼接浪费空间](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/api/String%E6%8B%BC%E6%8E%A5%E6%B5%AA%E8%B4%B9%E7%A9%BA%E9%97%B4.bmp)
+
 - ### StringBuilder构造方法：
   - 无参构造：`public StringBuilder()`
     - 构造一个不带任何字符的字符串生成器，其初始容量为 16 个字符。
+    - 代码示例：`StringBuilder sb = new StringBuilder("xxxx");`
 
 - ### StringBuilder的功能
   - 查询容量：
@@ -301,7 +301,7 @@
   - 添加功能：`public StringBuilder append(任意类型)`
     - 添加数据，并返回自身对象。(即可变字符串类型的值)
     - 代码示例：
-      - `sb.append("hello"); sb.append(true); sb.append(100); //输出：hellotrue100`
+      - 单个：`sb.append("hello"); sb.append(true); sb.append(100); //输出：hellotrue100`
       - 链式：`sb.append("hello").append(true).append(100);//输出：hellotrue100`
         - 因为返回值是字符串缓冲区类型，是对象，仍可以调用功能。
     - 注意：需要一次添加多个字符串时，使用链式append，不要再使用`+`连接了。
