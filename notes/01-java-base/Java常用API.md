@@ -264,6 +264,7 @@
       - `char[] chs = s.toCharArray();`
       - `for(int start=0,end=chs.length-1; start<=end; start++,end--){交换start与end对应字符}`
       - `return new String(chs);`
+        - //构造方法，讲字符数组传入即可，可省略定义新的String ss = new String(chs);,直接返回
     - 主函数调用：`String str = reverse(s);`
 
 <!--GFM-TOC -->
