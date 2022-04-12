@@ -248,7 +248,7 @@
     - 代码示例：
       - `String s3 = s1.substring(0,1).toUpperCase() + s1.substring(1).toLowerCase();`
     - 注意：
-      - 大小写转换是字符串String的方法，不能用charAt()截取。
+      - Char同样有类似方法: `char toUpperCase(char ch)`，也可考虑`s1.charAt(0)`截第一个字符，这里讲String方法就统一按String截取了。
       - substring()可能字符串索引越界异常，因此最好进行判断；但当字符串只有一个字符时，以上代码不报错。
 
   - 字符串反转
