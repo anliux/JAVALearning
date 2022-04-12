@@ -87,7 +87,7 @@
 - ### String创建的两种方法对比
   - 通过构造方法创建字符串对象和直接赋值创建字符串对象的区别：
     - 通过构造方法创建字符串对象：
-      - `String s1 = new String(“hello”);`
+      - `String s1 = new String("hello");`
     - 直接赋值创建字符串对象
       - `String s2 = "hello";`
       - `String s3 = "hello";`
