@@ -274,7 +274,7 @@
 
 
 ## StringBuilder
-- ### StringBuilder和String的区别?
+- ### StringBuilder和String的区别
   - String: 内容固定，不可变。
   - StringBuilder：可变字符串。
   
@@ -301,6 +301,8 @@
 
   - 添加功能：`public StringBuilder append(任意类型)`
     - 添加数据，并返回自身对象。(即可变字符串类型的值)
+      - 参数可以是任意类型：任意类型拼接过来以后组成新的字符串
+      - `StringBuilder sb2 = sb.append("hello"); Boolean b = (sb==sb2);//ture`
     - 代码示例：
       - 单个：`sb.append("hello"); sb.append(true); sb.append(100); //输出：hellotrue100`
       - 链式：`sb.append("hello").append(true).append(100);//输出：hellotrue100`
@@ -321,7 +323,9 @@
 
 - ### 典型问题
   - 字符串反转：
-    - String --> StringBuilder --> reverse --> String --> return
+    - 之前提供过两种思路：倒序遍历并连接到主字符串；转换为字符数组后前后指针获取并交换各值。
+    - 思路：利用StringBuilder的reverse()功能
+      - String --> StringBuilder --> reverse --> String --> return
     - 注：使用字符串缓冲区的构造方法，将字符串s作为参数传入，以此来转为StringBuilder类型。
   - 判断一个字符串是否是回文串：
     - 思路：反转字符串；与反转前的字符串比较：若相等，说明对称；返回结果。
@@ -342,7 +346,56 @@
 ## 待续。。。
 
 
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
+
+
+
+
+##
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+
+
+##
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+
+
+##
+
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+##
+
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+
+
+##
+
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 ### END
