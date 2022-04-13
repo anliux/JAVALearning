@@ -6,11 +6,10 @@
 <!--GFM-TOC -->
 * [API概述](#api概述): API概述，Scanner获取字符串
 * [String类](#string类): String概述, 构造方法(4种)及对比, 判断功能(4种), 获取功能(5种), 转换功能(3种), 其他功能(2种), 相关典型问题
-* [StringBuilder](#stringbuilder)
-* [对象数组的练习](#对象数组的练习)
-* [为什么出现集合类](#为什么出现集合类)
-* [ArrayList](#arraylist)
-* [ArrayList案例分析](#arraylist案例分析)
+* [StringBuilder](#stringbuilder): 
+* [对象数组的练习](#对象数组的练习): eclipse自动生成构造函数、get/set方法
+* [集合类与ArrayList](#集合类与arraylist):
+* [ArrayList案例分析](#arraylist案例分析): 
 * []()
 * []()
 * []()
@@ -431,7 +430,7 @@
 
 - ### 对象数组的内存图
   - 图示：
-    ![对象数组的内存图]()
+    ![对象数组的内存图](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/api/%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.bmp)
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -439,32 +438,24 @@
 
 
 
-## 为什么出现集合类
-- ### 概述
-  - 我们学习的是面向对象语言，而面向对象语言对事物的描述是通过对象体现的；
-  - 为了方便对多个对象进行操作，我们就必须把这多个对象进行存储。
+## 集合类与ArrayList
+- ### 集合类引入
+  - 面向对象语言对事物的描述是通过对象体现的; 为了方便对多个对象进行操作，必须把这多个对象进行存储。
   - 而要想存储多个对象，就不能是一个基本的变量，而应该是一个容器类型的变量。
-  - 在我们目前所学过的知识里面，有哪些是容器类型的呢?数组和StringBuilder。
+  - 已经学过的，有哪些是容器类型的呢? 数组和StringBuilder
     - StringBuilder的结果是一个字符串，不一定满足我们的要求，
     - 所以我们只能选择数组，这就是对象数组。
-  - 而对象数组又不能适应变化的需求，因为数组的长度是固定的，
-  - 这个时候，为了适应变化的需求，Java就提供了集合类供我们使用。
+  - 对象数组的弊端：不能适应变化的需求，因为数组的长度是固定的
+  - 因此：为了适应变化的需求，Java就提供了 <集合类> 供我们使用。
 
 - ### 集合类的特点：
-  - 长度可变。
+  - 长度可变 (相比数组的优势)
 
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
-
-## ArrayList
 - ### ArrayList概述
   - 最常用的集合
 
 - ### 通过阅读API学习
-  - java.util包下：因此需要导包
+  - java.util包下：因此需要导包 `import java.util.ArrayList;`
   - ArrayList<E>：大小可变数组的实现。
   - <E>：一种特殊的数据类型，泛型。
     - 在出现E的地方，使用引用数据类型替换即可。
@@ -478,7 +469,6 @@
     - 添加元素，E根据定义的类型确定，用的多
   - public void add(int index, E element)
     - 在指定索引处添加元素，用的不多
-
 
 - ### 添加元素的代码演示：
 	```
@@ -515,45 +505,45 @@
 
 
 - ### 增删改查的代码演示
-```
-package com.itcast01;
+	```
+	package com.itcast01;
 
-import java.util.ArrayList;
+	import java.util.ArrayList;
 
-public class ArrayListDemo2 {
-	public static void main(String[] args) {
-		//创建集合对象
-		ArrayList<String> array = new ArrayList<String>();
-		
-		//添加元素
-		array.add("hello");
-		array.add("java");
-		array.add("world");
-		System.out.println("array:"+array);//array:[hello, java, world]
+	public class ArrayListDemo2 {
+		public static void main(String[] args) {
+			//创建集合对象
+			ArrayList<String> array = new ArrayList<String>();
 
-		//获取元素
-		System.out.println("get:"+array.get(2));//get:world
-		
-		//集合长度
-		System.out.println("size:"+array.size());//size:3
-		
-		//删除元素
-		System.out.println("remove:"+array.remove("hello"));//remove:true
-		System.out.println("remove:"+array.remove("hello"));//remove:false
-		array.add(0,"hello");
-		
-		System.out.println("remove-index:"+array.remove(0));//remove-index:hello
-		array.add(0,"hello");
+			//添加元素
+			array.add("hello");
+			array.add("java");
+			array.add("world");
+			System.out.println("array:"+array);//array:[hello, java, world]
 
-		//修改元素
-		System.out.println("set:"+array.set(1, "android"));//set:java
-		
-		System.out.println("array:"+array);//array:[hello, android, world]
+			//获取元素
+			System.out.println("get:"+array.get(2));//get:world
 
+			//集合长度
+			System.out.println("size:"+array.size());//size:3
+
+			//删除元素
+			System.out.println("remove:"+array.remove("hello"));//remove:true
+			System.out.println("remove:"+array.remove("hello"));//remove:false
+			array.add(0,"hello");
+
+			System.out.println("remove-index:"+array.remove(0));//remove-index:hello
+			array.add(0,"hello");
+
+			//修改元素
+			System.out.println("set:"+array.set(1, "android"));//set:java
+
+			System.out.println("array:"+array);//array:[hello, android, world]
+
+		}
 	}
-}
 
-```
+	```
 
 - ### 集合遍历
   - 用for循环 + size方法 + get方法
@@ -726,13 +716,23 @@ public class ArrayListDemo2 {
 	}
    ```
 
+- ### 学生管理系统
+
+	
+
+
+	
+	
+	
+	
+	
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
 	
 	
 
-## 学生管理系统
+
 
 
 
