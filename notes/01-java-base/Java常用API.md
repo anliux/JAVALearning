@@ -347,7 +347,15 @@
 
 ## 对象数组的练习
 - ### 题目
-  - 创建一个学生数组，存储三个学生对象并遍历
+  - 题目：创建一个学生数组，存储三个学生对象并遍历
+  - ObjectArray相关练习
+
+- ### 自动生成构造函数和getXxx(), setXxx()方法
+  - A：自动生成构造方法：
+    - 无参构造：代码区域右键 -- Source -- Generate Constructors from Superclass.. 
+    - 带参构造：代码区域右键 -- Source -- Generate Constructors using Fields...: 
+  - B：自动生成get、set方法：
+    - 同时生成、可选：代码区域右键 -- Source -- Generate Getters and Setters.. -- select all
 
 - ### 步骤分析
   - 定义学生类
@@ -356,30 +364,25 @@
   - 把学生对象作为元素赋值给学生数组
   - 遍历学生数组
 
-- ### 定义学生类的代码
-  - 自动生成构成函数和getset方法
-    - A：自动生成构成方法：
-      - 代码区域右键 -- Source -- Generate Constructors from Superclass.. ： 无参构造函数
-      - 代码区域右键 -- Source -- Generate Constructors using Fields...: 带参构造函数
-    - B：自动生成get、set方法：
-      - 代码区域右键 -- Source -- Generate Getters and Setters.. -- select all
-  - 代码：
+- ### 代码示例
+  - 定义学生类的代码：
 	```
 	package com.itcast;
 
 	public class Student {
 		private String name;
 		private int age;
-		public Student() {
-			super();
+		public Student() {//自动生成的无参构造
+			super();//可去掉
 			// TODO Auto-generated constructor stub
 		}
-		public Student(String name, int age) {
-			super();
+		public Student(String name, int age) {//自动生成的带参构造
+			super();//可去掉
 			this.name = name;
 			this.age = age;
 		}
-
+		
+		//自动生成的get/set方法
 		public String getName() {
 			return name;
 		}
@@ -396,9 +399,7 @@
 	}
 
 	```
-
-
-- ### 学生类演示代码
+  - 学生类演示代码
 	```
 	package com.itcast;
 
@@ -421,6 +422,7 @@
 			for(int i = 0; i < students.length; i++) {
 				Student s = students[i];
 				System.out.println(s.getName() + "---" + s.getAge());
+				//直接打印对象名输出的是地址值，这里用get方法获取
 			}
 		}
 	}
