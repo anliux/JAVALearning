@@ -7,7 +7,6 @@
 * [API概述](#api概述): API概述，Scanner获取字符串
 * [String类](#string类): String概述, 构造方法(4种)及对比, 判断功能(4种), 获取功能(5种), 转换功能(3种), 其他功能(2种), 相关典型问题
 * [StringBuilder](#stringbuilder)
-* []()
 * [对象数组的练习](#对象数组的练习)
 * [为什么出现集合类](#为什么出现集合类)
 * [ArrayList](#arraylist)
@@ -346,7 +345,7 @@
 
 
 
-## ## 对象数组的练习
+## 对象数组的练习
 - ### 题目
   - 创建一个学生数组，存储三个学生对象并遍历
 
@@ -359,80 +358,82 @@
 
 - ### 定义学生类的代码
   - 自动生成构成函数和getset方法
-	A：自动生成构成方法：
-		代码区域右键 -- Source -- Generate Constructors from Superclass.. ： 无参构造函数
-		代码区域右键 -- Source -- Generate Constructors using Fields...: 带参构造函数
-	B：自动生成get、set方法：
-		代码区域右键 -- Source -- Generate Getters and Setters.. -- select all
+    - A：自动生成构成方法：
+      - 代码区域右键 -- Source -- Generate Constructors from Superclass.. ： 无参构造函数
+      - 代码区域右键 -- Source -- Generate Constructors using Fields...: 带参构造函数
+    - B：自动生成get、set方法：
+      - 代码区域右键 -- Source -- Generate Getters and Setters.. -- select all
   - 代码：
-```
-package com.itcast;
+	```
+	package com.itcast;
 
-public class Student {
-	private String name;
-	private int age;
-	public Student() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Student(String name, int age) {
-		super();
-		this.name = name;
-		this.age = age;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	
-}
+	public class Student {
+		private String name;
+		private int age;
+		public Student() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		public Student(String name, int age) {
+			super();
+			this.name = name;
+			this.age = age;
+		}
 
-```
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}
+
+	}
+
+	```
 
 
 - ### 学生类演示代码
-```
-package com.itcast;
+	```
+	package com.itcast;
 
-public class StudentDemo {
-	public static void main(String[] args) {
-		//创建学生数组
-		Student[] students = new Student[3];
-		
-		//创建学生对象
-		Student s1 = new Student("曹操", 40);
-		Student s2 = new Student("刘备", 35);
-		Student s3 = new Student("孙权", 30);
-		
-		//把学生对象作为元素赋值给学生数组
-		students[0] = s1;
-		students[1] = s2;
-		students[2] = s3;
-		
-		//遍历学生数组
-		for(int i = 0; i < students.length; i++) {
-			Student s = students[i];
-			System.out.println(s.getName() + "---" + s.getAge());
+	public class StudentDemo {
+		public static void main(String[] args) {
+			//创建学生数组
+			Student[] students = new Student[3];
+
+			//创建学生对象
+			Student s1 = new Student("曹操", 40);
+			Student s2 = new Student("刘备", 35);
+			Student s3 = new Student("孙权", 30);
+
+			//把学生对象作为元素赋值给学生数组
+			students[0] = s1;
+			students[1] = s2;
+			students[2] = s3;
+
+			//遍历学生数组
+			for(int i = 0; i < students.length; i++) {
+				Student s = students[i];
+				System.out.println(s.getName() + "---" + s.getAge());
+			}
 		}
 	}
-}
-
-
-```
+	```
 
 
 - ### 对象数组的内存图
   - 图示：
     ![对象数组的内存图]()
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -449,6 +450,10 @@ public class StudentDemo {
 
 - ### 集合类的特点：
   - 长度可变。
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -474,25 +479,25 @@ public class StudentDemo {
 
 
 - ### 添加元素的代码演示：
-```
-package com.itcast01;
+	```
+	package com.itcast01;
 
-import java.util.ArrayList;
+	import java.util.ArrayList;
 
-public class ArrayListDemo {
-	public static void main(String[] args) {
-		ArrayList<String> array = new ArrayList<String>();
-		System.out.println("array="+array);//输出：array=[]
-		
-		array.add("hello");
-		array.add("world");
-		System.out.println("array："+array);//array：[hello, world]
-		
-		array.add(1, "android");		
-		System.out.println("array："+array);//array：[hello, android, world]
+	public class ArrayListDemo {
+		public static void main(String[] args) {
+			ArrayList<String> array = new ArrayList<String>();
+			System.out.println("array="+array);//输出：array=[]
+
+			array.add("hello");
+			array.add("world");
+			System.out.println("array："+array);//array：[hello, world]
+
+			array.add(1, "android");		
+			System.out.println("array："+array);//array：[hello, android, world]
+		}
 	}
-}
-```
+	```
 
 - ### 增删改查
   - 获取元素：
@@ -553,31 +558,34 @@ public class ArrayListDemo2 {
   - 注：常规的做法是，输出时，先将get获取到的元素存储在变量中，然后输出变量。
 
 - ### 集合遍历的代码演示
-```
-package com.itcast01;
+	```
+	package com.itcast01;
 
-import java.util.ArrayList;
+	import java.util.ArrayList;
 
-public class ArrayListDemo3 {
-	public static void main(String[] args) {
-		//新建集合
-		ArrayList<String> array = new ArrayList<String>();
-		array.add("hello");
-		array.add("world");
-		array.add("java");
-		for(int i = 0; i < array.size(); i++) {
-			//System.out.println(array.get(i));
-			String s = array.get(i);
-			System.out.println(s);
+	public class ArrayListDemo3 {
+		public static void main(String[] args) {
+			//新建集合
+			ArrayList<String> array = new ArrayList<String>();
+			array.add("hello");
+			array.add("world");
+			array.add("java");
+			for(int i = 0; i < array.size(); i++) {
+				//System.out.println(array.get(i));
+				String s = array.get(i);
+				System.out.println(s);
+			}
 		}
 	}
-}
 
-```
+	```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
-
-
+	
 ## ArrayList案例分析
 - ### 获取满足要求的元素
   - 题目：
@@ -591,29 +599,28 @@ public class ArrayListDemo3 {
   - 方法：
     - size，get，startswith，
   - 代码：
-  ```
-package com.itcast01;
+  	```
+	package com.itcast01;
 
-import java.util.ArrayList;
+	import java.util.ArrayList;
 
-public class ArrayListTest {
-	public static void main(String[] args) {
-		String[] strArray = {"张三丰","宋远桥", "张无忌","殷梨亭","张翠山","莫声谷"};
-		ArrayList<String> array = new ArrayList<String>();
-		for(int i = 0; i < strArray.length; i++) {
-			array.add(strArray[i]);
-		}
-		System.out.println(array);
-		for(int j = 0; j < array.size(); j++) {
-			String s = array.get(j);
-			if(s.startsWith("张"))
-				System.out.println(s);
+	public class ArrayListTest {
+		public static void main(String[] args) {
+			String[] strArray = {"张三丰","宋远桥", "张无忌","殷梨亭","张翠山","莫声谷"};
+			ArrayList<String> array = new ArrayList<String>();
+			for(int i = 0; i < strArray.length; i++) {
+				array.add(strArray[i]);
+			}
+			System.out.println(array);
+			for(int j = 0; j < array.size(); j++) {
+				String s = array.get(j);
+				if(s.startsWith("张"))
+					System.out.println(s);
+			}
 		}
 	}
-}
 
-  ```
-
+ 	```
 
 - ### 存储自定义对象并遍历
   - 自定义Student对象
@@ -640,84 +647,88 @@ public class ArrayListTest {
     - 将键盘录入方法进行封装
   - 代码：
    ```
-//Student.java
+	//Student.java
 
-package com.itcast01;
+	package com.itcast01;
 
-public class Student {
-	private String name;
-	private String age;
-	public Student() {
-		
-	}
-	public Student(String name, String age) {
-		this.name = name;
-		this.age = age;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getAge() {
-		return age;
-	}
-	public void setAge(String age) {
-		this.age = age;
-	}	
-}
+	public class Student {
+		private String name;
+		private String age;
+		public Student() {
 
-   ```
-
-   ```
-//ArrayListTest2.java
-
-package com.itcast01;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class ArrayListTest2 {
-	public static void main(String[] args) {
-		ArrayList<Student> array = new ArrayList<Student>();
-		
-		//调用方法：调用一次方法，执行一次
-		addStudent(array);
-		addStudent(array);
-		addStudent(array);
-
-		for(int i = 0; i < array.size(); i++) {
-			Student s = array.get(i);
-			System.out.println(s.getName() + "--" + s.getAge());
 		}
+		public Student(String name, String age) {
+			this.name = name;
+			this.age = age;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getAge() {
+			return age;
+		}
+		public void setAge(String age) {
+			this.age = age;
+		}	
 	}
-	
-	/*	为了提高代码复用性，进行封装。
-	 * 
-	 * 	写方法：两个明确
-	 * 		返回值类型： void
-	 * 		参数列表：ArrayList<Student> array
-	 * */
-	private static void addStudent(ArrayList<Student> array) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("请输入学生姓名：");
-		String name = sc.nextLine();
-		System.out.println("请输入学生年龄：");
-		String age = sc.nextLine();
-		
-		Student s = new Student();
-		s.setName(name);
-		s.setAge(age);
-		
-		array.add(s);
 
-	}
-	
-}
    ```
 
+   ```
+	//ArrayListTest2.java
 
+	package com.itcast01;
+
+	import java.util.ArrayList;
+	import java.util.Scanner;
+
+	public class ArrayListTest2 {
+		public static void main(String[] args) {
+			ArrayList<Student> array = new ArrayList<Student>();
+
+			//调用方法：调用一次方法，执行一次
+			addStudent(array);
+			addStudent(array);
+			addStudent(array);
+
+			for(int i = 0; i < array.size(); i++) {
+				Student s = array.get(i);
+				System.out.println(s.getName() + "--" + s.getAge());
+			}
+		}
+
+		/*	为了提高代码复用性，进行封装。
+		 * 
+		 * 	写方法：两个明确
+		 * 		返回值类型： void
+		 * 		参数列表：ArrayList<Student> array
+		 * */
+		private static void addStudent(ArrayList<Student> array) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("请输入学生姓名：");
+			String name = sc.nextLine();
+			System.out.println("请输入学生年龄：");
+			String age = sc.nextLine();
+
+			Student s = new Student();
+			s.setName(name);
+			s.setAge(age);
+
+			array.add(s);
+
+		}
+
+	}
+   ```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+	
+	
 
 ## 学生管理系统
 
