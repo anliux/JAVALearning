@@ -365,7 +365,7 @@
 
 - ### 代码示例
   - 定义学生类的代码：
-	```
+	```Java
 	package com.itcast;
 
 	public class Student {
@@ -399,7 +399,7 @@
 
 	```
   - 学生类演示代码
-	```
+	```Java
 	package com.itcast;
 
 	public class StudentDemo {
@@ -474,7 +474,7 @@
     - 示例：`array.add(1, "java");//原来索引1处的元素会顺次后移到索引2处`
 
 - ### 添加元素的代码演示：
-	```
+	```Java
 	package com.itcast01;
 	import java.util.ArrayList;
 	public class ArrayListDemo {
@@ -513,7 +513,7 @@
 
 
 - ### 增删改查的代码演示
-	```
+	```Java
 	package com.itcast01;
 	import java.util.ArrayList;
 	public class ArrayListDemo2 {
@@ -556,7 +556,7 @@
   - 注：常规的做法是，输出时，先将get获取到的元素存储在变量中，然后输出变量。
 
 - ### 集合遍历的代码演示
-	```
+	```Java
 	package com.itcast01;
 	import java.util.ArrayList;
 	public class ArrayListDemo3 {
@@ -595,7 +595,7 @@
   - 方法：
     - size()，get(i)，startswith("xxx")，
   - 代码：
-  	```
+  	```Java
 	package com.itcast01;
 	import java.util.ArrayList;
 	public class ArrayListTest {
@@ -640,7 +640,7 @@
     - 为了方便使用，这个把学生类中的所有成员变量定义为String类型
     - 将键盘录入方法进行封装
   - 代码：
-   ```
+   ```Java
 	//Student.java
 	package com.itcast01;
 	public class Student {
@@ -669,7 +669,7 @@
 
    ```
 
-   ```
+   ```Java
 	//ArrayListTest2.java
 	package com.itcast01;
 	import java.util.ArrayList;
