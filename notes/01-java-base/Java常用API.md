@@ -369,8 +369,8 @@
 	package com.itcast;
 
 	public class Student {
-		private String name;
-		private int age;
+		private String name; //成员方法记得写修饰符 (与main方法对应)
+		private int age;  //成员方法记得写修饰符 (与main方法对应)
 		public Student() {//自动生成的无参构造
 			super();//可去掉
 			// TODO Auto-generated constructor stub
