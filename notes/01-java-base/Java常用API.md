@@ -452,23 +452,26 @@
   - 长度可变 (相比数组的优势)
 
 - ### ArrayList概述
-  - 最常用的集合
-
-- ### 通过阅读API学习
+  - 最常用的集合，通过阅读API学习
   - java.util包下：因此需要导包 `import java.util.ArrayList;`
-  - ArrayList<E>：大小可变数组的实现。
-  - <E>：一种特殊的数据类型，泛型。
-    - 在出现E的地方，使用引用数据类型替换即可。
-    - 举例：ArrayList<String>, ArrayList<Student>
+  - `ArrayList<E>`：大小可变数组的实现。
+  - `<E>`：一种特殊的数据类型，泛型。
+    - 在出现E的地方，暂时可以使用引用数据类型替换。
+    - 举例：`ArrayList<String>`, `ArrayList<Student>`, ...
+  - 打印自带小括号：syso输出 'array：[hello, world]'
 
 - ### 构造方法
   - 无参：ArrayList()
+  - 示例：`ArrayList<String> array = new ArrayList<String>();//可以参考数组的定义格式`
+  - 无参：ArrayList()：
 
 - ### 添加元素
-  - public boolean add(E e)
-    - 添加元素，E根据定义的类型确定，用的多
-  - public void add(int index, E element)
-    - 在指定索引处添加元素，用的不多
+  - `public boolean add(E e)`:
+    - 依次添加元素，E根据定义的类型确定，用的多
+    - 示例：`array.add("hello"); //这条可作为一行独立代码`
+  - `public void add(int index, E element)`:
+    - 在指定索引处添加元素，而原位置元素顺次后移一位，用的不多
+    - 示例：`array.add(1, "java");//原来索引1处的元素会顺次后移到索引2处`
 
 - ### 添加元素的代码演示：
 	```
@@ -493,15 +496,15 @@
 
 - ### 增删改查
   - 获取元素：
-    - public E get(int index) -- 返回指定索引处的元素
+    - `public E get(int index)` -- 返回指定索引处的元素
     - get方法不改变原有集合
   - 集合长度：
-    - public int size() -- 返回集合中的元素的个数
+    - `public int size()` -- 返回集合中的元素的个数
   - 删除元素：
-    - public boolean remove(Object o) -- 删除指定的元素，并返回删除是否成功（布尔型）
-    - public E remove(int index) -- 删除指定索引处的元素，并返回被删除的元素
+    - `public boolean remove(Object o)` -- 删除指定的元素，并返回删除是否成功（布尔型）
+    - `public E remove(int index)` -- 删除指定索引处的元素，并返回被删除的元素
   - 修改元素：
-    - public E set(int index, E element) -- 修改指定索引处的元素，返回被修改的元素（原来的元素）
+    - `public E set(int index, E element)` -- 修改指定索引处的元素，返回被修改的元素（原来的元素）
 
 
 - ### 增删改查的代码演示
