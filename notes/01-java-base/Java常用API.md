@@ -476,9 +476,7 @@
 - ### 添加元素的代码演示：
 	```
 	package com.itcast01;
-
 	import java.util.ArrayList;
-
 	public class ArrayListDemo {
 		public static void main(String[] args) {
 			ArrayList<String> array = new ArrayList<String>();
@@ -496,23 +494,28 @@
 
 - ### 增删改查
   - 获取元素：
-    - `public E get(int index)` -- 返回指定索引处的元素
-    - get方法不改变原有集合
+    - `public E get(int index)`: 返回指定索引处的元素
+      - 注意：get方法不改变原有集合
+    - 示例：`System.out.println("get:"+array.get(0));`
   - 集合长度：
-    - `public int size()` -- 返回集合中的元素的个数
+    - `public int size()`: 返回集合中的元素的个数
+    - 示例：`System.out.println("size:"+array.size());`
   - 删除元素：
-    - `public boolean remove(Object o)` -- 删除指定的元素，并返回删除是否成功（布尔型）
-    - `public E remove(int index)` -- 删除指定索引处的元素，并返回被删除的元素
+    - `public boolean remove(Object o)`: 删除指定的元素，并返回删除是否成功（布尔型）
+      - 注意：若存在，即可删除并返回true，否则返回false；成功时仅删除第一个，再次remove时删除下一个该元素。
+    - 示例：`array.remove("hello");`
+    - `public E remove(int index)`: 删除指定索引处的元素，并返回被删除的元素
+      - 注意：输入的是索引值，需要注意越界错误
+    - 示例：`System.out.println("remove(index)": + array.remove(i));`
   - 修改元素：
     - `public E set(int index, E element)` -- 修改指定索引处的元素，返回被修改的元素（原来的元素）
+    - 示例：`System.out.println("set:"+array.set(1,"python"));`
 
 
 - ### 增删改查的代码演示
 	```
 	package com.itcast01;
-
 	import java.util.ArrayList;
-
 	public class ArrayListDemo2 {
 		public static void main(String[] args) {
 			//创建集合对象
@@ -539,7 +542,7 @@
 			array.add(0,"hello");
 
 			//修改元素
-			System.out.println("set:"+array.set(1, "android"));//set:java
+			System.out.println("set:"+array.set(1, "android"));//set:java (返回被替代的元素)
 
 			System.out.println("array:"+array);//array:[hello, android, world]
 
@@ -549,15 +552,13 @@
 	```
 
 - ### 集合遍历
-  - 用for循环 + size方法 + get方法
+  - 用for循环 + size()方法 + get()方法
   - 注：常规的做法是，输出时，先将get获取到的元素存储在变量中，然后输出变量。
 
 - ### 集合遍历的代码演示
 	```
 	package com.itcast01;
-
 	import java.util.ArrayList;
-
 	public class ArrayListDemo3 {
 		public static void main(String[] args) {
 			//新建集合
@@ -565,10 +566,10 @@
 			array.add("hello");
 			array.add("world");
 			array.add("java");
-			for(int i = 0; i < array.size(); i++) {
+			for(int i = 0; i < array.size(); i++) {//size()获取数组集合的大小
 				//System.out.println(array.get(i));
-				String s = array.get(i);
-				System.out.println(s);
+				String s = array.get(i);//get()获取数组集合中的元素
+				System.out.println(s);//先get()存起来而不是直接输出，是标准用法
 			}
 		}
 	}
@@ -592,24 +593,22 @@
     - 遍历字符串数组，获取每个元素，并添加到集合；
     - 遍历集合：判断字符串元素是否以“张”开头，如果是，就输出。
   - 方法：
-    - size，get，startswith，
+    - size()，get(i)，startswith("xxx")，
   - 代码：
   	```
 	package com.itcast01;
-
 	import java.util.ArrayList;
-
 	public class ArrayListTest {
 		public static void main(String[] args) {
-			String[] strArray = {"张三丰","宋远桥", "张无忌","殷梨亭","张翠山","莫声谷"};
+			String[] strArray = {"张三丰","宋远桥", "张无忌","殷梨亭","张翠山","莫声谷"};//不是重头戏，直接赋值
 			ArrayList<String> array = new ArrayList<String>();
 			for(int i = 0; i < strArray.length; i++) {
-				array.add(strArray[i]);
+				array.add(strArray[i]);//遍历添加元素
 			}
-			System.out.println(array);
+			System.out.println(array);//
 			for(int j = 0; j < array.size(); j++) {
-				String s = array.get(j);
-				if(s.startsWith("张"))
+				String s = array.get(j);//遍历获取集合元素
+				if(s.startsWith("张"))//判断是否以"张"开头
 					System.out.println(s);
 			}
 		}
@@ -623,7 +622,7 @@
   - 新建集合，新建Student对象，并将Student对象存入集合
   - 遍历集合并输出
   - 注意点：
-    - ArrayList<Student>
+    - 创建集合对象：`ArrayList<Student> array = new ArrayList<Student>();`
     - for循环遍历时，接受变量为`Student s = array.get(i);`
     - 输出时，使用Student定义的获取方法：`System.out.println(s.getName()+s.getAge());`
 
@@ -643,9 +642,7 @@
   - 代码：
    ```
 	//Student.java
-
 	package com.itcast01;
-
 	public class Student {
 		private String name;
 		private String age;
@@ -674,12 +671,9 @@
 
    ```
 	//ArrayListTest2.java
-
 	package com.itcast01;
-
 	import java.util.ArrayList;
 	import java.util.Scanner;
-
 	public class ArrayListTest2 {
 		public static void main(String[] args) {
 			ArrayList<Student> array = new ArrayList<Student>();
@@ -713,9 +707,7 @@
 			s.setAge(age);
 
 			array.add(s);
-
 		}
-
 	}
    ```
 
