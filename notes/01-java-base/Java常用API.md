@@ -735,9 +735,57 @@
 - ### 学生类代码
   - 步骤：定义成员变量，之后生成构造方法(无参/带参)，get()/set()方法
   - 注意成员变量：private修饰，包括”学号，姓名，年龄，居住地“
-```
+	```
+	package test.StudentArray;
+	//学生类
 
-```
+	public class Student {
+		//定义成员变量
+		private String id;
+		private String name;
+		private String age;
+		private String address;
+
+		//生成构造函数：无参/带参
+		public Student() {
+
+		}
+		public Student(String id, String name, String age, String address) {
+			this.id = id;
+			this.name = name;
+			this.age = age;
+			this.address = address;
+		}
+
+		//生成get()/set()函数
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getAge() {
+			return age;
+		}
+		public void setAge(String age) {
+			this.age = age;
+		}
+		public String getAddress() {
+			return address;
+		}
+		public void setAddress(String address) {
+			this.address = address;
+		}
+
+	}
+
+	```
 
 - ### 学生管理类代码
   - 步骤：依次定义主界面、查看、添加、删除、修改的代码
@@ -747,9 +795,195 @@
     - case "5"和default：都输入一条”谢谢“，可以用到case穿透
   - 查看学生类：创建容器(循环外创建即可)，调用自定义的查看方法，并写该方法
     - 输入时加入`\t` 制表符tab键的位置，可以更好地对齐 <注意`\t`在双引号里>
-```
+  - 添加学生类：键盘录入，存储，set()方法赋值给学生类对象
+    - 学号重复问题：while(true) + flag循环
+    - 关键代码：`if(s.getId().equals(id)) {}`
+  - 删除学生对象：根据学号删除对应的学生对象
+    - 遍历对比，根据索引值remove array集合的对象 
+    - 关键代码：`if(s.getId().equals(id)) { array.remove(x); break;	}`
+    - 同样注意学号不存在问题：定义flag进行标记，
+    - 关键代码：`if(index==-1) syso("要删除的对象不存在")`
+  - 修改学生：依然根据学号
+    - 加判断考虑学号不存在的情况
+	```
+	package test.StudentArray;
 
-```
+	import java.util.ArrayList;
+	import java.util.Scanner;
+
+	public class StudentManager {
+		public static void main(String[] args) {
+			// 定义存储学生类的集合
+			ArrayList<Student> array = new ArrayList<Student>();
+
+			// 这是学生管理系统的主界面
+			// 循环直至退出
+			while (true) {
+				System.out.println("--------欢迎来到学生管理系统--------");
+				System.out.println("1. 查看所有学生");
+				System.out.println("2. 添加学生");
+				System.out.println("3. 删除学生");
+				System.out.println("4. 修改学生");
+				System.out.println("5. 退出");
+				System.out.println("请输入你的选择：");
+				// 创建键盘录入对象
+				Scanner sc = new Scanner(System.in);
+				String choiceString = sc.nextLine();
+				// 用switch语句实现选择
+				switch (choiceString) {
+				case "1":
+					// 查看所有学生
+					findAllStudents(array);
+					break;
+				case "2":
+					// 添加学生
+					addStudent(array);
+					break;
+				case "3":
+					deleteStudent(array);
+					// 删除学生
+					break;
+				case "4":
+					// 修改学生
+					updateStudent(array);
+					break;
+				case "5":
+					// 退出
+					// break;
+				default:
+					System.out.println("谢谢你的使用 ");
+					System.exit(0);// JVM退出
+					break;
+				}
+			}
+
+		}
+
+		//修改学生
+		public static void updateStudent(ArrayList<Student> array) {
+			//创建键盘录入对象
+			Scanner sc = new Scanner(System.in);
+			System.out.println("请输入要修改的学号：");
+			String id = sc.nextLine();
+
+			//定义索引值，判断是否存在
+			int index = -1;
+			for(int x = 0; x<array.size(); x++) {
+				Student s = array.get(x);
+				if(s.getId().equals(id)) {
+					index = x;
+					break;
+				}
+			}
+			if(index == -1)
+				System.out.println("您输入的学号不存在，请重新输入：");
+			else {
+				System.out.println("请输入新的学生姓名：");
+				String name = sc.nextLine();
+				System.out.println("请输入新的学生年龄：");
+				String age = sc.nextLine();
+				System.out.println("请输入新的学生地址：");
+				String address = sc.nextLine();
+
+				//创建学生对象
+				Student s = new Student();
+				s.setId(id);
+				s.setName(name);
+				s.setAge(age);
+				s.setAddress(address);
+
+				//修改集合中的对象
+				array.set(index, s);
+				System.out.println("修改学生成功");
+			}
+		}
+
+		// 删除学生
+		public static void deleteStudent(ArrayList<Student> array) {
+			//创建键盘录入对象
+			Scanner sc = new Scanner(System.in);
+			System.out.println("请输入要删除对象的学号：");
+			String id = sc.nextLine();
+			//遍历并对比
+			int index = -1;
+			for(int x=0; x<array.size(); x++) {
+				Student s = array.get(x);
+				if(s.getId().equals(id)) {
+					index = x;
+					break;
+				}
+			}
+			if(index == -1) {
+				System.out.println("您输入的学号不存在，请重新输入：");
+			}else {
+				array.remove(index);
+				System.out.println("删除学生成功");
+			}
+		}
+
+		// 添加学生
+		public static void addStudent(ArrayList<Student> array) {
+			// 创建键盘录入对象
+
+			Scanner sc = new Scanner(System.in);
+
+			String id;
+			// 加入ID是否重复的判断
+			while (true) {
+				System.out.println("请输入学号：");
+				id = sc.nextLine();
+				Boolean flag = false;
+				for (int x = 0; x < array.size(); x++) {
+					Student s = array.get(x);
+					if (s.getId().equals(id)) {
+						flag = true;
+						break;
+					}
+				}
+				if (flag) {
+					System.out.println("您输入的学号已被占用，请重新输入：");
+				} else
+					break;
+			}
+
+			System.out.println("请输入姓名：");
+			String name = sc.nextLine();
+			System.out.println("请输入年龄：");
+			String age = sc.nextLine();
+			System.out.println("请输入地址：");
+			String address = sc.nextLine();
+
+			// 创建学生对象
+			Student s = new Student();
+			s.setId(id);
+			s.setName(name);
+			s.setAge(age);
+			s.setAddress(address);
+
+			// 把学生对象作为元素添加到集合中
+			array.add(s);
+
+			// 给出提示：
+			System.out.println("添加学生对象成功");
+		}
+
+		// 查看所有学生的方法
+		public static void findAllStudents(ArrayList<Student> array) {
+			// 首先判断集合中是否有数据，如果没有，就给出提示，并让该方法不继续执行下去
+			if (array.size() == 0) {
+				System.out.println("不好意思，目前没有学生信息可供查询，请重新选择您的操作");
+				return;
+			}
+			// \t tab键制表符的位置
+			System.out.println("学号\t\t姓名\t年龄\t居住地\t");
+			for (int x = 0; x < array.size(); x++) {
+				Student s = array.get(x);
+				System.out.println(s.getId() + "\t" + s.getName() + "\t" + s.getAge() + "\t" + s.getAddress());
+			}
+		}
+	}
+
+	```
 
 
 
