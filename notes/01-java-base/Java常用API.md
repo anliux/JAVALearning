@@ -735,7 +735,8 @@
 - ### 学生类代码
   - 步骤：定义成员变量，之后生成构造方法(无参/带参)，get()/set()方法
   - 注意成员变量：private修饰，包括”学号，姓名，年龄，居住地“
-	```
+	
+	```Java
 	package test.StudentArray;
 	//学生类
 
@@ -805,7 +806,8 @@
     - 关键代码：`if(index==-1) syso("要删除的对象不存在")`
   - 修改学生：依然根据学号
     - 加判断考虑学号不存在的情况
-	```
+
+	```Java
 	package test.StudentArray;
 
 	import java.util.ArrayList;
