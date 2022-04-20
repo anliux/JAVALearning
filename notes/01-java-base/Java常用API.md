@@ -462,7 +462,7 @@
 
 - ### 构造方法
   - 无参：ArrayList()
-  - 示例：`ArrayList<String> array = new ArrayList<String>();//可以参考数组的定义格式`
+    - 示例：`ArrayList<String> array = new ArrayList<String>();//可以参考数组的定义格式`
   - 无参：ArrayList()：
 
 - ### 添加元素
@@ -999,6 +999,71 @@
 
 
 ## IO流
+
+- ### IO流概述和分类
+  - 引入：类似ArrayList的集合类，存储数据的有效范围仅为该代码运行期间，在内存中临时存储，再次打开时输入的数据已丢失。而IO流技术可以永久存储。
+  - 概述：IO流用来处理设备之间的传输问题，包括文件复制、上传/下载文件等。
+  - IO流分类：
+    - 输出流 (写数据)：FileWriter
+    - 输入流 (读数据)：FileReader
+  - 图示：
+  ![]()
+
+- ### FileWriter概述  
+  - 输出流写数据，通过阅读API学习
+  - java.io包下：因此需要导包 `import java.io.FileWriter;`
+  - 输出流写数据的步骤：
+    - 1. 创建输出流对象；
+    - 2. 调用输出流对象的写数据的方法；
+    - 3. 释放资源。
+
+- ### 构造方法和成员方法
+  - 构造方法：
+    - `FileWriter(String fileName)`: 传递一个文件名称
+  - 成员方法：
+    - void write(String str): 写入数据
+    - void flush(): 刷新缓冲区
+      - 数据不会直接写到文件，而是写到了内存缓冲区，flush刷新后显示 
+    - void close() 
+  - 创建输出流对象做了哪些事情：
+    - 1. 调用系统资源创建了一个文件；(没有路径所指文件时)
+    - 2. 创建输出流对象；
+    - 3. 把输出流对象指向该文件。
+  - 代码示例：(注意导包和抛出异常)
+  ```
+  import java.io.FileWriter;
+  import java.io.IOException;
+  public class FileWriterDemo{
+  	public static void main(String[] args) throws IOException {
+		//创建输出流对象
+		FileWriter fw = new FileWriter("d:\\a.txt");//没有该文件时会自动创建
+		//调用数据流对象的写数据方法
+		fw.write("IO流你好");//写一个字符串数据
+		fw.flush();//数据没有直接写到文件，而是写到了内存缓冲区
+	}
+  }
+  ```
+
+
+- ### 添加元素?
+  - `public boolean add(E e)`:
+    - 依次添加元素，E根据定义的类型确定，用的多
+    - 示例：`array.add("hello"); //这条可作为一行独立代码`
+  - `public void add(int index, E element)`:
+    - 在指定索引处添加元素，而原位置元素顺次后移一位，用的不多
+    - 示例：`array.add(1, "java");//原来索引1处的元素会顺次后移到索引2处`
+
+
+- ### 
+
+
+
+- ### 
+
+
+
+
+- ### 
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
