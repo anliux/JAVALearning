@@ -6,10 +6,10 @@
 <!--GFM-TOC -->
 * [API概述](#api概述): API概述，Scanner获取字符串
 * [String类](#string类): String概述, 构造方法(4种)及对比, 判断功能(4种), 获取功能(5种), 转换功能(3种), 其他功能(2种), 相关典型问题
-* [StringBuilder](#stringbuilder): 
+* [StringBuilder](#stringbuilder): 和String的区别, 特点和优势, 构造方法, 功能(查询添加反转), 和String相互转换, 典型问题(字符串反转, 回文串), StringBuffer
 * [对象数组的练习](#对象数组的练习): eclipse自动生成构造函数、get()/set()方法
-* [集合类与ArrayList](#集合类与arraylist):
-* [ArrayList案例分析](#arraylist案例分析): 
+* [集合类与ArrayList](#集合类与arraylist): 集合类概述, ArrayList概述, 构造方法, 添加/增删改查/遍历的方法
+* [ArrayList案例分析](#arraylist案例分析): 获取满足要求的元素, 存储自定义对象并遍历, 键盘录入数据存储并遍历
 * [学生管理系统](#学生管理系统): 学生类增删改查练习，含完整代码，篇幅较长可选择性跳过
 * []()
 * []()
@@ -275,7 +275,7 @@
 
 
 ## StringBuilder
-- ### StringBuilder和String的区别
+- ### StringBuilder和String的区别 
   - String: 内容固定，不可变。
   - StringBuilder：可变字符串。
   
@@ -451,7 +451,7 @@
 - ### 集合类的特点：
   - 长度可变 (相比数组的优势)
 
-- ### ArrayList概述
+- ### ArrayList概述  
   - 最常用的集合，通过阅读API学习
   - java.util包下：因此需要导包 `import java.util.ArrayList;`
   - `ArrayList<E>`：大小可变数组的实现。
@@ -616,7 +616,7 @@
 
  	```
 
-- ### 存储自定义对象并遍历
+- ### 存储自定义对象并遍历 
   - 自定义Student对象
     - 包括：成员变量name和age，无参构造，带参构造，get、set方法
   - 新建集合，新建Student对象，并将Student对象存入集合
@@ -998,7 +998,7 @@
 
 
 
-##
+## IO流
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
