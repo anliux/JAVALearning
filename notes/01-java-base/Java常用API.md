@@ -1013,38 +1013,46 @@
   - 输出流写数据，通过阅读API学习
   - java.io包下：因此需要导包 `import java.io.FileWriter;`
   - 输出流写数据的步骤：
-    - 1. 创建输出流对象；
-    - 2. 调用输出流对象的写数据的方法；
-    - 3. 释放资源。
+    - 1. 创建输出流对象；<创建文件时需要调用系统资源>
+    - 2. 调用输出流对象的写数据的方法，并flush刷新缓冲区；
+    - 3. 释放资源。<即通知系统释放和该文件相关的资源，因为创建输出流对象是调用系统资源创建的>
 
 - ### 构造方法和成员方法
   - 构造方法：
-    - `FileWriter(String fileName)`: 传递一个文件名称
+    - `FileWriter(String fileName)`: 传递一个文件名称 <注意是路径+文件名>
   - 成员方法：
-    - void write(String str): 写入数据
-    - void flush(): 刷新缓冲区
+    - `void write(String str)`: 写入数据
+    - `void flush()`: 刷新缓冲区
       - 数据不会直接写到文件，而是写到了内存缓冲区，flush刷新后显示 
-    - void close() 
-  - 创建输出流对象做了哪些事情：
+    - `void close()`
+  - 创建输出流对象做了哪些事情：`FileWriter fw = new FileWriter("d:\\a.txt")`
     - 1. 调用系统资源创建了一个文件；(没有路径所指文件时)
     - 2. 创建输出流对象；
     - 3. 把输出流对象指向该文件。
-  - 代码示例：(注意导包和抛出异常)
-  ```
+  - 写数据方法的路径问题：
+    - 相对路径：相对当前项目而言，在项目的根目录下(注意是"项目")
+      - 示例：`FileWriter fw = new FileWriter("a.txt")//不加盘符的文件名;` 
+    - eclipse中显示相对路径的文件：选中项目project -- 右键：refresh，即可在项目下出现相应的文件(a.txt)
+    - 绝对路径：指明盘符的具体路径
+      - 示例：`FileWriter fw = new FileWriter("d:\\a.txt");//加了盘符位置的文件名`
+  - 代码示例：(注意导包和导抛出异常)
+  ```Java
   import java.io.FileWriter;
   import java.io.IOException;
   public class FileWriterDemo{
   	public static void main(String[] args) throws IOException {
 		//创建输出流对象
-		FileWriter fw = new FileWriter("d:\\a.txt");//没有该文件时会自动创建
+		FileWriter fw = new FileWriter("d:\\a.txt");//没有该文件时会自动创建，使用绝对路径
+			//如果不带盘符地址，默认为所写入的文件在代码项目所在路径下的相对路径
 		//调用数据流对象的写数据方法
 		fw.write("IO流你好");//写一个字符串数据
-		fw.flush();//数据没有直接写到文件，而是写到了内存缓冲区
+		fw.flush();//数据没有直接写到文件，而是写到了内存缓冲区，刷新缓冲区后才会显示
+		fw.close();//释放资源，否则fw会一直占用中
 	}
   }
   ```
 
-
+- ### 写数据方法的相对路径和jue'din
 - ### 添加元素?
   - `public boolean add(E e)`:
     - 依次添加元素，E根据定义的类型确定，用的多
