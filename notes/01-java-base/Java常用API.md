@@ -1024,7 +1024,7 @@
     - `void write(String str)`: 写入数据
     - `void flush()`: 刷新缓冲区
       - 数据不会直接写到文件，而是写到了内存缓冲区，flush刷新后显示 
-    - `void close()`
+    - `void close()`: 释放调用的系统资源
   - 创建输出流对象做了哪些事情：`FileWriter fw = new FileWriter("d:\\a.txt")`
     - 1. 调用系统资源创建了一个文件；(没有路径所指文件时)
     - 2. 创建输出流对象；
