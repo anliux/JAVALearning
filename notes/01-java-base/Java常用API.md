@@ -1007,7 +1007,7 @@
     - 输出流 (写数据)：FileWriter
     - 输入流 (读数据)：FileReader
   - 图示：
-  ![]()
+  ![IO流的作用及分类](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/io/IO%E6%B5%81%E7%9A%84%E4%BD%9C%E7%94%A8%E5%8F%8A%E5%88%86%E7%B1%BB.bmp)
 
 - ### FileWriter概述  
   - 输出流写数据，通过阅读API学习
