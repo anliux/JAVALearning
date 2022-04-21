@@ -1017,7 +1017,7 @@
     - 2. 调用输出流对象的写数据的方法，并flush刷新缓冲区；
     - 3. 释放资源。<即通知系统释放和该文件相关的资源，因为创建输出流对象是调用系统资源创建的>
 
-- ### 构造方法和成员方法
+- ### FileWriter的构造方法和成员方法
   - 构造方法：
     - `FileWriter(String fileName)`: 传递一个文件名称 <或路径+文件名>
   - 成员方法：
@@ -1081,15 +1081,27 @@
     - 写入一个字符数组的一部分数据
     - 代码示例：`char[] chs = {'a','b','c','d','e'}; fw.write(chs,2,3);//写入的数据在文件中的形式是"cde"不带引号`
 
-- ### FileWriter写数据的换行和追加写
-  - 
+- ### FileWriter写数据的换行
+  - 用换行符可以实现换行
+    - 代码示例：for循环中：`fw.write(x); fw.write("\r\n");`
+  - 不同系统识别的换行符不同：
+    - Windows: `\r\n` 
+    - linux: `\n`
+    - mac: `\r`
+    - 注意：如果在Windows用`\n`写入，则自带的记事本打开无法识别，显得的仍然是没有换行的
 
+- ### FileWriter写数据的追加写入
+  - 构造方法：`FileWriter(Sting str, Boolean append)`
+    - append默认为false，当需要追加时，可以在第二个参数位置写true
+    - 这时再运行，会将新的内容追加到文件中
+  - 代码示例：
+    - `FileWriter fw = new FileWriter("c.txt",true); //默认为false，写为true时表示追加写入`
+    - `fw.write("xxxxxx");//这时会追加新的xxxx内容写入到文件` 
 
-- ### 
-
-
-
-- ### 
+- ### FileReader概述  
+  - 输入流写数据，通过阅读API学习
+  - java.io包下：因此需要导包 `import java.io.FileReader;`
+  - 输入流写数据的步骤：
 
 
 
