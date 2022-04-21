@@ -5,8 +5,8 @@
 
 ### 00-基础知识
 - [数据结构小结..待整理]()
-- [Git使用小结]()
-- [Linux常用命令小结]()
+- [Git使用小结..待整理]()
+- [Linux常用命令小结..待整理]()
 
 ### 01-Java基础
 - [Java介绍](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E4%BB%8B%E7%BB%8D.md)
@@ -19,13 +19,13 @@
   -  xx
 - [Java常用API](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%B8%B8%E7%94%A8API.md)
   -  API概述, 字符串(String与StringBuidler), 集合([]数组, ArrayList), IO流(), ...
-- [泛型与常见数据结构]()
+- [泛型与常见数据结构..待整理]()
   - xx 
-- [异常处理]()
+- [异常处理..待整理..待整理]()
   - xx 
-- [多线程]()
+- [多线程..待整理]()
   - xx 
-- [网络编程]()
+- [网络编程..待整理]()
   -  xx
 - []()
   - xx
