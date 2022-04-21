@@ -1037,6 +1037,11 @@
     - 绝对路径：指明盘符的具体路径
       - 示例：`FileWriter fw = new FileWriter("d:\\a.txt");//加了盘符位置的文件名`
       - 注意：mac中路径为'/users/xx/...'
+  - close()和flush()方法：
+    - flush(): 刷新缓冲区；之后流对象还可以继续使用。
+    - close(): 先刷新缓冲区，后通知系统释放资源；之后流对象不可以再使用了。
+      - close()做两步，因此即使write()之后没有flush(), close()的时候也会自动刷新。
+      - 写入内容较少时，可以省略flush().
   - 代码示例：(注意导包和导抛出异常)
 	  ```Java
 	  import java.io.FileWriter;
@@ -1049,20 +1054,35 @@
 			//调用数据流对象的写数据方法
 			fw.write("IO流你好");//写一个字符串数据
 			fw.flush();//数据没有直接写到文件，而是写到了内存缓冲区，刷新缓冲区后才会显示
+			fw.write("javaee");
+			fw.flush();
 			fw.close();//释放资源，否则fw会一直占用中
+			//fw.write("123"); //close()之后再写数据会报错
+			
 		}
 	  }
 	  ```
 
-- ### 
-- 
-- ### 添加元素?
-  - `public boolean add(E e)`:
-    - 依次添加元素，E根据定义的类型确定，用的多
-    - 示例：`array.add("hello"); //这条可作为一行独立代码`
-  - `public void add(int index, E element)`:
-    - 在指定索引处添加元素，而原位置元素顺次后移一位，用的不多
-    - 示例：`array.add(1, "java");//原来索引1处的元素会顺次后移到索引2处`
+- ### FileWriter写数据的方法
+  - `void write(String str)`: 
+    - 写入一个字符串数据
+    - 代码示例：`fw.write("abcde");  fw.close(); //写入"abcde"; 此处写入较少可省略flush()` 
+  - `void write(String str, int index, int lens)`:
+    - 写入一个字符串中的一部分数据，即从索引值index开始，长度为lens的子串
+    - 代码示例：`fw.write("abcde", 1, 3);  fw.close(); //可写入"bcd"`  
+  - `void write(int ch)`:
+    - 写入一个字符数据
+    - 为int类型的好处是：既可以写char类型的数据，也可以写char对应的int类型的值，比如'a'和97均可
+    - 代码示例：`fw.write('a');`和`fw.write(97);`均可写入字符'a' 
+  - `void write(char[] chs)`: 
+    - 写入一个字符数组数据
+    - 代码示例：`char[] chs = {'a','b','c','d','e'}; fw.write(chs);//写入的数据在文件中的形式是"abcde"不带引号`
+  - `void write(char[] chs, int index, int lens)`: 
+    - 写入一个字符数组的一部分数据
+    - 代码示例：`char[] chs = {'a','b','c','d','e'}; fw.write(chs,2,3);//写入的数据在文件中的形式是"cde"不带引号`
+
+- ### FileWriter写数据的换行和追加写
+  - 
 
 
 - ### 
