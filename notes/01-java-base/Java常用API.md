@@ -1145,10 +1145,36 @@
 	  }
 	  ```
 
+- ### FileReader和FileWriter的综合练习
+  - 题目：文件复制 - 将相同项目下的a.java中的内容复制到b.java文件中
+  - 文件复制的套路：
+    - 数据源：a.java -- 读数据 -- FileReader
+    - 目的地：b.java -- 写数据 -- FileWriter
+  - 注意点：
+    - 同时有读写时，close()先关哪个都可，推荐先关write.
+  - 代码示例：
+	  ```java 
+	  FileReader fr = new FileReader("a.java");//同项目下，用相对路径即可。下同。
+	  FileWriter fw = new FileWriter("b.java");
+	  int ch;
+	  while((ch = fr.read()) != -1){//参考按单个字符读取的循环
+		fw.write(ch);
+	  }
+	  fw.close();
+	  fr.close();
+	  ```
+- ### 字符缓冲流
+  - 
 
 
 
-- ### 
+
+
+- ###
+
+
+
+
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
