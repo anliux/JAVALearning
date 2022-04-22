@@ -1088,7 +1088,7 @@
     - Windows: `\r\n` 
     - linux: `\n`
     - mac: `\r`
-    - 注意：如果在Windows用`\n`写入，则自带的记事本打开无法识别，显得的仍然是没有换行的
+    - 注意：如果在Windows用`\n`写入，则自带的记事本打开无法识别，显得的仍然是没有换行的；而用编辑器打开可以识别。
 
 - ### FileWriter写数据的追加写入
   - 构造方法：`FileWriter(Sting str, Boolean append)`
