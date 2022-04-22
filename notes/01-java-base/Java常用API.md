@@ -1101,7 +1101,49 @@
 - ### FileReader概述  
   - 输入流写数据，通过阅读API学习
   - java.io包下：因此需要导包 `import java.io.FileReader;`
+  - 构造方法：`FileReader(String filename)` -- 传递文件名称
+    - 注意：仍然需要导包和抛出异常
   - 输入流写数据的步骤：
+    - 创建输入流对象;
+    - 调用输入流对象的读数据方法;
+    - 释放资源.
+  - 读数据的方法：
+    - `int read()`: 
+      - 一次读取一个字符，且存储类型为int，即字符对应的int值
+        - 可通过(char)强转为char类型
+      - 再次使用本方法时：自动读取下一个字符 <不需要像写数据一样声明追加>
+      - 当没有可读取数据时，返回-1 <可作为读取循环结束的判断条件>
+      - 空格、回车等也可以读取到，不需要在输出语句(syso)里加`ln` 
+        - 例如：读取某个.java文件，可以在控制台输出带格式的代码 
+      - 循环时while语句的妙用：
+        - `while((ch = fr.read()) != -1){...}`
+        - 做了三步：read()读数据; 读取到的结果赋值给ch; 判断ch的值是否为-1
+    - `void close()`: 读取结束后记得关闭释放资源
+      - 代码示例：`fr.close();`
+  - 读数据常见异常：
+    - `java.io.FileNotFoundException: fr.txt (系统找不到指定文件)` 
+  - 代码示例：
+	  ```Java
+	  import java.io.fileNotFoundException;
+	  import java.io.FileReader;
+	  import java.io.IOException;
+	  public class FileReaderDemo{
+		public static void main(String[] args) throws IOException{
+			FileReader fr = new FileReader("fr.txt");//创建输入流对象; fr.txt内容为："abc"
+			/*
+			int ch = fr.read();//调用输入流对象的读取方法
+			System.out.println(ch);//97
+			System.out.println((char)ch);//a
+			*/
+			int ch;
+			while((ch = fr.read()) != -1){//这条语句做了三个步骤
+				System.out.print();
+			}
+			fr.close();//释放资源
+			
+		}
+	  }
+	  ```
 
 
 
