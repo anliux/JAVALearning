@@ -1171,8 +1171,9 @@
   - FileReader两种读数据方法对比图解
   ![FileReader读数据的两种方式图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/io/FileReader%E8%AF%BB%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%9B%BE%E8%A7%A3.bmp)
 
-- ### FileReader和FileWriter的综合练习
-  - 题目：文件复制 - 将相同项目下的a.java中的内容复制到b.java文件中
+- ### IO流案例：复制文本文件
+  - 题目：
+    - 文件复制：将相同项目下的a.java中的内容复制到b.java文件中
   - 文件复制的套路：
     - 数据源：a.java -- 读数据 -- FileReader
     - 目的地：b.java -- 写数据 -- FileWriter
