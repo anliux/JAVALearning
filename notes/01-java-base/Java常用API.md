@@ -1107,22 +1107,23 @@
     - 创建输入流对象;
     - 调用输入流对象的读数据方法;
     - 释放资源.
-  - 读数据的方法：
-    - `int read()`: 
-      - 一次读取一个字符，且存储类型为int，即字符对应的int值
-        - 可通过(char)强转为char类型
-      - 再次使用本方法时：自动读取下一个字符 <不需要像写数据一样声明追加>
-      - 当没有可读取数据时，返回-1 <可作为读取循环结束的判断条件>
-      - 空格、回车等也可以读取到，不需要在输出语句(syso)里加`ln` 
-        - 例如：读取某个.java文件，可以在控制台输出带格式的代码 
-      - 循环时while语句的妙用：
-        - `while((ch = fr.read()) != -1){...}`
-        - 做了三步：read()读数据; 读取到的结果赋值给ch; 判断ch的值是否为-1
+  
+- ### FileReader读数据的方法：
+  - `int read()`: 
+    - 一次读取一个字符，且存储类型为int，即字符对应的int值
+      - 可通过(char)强转为char类型
+    - 再次使用本方法时：自动读取下一个字符 <不需要像写数据一样声明追加>
+    - 当没有可读取数据时，返回-1 <可作为读取循环结束的判断条件>
+    - 空格、回车等也可以读取到，不需要在输出语句(syso)里加`ln` 
+      - 例如：读取某个.java文件，可以在控制台输出带格式的代码 
+    - 循环时while语句的妙用：
+      - `while((ch = fr.read()) != -1){...}`
+      - 做了三步：read()读数据; 读取到的结果赋值给ch; 判断ch的值是否为-1
     - `void close()`: 读取结束后记得关闭释放资源
       - 代码示例：`fr.close();`
-  - 读数据常见异常：
-    - `java.io.FileNotFoundException: fr.txt (系统找不到指定文件)` 
-  - 代码示例：
+    - 读数据常见异常：
+      - `java.io.FileNotFoundException: fr.txt (系统找不到指定文件)` 
+    - 代码示例：
 	  ```Java
 	  import java.io.fileNotFoundException;
 	  import java.io.FileReader;
@@ -1144,6 +1145,31 @@
 		}
 	  }
 	  ```
+  - `int read(char[] cbuf)`
+    - 一次读取一个字符数组的数据，返回实际读取的字符个数
+    - 步骤仍然是：创建对象；调用读数据方法；释放资源。
+    - `char[] chs = new char[1024];`
+      - 自定义字符数组，相当于读取到自定义数组中，数组长度为每次读取的字符个数
+      - 通常，数组长度定义为1024或1024的整数倍：因为MB,GB等的换算是1024
+    - 读取为空时，返回-1 <可作为循环结束的条件>
+    - 会读取回车 `\r\n`，占用2个长度
+    - 上一次的读取会被下一次替换，当下一次读取不够全部提黄上一次读取时，上一次的读取会遗留在存储字符数组中
+      - 详见下方图解 
+    - 输入推荐用`System.out.println(new String(chs,0,len));`
+    - 代码示例：
+	    ```java 
+	    //创建输入流对象
+	    FileReader fr = new FileReader("a.txt");
+	    char[] chs = new char[1024];
+	    int len;
+	    while((len = fr.read(chs)) != -1){
+		System.out.print(new String(chs,0,len));//注意syso不要写ln，读取了回车等格式符
+	    }
+	    fr.close();    
+
+	    ```
+  - FileReader两种读数据方法对比图解
+  ![FileReader读数据的两种方式图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/io/FileReader%E8%AF%BB%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%9B%BE%E8%A7%A3.bmp)
 
 - ### FileReader和FileWriter的综合练习
   - 题目：文件复制 - 将相同项目下的a.java中的内容复制到b.java文件中
@@ -1152,7 +1178,7 @@
     - 目的地：b.java -- 写数据 -- FileWriter
   - 注意点：
     - 同时有读写时，close()先关哪个都可，推荐先关write.
-  - 代码示例：
+  - '一次读取一个字符'的代码示例：
 	  ```java 
 	  FileReader fr = new FileReader("a.java");//同项目下，用相对路径即可。下同。
 	  FileWriter fw = new FileWriter("b.java");
@@ -1163,6 +1189,9 @@
 	  fw.close();
 	  fr.close();
 	  ```
+	  
+	  
+	  
 - ### 字符缓冲流
   - 
 
