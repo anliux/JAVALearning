@@ -1183,24 +1183,69 @@
 	  ```java 
 	  FileReader fr = new FileReader("a.java");//同项目下，用相对路径即可。下同。
 	  FileWriter fw = new FileWriter("b.java");
-	  int ch;
+	  //一次读取一个字符的定义方法
+	  int ch;//定义返回值flag
 	  while((ch = fr.read()) != -1){//参考按单个字符读取的循环
 		fw.write(ch);
 	  }
 	  fw.close();
 	  fr.close();
 	  ```
-	  
+  - '一次读取一个字符数组'的代码示例：
+	  ```java 
+	  FileReader fr = new FileReader("a.java");//同项目下，用相对路径即可。下同。
+	  FileWriter fw = new FileWriter("b.java");
+	  //一次读取一个字符数组的定义方法
+	  char[] chs = new char[1024];//定义读取的字符数组
+	  int len;//定义返回值flag
+	  while((len = fr.read(chs)) != -1){//参考按单个字符读取的循环
+		fw.write(chs,0,len);
+	  }
+	  fw.close();
+	  fr.close();
+	  ```	  
 	  
 	  
 - ### 字符缓冲流
+  - BufferedWriter:
+    - 将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组、字符串的高效写入
+    - 代码示例：`BufferedWriter bw = new BufferedWriter(new FileWriter("bw.txt"));`
+    - 调用使用同FileWriter()
+  - BufferedReader:
+    - 从字符输入流中读取文本，缓冲各个字符，从而提供单个字符、数组、行的高效读取
+    - 代码示例：`BufferedReader br = new BufferedReader(new FileReader("br.txt"));`
+      - 仍然分为读取单个字符和读取字符数组两种方式。
+  - 导包：`import java.io.BufferedWriter/BufferedReader;`
+  - 用缓冲流复制文件
+    - 注意：记得开始导包和抛出异常
+    - 数据源：a.java -- 读数据 -- FileReader -- 高效读数据 -- BufferedReader
+    - 目的地：b.java -- 写数据 -- FileWriter -- 高效写数据 -- BufferedWriter
+    - 代码示例：
+	    ```java
+	    import java.io.* 
+	    ...
+	    public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader("a.java"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("b.java"));
+		/*
+		//一次读写一个字符
+		int ch;
+		while((ch = br.read()) != -1){
+			bw.write((char)ch);
+		}
+		*/
+		//一次读取一个字符数组
+		char[] chs = new char[1024];
+		int len;
+		while((len = br.read(chs)) != -1){
+			bw.write(chs,0,len);//不要忘记参数，防止写入未覆盖的遗留数据
+		}
+	    }
+
+	    ```
+
+- ### 字符缓冲流的特殊功能
   - 
-
-
-
-
-
-- ###
 
 
 
