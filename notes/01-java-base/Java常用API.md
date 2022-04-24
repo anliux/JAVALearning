@@ -626,7 +626,6 @@
     - for循环遍历时，接受变量为`Student s = array.get(i);`
     - 输出时，使用Student定义的获取方法：`System.out.println(s.getName()+s.getAge());`
 
-
 - ### 键盘录入数据存储并遍历
   - 题目：
     - 创建一个集合，存储学生对象，学生对象的数据来自于键盘录入，最后，遍历集合
@@ -1089,6 +1088,9 @@
     - linux: `\n`
     - mac: `\r`
     - 注意：如果在Windows用`\n`写入，则自带的记事本打开无法识别，显得的仍然是没有换行的；而用编辑器打开可以识别。
+  - 缓冲流有特殊的换行方法
+    - BufferedWriter: `voidnewLine()` -- 可根据系统自动匹配换行符，详见缓冲流的特殊功能部分。
+    - 代码示例：`bw.newLine();//取代bw.write("\r\n")；`
 
 - ### FileWriter写数据的追加写入
   - 构造方法：`FileWriter(Sting str, Boolean append)`
@@ -1205,7 +1207,6 @@
 	  fr.close();
 	  ```	  
 	  
-	  
 - ### 字符缓冲流
   - BufferedWriter:
     - 将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组、字符串的高效写入
@@ -1245,10 +1246,58 @@
 	    ```
 
 - ### 字符缓冲流的特殊功能
-  - 
+  - BufferedWriter:
+    - `void newLine()`: 写一个换行符，这个换行符由系统决定 
+      - 不需要再判断系统换行符，取代之前的`fw.write("\r\n");`
+    - 代码示例: `bw.newLine();`
+  - BufferedReader:
+    - `String readLine()`: 一次读取一行数据，但不读取换行符 (但读取空格)
+      - 返回值是字符串格式
+      - 读取空格：所以不用担心格式会乱，只需要加上换行即可
+      - 读取为空时返回null，可以作为循环结束的判断语句
+    - 代码示例：
+	    ```java 
+	    BufferedReader br = new BufferedReader(new FileReader("br.txt"));
+	    String line;
+	    while((line = br.readLine()) != null){//这里同时做了三步，同上 (读取、赋值、判断)
+		System.out.println();//readLine()不读取换行符，因此syso语句需要加上`ln`
+	    }
+	    br.close();
+	    ```
+  - 导包注意点：
+    - 用字符缓冲流时，BufferedWriter/BufferedReader和FileWriter/FileReader都需要导入
+    - 当然还有IO流异常 IOException 
+  - 使用字符缓冲流的特殊方法复制文本文件
+	    ```java
+	    public class CopyFileDemo{
+		public static void main(String[] args) throws IOException{
+			//创建缓冲流对象
+			BufferedReader br = new BufferedReader(new FileReader("a.txt"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("b.txt"));
+			String line;
+			while((line = br.readLine()) != null){
+				bw.write();
+				bw.newLine()
+				bw.flush();
+			}
+			bw.close();
+			br.close()
+		}
+	    }
+	    ```
 
-
-
+- ### 复制文本文件的5种方法
+  - 基本流一次读写一个字符
+  - 基本流一次读写一个字符数组
+  - 缓冲流一次读写一个字符
+    - 注意：缓冲流也可以用基本流的方法`br.read()`进行读取
+  - 缓冲流一次读写一个字符数组
+  - 缓冲流一次读写一个字符串 <推荐，重点掌握>
+    - 用缓冲流的特殊方法进行读写 
+    - `br.readLine()` and `bw.newLine()`.
+  - 注：
+    - 写代码时可以将读写的文件名和五种方法单独定义，提高复用性
+    - 此处涉及异常抛出注意点：当所调用的方法抛出了异常时，所调用的方法也需要抛出异常，即main方法也需要加`throws IOException`
 
 
 <!--GFM-TOC -->
