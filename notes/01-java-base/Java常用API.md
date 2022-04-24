@@ -10,9 +10,9 @@
 * [对象数组的练习](#对象数组的练习): eclipse自动生成构造函数、get()/set()方法
 * [集合类与ArrayList](#集合类与arraylist): 集合类概述, ArrayList概述, 构造方法, 添加/增删改查/遍历的方法
 * [ArrayList案例分析](#arraylist案例分析): 获取满足要求的元素, 存储自定义对象并遍历, 键盘录入数据存储并遍历
-* [学生管理系统](#学生管理系统): 学生类增删改查练习，含完整代码，篇幅较长可选择性跳过
+* [集合版学生管理系统](#集合版学生管理系统): 学生类增删改查练习，含完整代码，篇幅较长可选择性跳过
 * [IO流](#io流): 
-* []()
+* [IO流版学生管理系统](#io流版学生管理系统)
 * []()
 * []()
 * []()
@@ -716,7 +716,7 @@
 	
 	
 
-## 学生管理系统
+## 集合版学生管理系统
 - ### 注意：
   - 本部分展示完整代码，因此篇幅较长，可选择性跳过。
 
@@ -1304,6 +1304,70 @@
     - 写代码时可以将读写的文件名和五种方法单独定义，提高复用性
     - 此处涉及异常抛出注意点：当所调用的方法抛出了异常时，所调用的方法也需要抛出异常，即main方法也需要加`throws IOException`
 
+- ### 集合数据的读取
+  - IO流：将集合中的数据写入文本文件
+    - 题目：
+      - 把ArrayList集合中的字符串数据存储到文本文件，每一个字符串元素作为文件中的一行数据 
+    - 步骤：
+      - 创建集合对象
+      - 往集合中添加元素
+      - 创建输出缓冲流对象
+      - 遍历集合，得到每一个字符串元素，然后把该字符串元素作为数据写入到文本文件
+      - 释放资源
+    - 代码示例：
+	    ```java
+	    import java.io.*; //(ctrl+shift+o大法好)
+	    import java.util.ArrayList;
+
+	    public class ArrayListToFile{
+		public static void main(String[] args) throws IOException{
+			ArrayList<String> array = new ArrayList<>();
+			array.add("hello");
+			array.add("Java");
+			array.add("world");
+			BufferedWriter bw = new BufferedWriter(new FileWriter("a.txt"));
+			for(int i=0;i<array.size();i++){
+				String s = array.get(i);
+				bw.write(s);
+				bw.newLine();
+				bw.flush();
+			}
+			bw.close();
+		}
+	    }
+	    //运行，并刷新项目
+	    ```
+  - IO流：将文本文件中的数据读取并存入集合中
+    - 题目：
+      - 文本文件中读取数据到ArrayList中，并遍历集合；每一行数据作为一个字符串元素。
+    - 步骤：
+      - 创建输入缓冲流对象；
+      - 创建集合对象；
+      - 去读数据，每次读取一行数据，把该行数据作为一个元素存储到集合中；
+      - 释放资源；
+      - 遍历集合.
+    - 代码示例：
+	    ```java
+	    import java.io.*; //(ctrl+shift+o大法好)
+	    import java.util.ArrayList;
+
+	    public class ArrayListToFile{
+		public static void main(String[] args) throws IOException{
+			BufferedReader br = new BufferedReader(new FileReader("a.txt"));
+			ArrayList<String> array = new ArrayList<>();
+			String line;
+			while((line = br.readLine()) != null){
+				array.add(line);
+			}
+			br.close();
+			for(int i=0;i<array.size();i++){
+				String s = array.get(i);
+				System.out.println(s);
+			}
+		}
+	    }
+	    //运行，并刷新项目
+	    ```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -1312,7 +1376,7 @@
 
 
 
-##
+## IO流版学生管理系统
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
