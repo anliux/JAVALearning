@@ -1246,6 +1246,10 @@
 	    ```
 
 - ### 字符缓冲流的特殊功能
+  - 字符缓冲流：
+    - 包含缓冲输入/输出流：BufferedWriter 和 BufferedReader
+    - 创建缓冲流对象：构造方法参数为对应的基本输入/输出流对象，而不是直接传入文件。 
+    - 代码示例：`BufferedReader br = new BufferedReader(new FileReader("br.txt"));`
   - BufferedWriter:
     - `void newLine()`: 写一个换行符，这个换行符由系统决定 
       - 不需要再判断系统换行符，取代之前的`fw.write("\r\n");`
@@ -1268,6 +1272,7 @@
     - 用字符缓冲流时，BufferedWriter/BufferedReader和FileWriter/FileReader都需要导入
     - 当然还有IO流异常 IOException 
   - 使用字符缓冲流的特殊方法复制文本文件
+    - 代码示例：
 	    ```java
 	    public class CopyFileDemo{
 		public static void main(String[] args) throws IOException{
