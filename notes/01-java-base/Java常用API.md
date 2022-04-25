@@ -986,14 +986,9 @@
 
 	```
 
-
-
-
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
-
-
 
 
 
@@ -1375,8 +1370,63 @@
 
 
 
-
 ## IO流版学生管理系统
+- ### 图示：
+  - 左右为核心部分，中间加入集合作为临时存储，避免频繁读写文件；
+  - 左-中：为之前的集合版学生管理系统，代码可以复用
+  - 中-右：为集合与文件的读写，加入两个读写方法
+  ![学生管理系统IO版图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/io/%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FIO%E7%89%88%E5%9B%BE%E8%A7%A3.bmp)
+
+- ### 学生类代码
+  - 可直接复用
+
+- ### 学生管理类代码
+  - 复用增删改查方法，并加入集合到文件的读写两个方法
+  - 代码示例：
+  ```java
+  
+  
+  
+  //增删改查略
+  
+  //从文件中读取数据到集合: 'heima001,向问天,30,北京'作为一条对应一个Student对象
+  public static void readData(String fileName, ArrayList<Student> array) throws IOException{
+  	//创建输入缓冲流对象
+	BufferedReader br = new BufferedReader(new FileReader("fileName"));
+	String line;
+	while((line = br.readLine()) != null){
+		String[] datas = line.spit(",");
+		Student s = new Student();
+		s.setId(datas[0]);
+		s.setName(datas[1]);
+		s.setAge(datas[2]);
+		s.setAddress(datas[3]);
+		array.add(s);
+	}
+	br.close();
+  }
+  
+  //把集合中的数据写入文件：'heima001,向问天,30,北京'作为一条对应一个Student对象
+  public static void writerData() throws IOException{
+  	//创建输出缓冲流对象
+	BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+	for(int i = 0; i<array.size(); i++){
+		Student s = array.get(i);
+		StringBuilder sb = new StringBuilder();//需要拼接成’heima001,向问天,30,北京‘，可以用StringBuilder
+		sb.append(s.getId()).append(",").append(s.getName()).append(",").append(s.getAge()).append(",").append(s.getAddress();
+		
+		bw.write(sb.toString());
+		bw.newLine();
+		bw.flush();
+	}
+	bw.close();
+  }
+  
+  ```
+
+
+
+
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
