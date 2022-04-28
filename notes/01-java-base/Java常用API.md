@@ -1382,12 +1382,22 @@
 
 - ### 学生管理类代码
   - 复用增删改查方法，并加入集合到文件的读写两个方法
+  - 增删改查：
+    - main方法中删去新建ArrayList, 改为定义文件
+      - `String fileName = "students.txt";`
+    - 参数列表改为传入文件名：
+      - `public static void addStudent(String fileName){}`
+    - 增删改查方法中先新建ArrayList，后读取文件到集合对象中，下面就一样了
+      - `ArrayList<Student> array = new ArrayList<>();`
+      - `readData(fileName,array);` 
+    - 增删改查方法的最后，array操作之后，将集合对象中的数据写入文件：
+      - `writeData(fileName,array);` 
+    - 注意：增删改查和main方法需要跟着抛出异常。 
   - 代码示例：
   ```java
   
+  //main方法和增删改查略
   
-  
-  //增删改查略
   
   //从文件中读取数据到集合: 'heima001,向问天,30,北京'作为一条对应一个Student对象
   public static void readData(String fileName, ArrayList<Student> array) throws IOException{
@@ -1423,8 +1433,6 @@
   }
   
   ```
-
-
 
 
 
