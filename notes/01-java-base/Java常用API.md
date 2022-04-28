@@ -1276,7 +1276,7 @@
 			BufferedWriter bw = new BufferedWriter(new FileWriter("b.txt"));
 			String line;
 			while((line = br.readLine()) != null){
-				bw.write();
+				bw.write(line);
 				bw.newLine()
 				bw.flush();
 			}
