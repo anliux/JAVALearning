@@ -1084,7 +1084,7 @@
     - mac: `\r`
     - 注意：如果在Windows用`\n`写入，则自带的记事本打开无法识别，显得的仍然是没有换行的；而用编辑器打开可以识别。
   - 缓冲流有特殊的换行方法
-    - BufferedWriter: `voidnewLine()` -- 可根据系统自动匹配换行符，详见缓冲流的特殊功能部分。
+    - BufferedWriter: `void newLine()` -- 可根据系统自动匹配换行符，详见缓冲流的特殊功能部分。
     - 代码示例：`bw.newLine();//取代bw.write("\r\n")；`
 
 - ### FileWriter写数据的追加写入
