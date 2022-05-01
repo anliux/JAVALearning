@@ -127,10 +127,10 @@
 	}
 	```
 
-	```
-	/*java
-	* PhoneDemo.java:
-	* 手机类的测试类
+	```java
+	/*
+	 * PhoneDemo.java:
+	 * 手机类的测试类
 		*/
 	public class PhoneDemo {
 		public static void main(String[] args) {
@@ -526,14 +526,166 @@
 
 
 
-## 待续
+## static关键字
+- ### 静态static关键字概述
+  - 关键字，修饰符，用于修饰成员变量和成员方法
+  - 代码示例：
+	  ```java
+	  class Person{
+		String name;
+		int age;
+		static Sting graduateFrom;//毕业院校
+		public void speak(){
+			System.out.println(name + age + graduateFrom);
+		}
+	  }
+	  ```
+  
+- ### 静态static的特点：
+  - 被所有对象所共享；
+    - 若当一个变量是static而开局没有初始化, 则当第一个对象进行了定义，后面的对象的该变量默认值都是第一个对象定义好的值，进行了共享。
+  - 可以使用类名调用；
+    - 代码示例：
+      - `Person.graduateFrom = "传智学院";`，则后面所有对象的默认graduateFrom参数都是此处定义好的
+  - 静态的加载优先于对象，是随着类的加载而加载的。
+    - 随着该类的字节码文件的加载而加载。 
+  
+- ### 静态/非静态的相互调用
+  - 静态方法：静态只能访问静态(成员变量和成员方法)
+    - 理解为：静态加载时，非静态的成员挂靠在对象，还没有生成呢，不存在的东西不能使用。
+    - 可以调用静态的成员变量；
+    - 可以调用静态的成员方法；
+    - 不可以调用非静态成员变量；
+    - 不可以调用非静态成员方法。
+  - 非静态方法：既可访问静态，又可访问非静态
+    - 理解为：静态先于非静态加载，有非静态时一定有静态在了，可以用没有冲突。
+    - 可以调用静态的成员变量；
+    - 可以调用静态的成员方法；
+    - 可以调用非静态的成员变量；
+    - 可以调用非静态的成员方法。
+  - 静态方法中不可以定义this, super关键字
+    - 理解为：静态加载时还没有对象
+  - 代码示例：
+	  ```java
+	  public class StaticDemo{
+		public static void main(String[] args){
+			Student.graduateFrom = "传智学院";
+			Student.study();
+			//输出：传智学院(回车) sleep
+		}
+	  }
+
+	  class Person{
+	  	String name;
+		int age;
+		static String graduateFrom;//毕业院校
+		
+		public static void study(){//静态的成员方法：调用测试区
+			System.out.println(graduateFrom);//静态方法可以调用静态的成员变量
+			sleep();//静态方法可以调用静态的成员方法
+			
+			//syso(name);//报错：静态方法不能调用非静态的成员变量
+			//eat();//报错：静态方法不能调用非静态的成员方法
+		}
+		public static void sleep(){//静态的成员方法
+			System.out.println("sleep");
+			//this.xx：空白，召唤不出任何东西。//非静态中不能使用this关键字
+		}
+		public void eat(){//非静态的成员方法
+			System.out.println("eat");
+			System.out.println(graduateFrom);//非静态方法可以调用静态的成员变量
+			sleep();//非静态方法可以调用静态的成员方法
+			//非静态：调用非静态成员变量和方法是之前一直在做的事，可以调用。
+		}
+	  }
+	  ```
+
+- ### 静态的优缺点：
+  - 优点：
+    - 对对象的共享数据提供单独空间的存储，节省空间，没有必要每一个对象都存储一份
+    - 可以直接被类名调用,不用在堆内存创建对象
+  - 缺点：
+    - 访问出现局限性。（静态虽好，但只能访问静态）
+ 
+- ### 静态的应用场景
+  - Math类的使用：典型应用
+  - Math:
+    - 查阅API进行学习
+    - 包含基本的数学运算方法
+    - lang包下：不用导包
+    - Math的所有方法都是static静态的
+    - Java没有提供构造方法：直接通过类名调用，和对象无关
+    - 常用方法示例：
+      - static double PI: `syso(Math.PI);//直接类名Math调用，输出π的值`
+      - static double max(double a, double b): min()同，求最值
+        - `syso((Math.max(3,4));//返回值：4`
+      - static double abs(double a): 
+        - 求绝对值，返回double类型，但一般不新增小数点；注意求绝对值方法有4中数据类型的重载
+	- `syso((Math.abs(-10));//返回值：10`
+      - static double ceil(double a): 
+        - 天花板，向上取整，返回double类型, 会补一个小数点位 (不涉及四舍五入)
+	- `syso((Math.ceil(-1.23));//返回值: -1.0`
+      - static double floor(double a): 
+        - 地板，向下取整，返回double类型, 会补一个小数点位 (不涉及四舍五入)
+	- `syso((Math.floor(-1.23));//返回值: -2.0`
+      - static long round(double a): 
+        - 四舍五入，返回long类型
+	- `syso((Math.round(1.23));//返回值：1`
+	- `syso((Math.round(1.83));//返回值：2`
+	- `syso((Math.round(-1.23));//返回值：-1`
+	- `syso((Math.round(-1.83));//返回值：-2`
+      - static double pow(double a, double b):
+        - a的b次幂
+        - `syso((Math.pow(2,3));//返回值：2^3=8.0`
+      - static double random(): 
+        - 返回一个带正号、介于0.0-1.0之间的double值随机数
+        - `syso((Math.random());//返回值: 0.34674326810933...`
+
+- ### 静态自定义工具类
+  - 将不需要new对象的方法定义为静态后直接调用
+  - 代码示例：
+	  ```java
+	  //MyArrays.java
+	  public class MyArrays{
+		private MyArrays(){}//不需要创建对象，私有构造函数
+
+		//求最大值：返回数据中的最大元素 <设定为自然数最值>
+		public static int getMax(int[] arr){
+			int max = 0;//参照物
+			for(int i = 0; i<arr.length; i++){
+				if(arr[] > max)
+					max = arr[];
+			}
+			return max;
+		}
+
+		//返回数组中指定参数的索引
+		public static int getIndex(int[] arr, int a){
+			for(int i=0; i<arr.length; i++){
+				if(arr[i] == a)
+					return i;
+			}
+			return -1;
+		}
+	  }
+	  ```
+	  
+	  ```java
+	  //MyArrayDemo.java
+	  public class MyArrayDemo{
+	  	public static void main(String[] args){
+			int[] arr = {3,5,8,10,2};
+			int max = MyArray.getMax(arr);//类名调用获取最值方法
+			syso(max);
+			int index = MyArray.getIndex(arr,8);//类名调用获取索引值方法
+			syso(index);
+		}
+	  }
+	  ```
 
 
 
-
-
-
-##
+## 代码块
 
 
 
