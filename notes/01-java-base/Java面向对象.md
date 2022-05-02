@@ -13,8 +13,8 @@
 * [构造方法](#构造方法): 作用，格式，无参构造带参构造，调用，注意事项
 * [标准类的代码编写与测试](#标准类的代码编写与测试): 以Student类为例展示
 * [类名作为形式参数和返回值](#类名作为形式参数和返回值): 类合理联想到对象实体
-* [static关键字](#static关键字):
-* [代码块](#代码块):
+* [static关键字](#static关键字): static概述, 特点, 静态/非静态相互调用, 优缺点, 应用场景与Math类, static自定义工具类
+* [代码块](#代码块): 代码块概述, 局部代码块, 构造代码块, 静态代码块, 涉及代码块执行顺序的面试题分析
 * []():
 * []():
 * []():
@@ -559,7 +559,7 @@
   - 静态的加载优先于对象，是随着类的加载而加载的。
     - 随着该类的字节码文件的加载而加载。 
   
-- ### 静态/非静态的相互调用
+- ### 静态/非静态的相互调用 
   - 静态方法：静态只能访问静态(成员变量和成员方法)
     - 理解为：静态加载时，非静态的成员挂靠在对象，还没有生成呢，不存在的东西不能使用。
     - 可以调用静态的成员变量；
@@ -699,7 +699,156 @@
 
 
 ## 代码块
+- ### 代码块概述：
+  - 在代码中，用{}括起来的代码被称为代码块
+  
+- ### 分类：
+  - 局部代码块
+    - 在方法中出现，控制变量生命周期(作用域)
+    - 好处：及早释放，提高内存利用率
+    - 代码示例：
+	    ```java
+	    //写在main函数中的局部代码块
+	    public static void main(String[] args){
+		{int num = 10;}
+		System.out.println(num);//代码块中的num生命周期已结束，此处syso语句中已经读取不到num
+	    }
 
+	    ```
+  - 构造代码块
+    - 在<类中方法外>出现，抽取<构造方法>中的共性
+    - 执行：每次创建对象都会执行，并且在构造方法前执行。
+    - 代码示例：
+	    ```Java
+	    public Teacher{
+	    	String name;
+		int age;
+		{System.out.println("我爱Java");}
+		public Teacher(){
+			syso("我是无参空构造");
+		}
+		public Teacher(String name, int age){
+			syso("我是带参构造");
+			this.name = name;
+			this.age = age;
+		}
+	    }
+
+	    ```
+	    ```Java
+	    //调用输出：
+	    public static void main(String[] args){
+	    	Teacher t1 = new Teacher();
+		Teacher t2 = new Teacher("小张老师",18);
+	    }
+	    /*
+	    输出：<构造代码块先于构造方法执行>
+	    我爱Java
+	    我是无参空构造
+	    我爱Java
+	    我是带参构造
+	    */    
+	    ```
+  - 静态代码块
+    - 在<类中方法外>出现，并加上static修饰；
+    - 用于给类进行初始化，在加载的时候就执行，并且只执行一次。
+    - 一般用于加载驱动
+    - 代码示例：
+	    ```java
+	    public class BlockDemo {
+		public static void main(String[] args) {
+			Teacher t1 = new Teacher();
+			Teacher t2 = new Teacher("小张老师",18);
+		}
+	    }
+
+	    class Teacher{
+		String name;
+		int age;
+		static{//静态代码块
+			System.out.println("我的静态代码块");
+		}
+
+		{//构造代码块
+			System.out.println("我是构造代码块");
+		}
+
+		public Teacher() {
+			System.out.println("我是无参空构造");
+		}
+		public Teacher(String name, int age) {
+			System.out.println("我是带参构造");
+		}
+
+	    }
+	    /*
+	    输出：
+		我的静态代码块
+		我是构造代码块
+		我是无参空构造
+		我是构造代码块
+		我是带参构造
+	    */
+	    ```
+  - 静态代码块和构造代码块的执行顺序：
+    - 静态代码块>构造代码块>构造函数内代码
+    - 静态代码块只执行一次
+    - 构造代码块：构造一次对象(new一次对象)，执行一次
+  - 同步代码块(多线程讲)
+
+- ### 代码块面试题
+  - 考查代码块的执行顺序
+    - 开始执行主函数，需要先加载BlockTest, 于是先执行BlockTest的静态代码块
+    - 然后执行主函数
+    - 之后执行`Coder c1 = new Coder();`
+      - 用到Coder类：Coder类第一次被加载，先加载Coder的静态代码块
+      - `Coder c1 = new Coder();`: 先加载Coder的构造代码块，后加载无参构造
+      - `Coder c2 = new Coder();`: 先加载Coder的构造代码块，后加载无参构造
+    - 注意：
+      - 静态代码块只在第一次加载该类的时候用到，因此Coder类的静态代码块只执行了一次。 
+      - 没有用到主函数所在的BlockTest的《构造代码块》和《无参构造》，是因为没有创建BlockTest的对象。
+  - 代码示例：
+	```java
+	public class BlockTest {
+		static {
+			System.out.println("BlockTest静态代码块执行了");
+		}
+		{
+			System.out.println("BlockTest构造代码块执行了");
+		}
+		public BlockTest() {
+			System.out.println("BlockTest无参空构造执行了");
+		}
+		public static void main(String[] args) {
+			System.out.println("BlockTest的主函数执行了！");
+			Coder c1 = new Coder();
+			Coder c2 = new Coder();
+		}
+	}
+
+	class Coder{
+		static{
+			System.out.println("Coder静态代码块执行");
+		}
+		{
+			System.out.println("Coder构造代码块执行");
+		}
+		public Coder(){
+			System.out.println("Coder无参空构造执行");
+		}
+
+	}
+	```
+  - 代码结果：
+  	```
+	BlockTest静态代码块执行了
+	BlockTest的主函数执行了！
+	Coder静态代码块执行
+	Coder构造代码块执行
+	Coder无参空构造执行
+	Coder构造代码块执行
+	Coder无参空构造执行
+ 	```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
