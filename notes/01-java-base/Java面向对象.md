@@ -1174,7 +1174,7 @@
   - 接口interface：
     - 一种比抽象类还抽象的类，接口里所有的方法全是抽象方法
     - 接口只包含常量和方法的定义,而没有变量和方法的方法体
-  - 接口和类的关系是实现 implement 
+  - 接口和类的关系是实现 `implements` 
     - 帮助抽象类中的抽象方法实现为具体的方法 
     - 一个类实现一个接口，必须实现该接口的所有方法 
   - 接口的格式：`interface 接口名{}` -- 类似于类的定义
@@ -1272,6 +1272,119 @@
   - 区别4：构造方法
     - 抽象类：有构造方法
     - 接口：没有构造方法 (只有常量没有变量，也不需要初始化什么)
+
+- ### 运动员案例
+  - 图示：
+  ![运动员案例分析](https://github.com/anliux/JAVALearning/blob/master/images/01-java-base/class/%E8%BF%90%E5%8A%A8%E5%91%98%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90.png)
+  - 代码示例：
+  	```java
+	/* 	
+	 * 	篮球运动员和教练
+		乒乓球运动员和教练
+		现在篮球运动员和教练要出国访问,需要学习英语
+		请根据你所学的知识,分析出来哪些是类,哪些是抽象类,哪些是接口
+	 */
+
+	public class AbstractTest {
+		public static void main(String[] args) {
+			//篮球运动员
+			BasketBallPlayer bbp = new BasketBallPlayer();
+			bbp.name = "姚明";
+			bbp.age = 20;
+			bbp.gender = "男";
+			bbp.eat(); //吃饭
+			bbp.study(); //学扣篮
+			bbp.speak(); //姚明说英语		
+
+			//乒乓球教练
+			PingpangCoach ppc = new PingpangCoach(); 
+			//变量初始化略
+			ppc.teach(); //教抽球
+			//ppc.speak();//未定义此方法
+		}	
+	}
+
+	//人
+	class Person{
+		String name;//姓名
+		int age;//年龄
+		String gender;//性别
+
+		public Person() {//无参构造
+		}
+
+		public Person(String name, int age, String gender) {//带参构造
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		}
+
+		public void eat() {
+			System.out.println("吃饭");
+		}
+		public void sleep() {
+			System.out.println("睡觉");
+		}	
+	}
+
+	//运动员
+	abstract class Player extends Person{
+		public abstract void study();
+	}
+
+	//教练
+	abstract class Coach extends Person{
+		public abstract void teach();
+	}
+
+	//学英语
+	interface speakEnglish{
+		public abstract void speak();
+	} 
+
+	//篮球运动员
+	 class BasketBallPlayer extends Player implements speakEnglish {
+		@Override
+		public void study() {
+			System.out.println("学扣篮");
+		}
+
+		@Override
+		public void speak() {
+			System.out.println(name+"说英语");
+		}	
+	}
+
+	//篮球教练
+	class BasketBallCoach extends Coach implements speakEnglish {
+		@Override
+		public void teach() {
+			System.out.println("教扣篮");
+		}
+
+		@Override
+		public void speak() {
+			System.out.println(name+"说英语");
+		}	
+	}
+
+	//乒乓球运动员
+	class PingpangPlayer extends Player{
+		@Override
+		public void study() {
+			System.out.println("学抽球");
+		}	
+	}
+
+	//乒乓球教练
+	class PingpangCoach extends Coach{
+		@Override
+		public void teach() {
+			// TODO Auto-generated method stub
+			System.out.println("教抽球");
+		}	
+	}  
+  	```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
