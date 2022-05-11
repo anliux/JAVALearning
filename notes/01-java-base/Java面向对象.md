@@ -20,8 +20,14 @@
 * [接口](#接口): 概述, 成员特点, 接口与类的关系, 接口思想与API, 接口的优点, 接口与抽象类的关系, 运动员案例示例
 * [匿名对象](#匿名对象): 匿名对象概述, 应用场景, 问题
 * [final](#final):
-* []()
-* []()
+* [多态](#多态): 
+* [](): 
+* []():
+* []():
+* []():
+* []():
+* []():
+* []():
 
 <!--GFM-TOC -->
 
@@ -1486,26 +1492,173 @@
 
 ## 多态
 - ### 多态的概述
-- 
+  - 多态：polymorphic
+  - 定义：某一类事物的多种存在形态。
+  - 多态的前提：
+    - 子父类的继承关系
+    - 方法的重写
+    - 父类引用指向子类对象：`Animal a = new Cat();`
+      - 父类引用(变量): Animal a
+      - 指向：=
+      - 子类对象：new Cat()
+  - 代码示例：
+    - 定义Animal和Cat两种类，并分别写eat()方法："动物吃东西"和"猫吃鱼"
+    - 定义父类引用指向子类对象：`Animal a = new Cat();`
+    - 调用eat()方法：`a.eat();//动态绑定，输出：猫吃鱼`  
+  - 动态绑定：
+    -  是指“在运行/执行期间”（而非编译期间) 判断所引用对象的实际类型，根据实际类型调用相应的方法。
+  - 多态举例：
+    - 例：动物中猫，狗。
+    - 动物是猫和狗具体事物中抽取出来的父类型。
+    - 同时猫也是动物中的一种，也可以把猫称为动物。
+    - `动物 y = new 猫();`
+
 - ### 多态的成员特点
-- 
+  - 成员变量：编译和运行都看等号左边(父)
+    - 变量没有重写的概念，都是看 <左边的父类> 定义类型 
+    - 编译时期: 看引用型变量所属的类中是否有所调用的变量
+    - 运行时期: 也是看引用型变量所属的类是否有调用的变量
+    - 成员变量无论编译还是运行都看引用型变量"所属的类"。
+    - 代码示例：
+    ```java
+    class Dad{ int num = 20; }
+    class Kid extends Dad{ int num = 10; }
+    
+	    ...main(){
+		Dad d = new Kid();
+		syso(d.num);//输出父类的：20
+	    }
+    ```
+  - 成员函数：编译看左边(父)运行看右边(子)
+    - 编译时：要查看引用变量所属的类中是否有所调用的成员。
+      - 如果父类没有此方法，只有子类有，则编译报错 
+    - 运行时：要查看对象所属的类中是否有所调用的成员。(动态绑定)
+      - 如果父子出现同名的方法,会运行子类中的方法,因为方法有覆盖的特性
+    - 代码示例：
+    ```java
+    class Dad{ 
+    	public void method(){
+		syso("父类方法");
+	} 
+    }
+    class Kid extends Dad{ 
+    	public void method(){
+		syso("子类方法");
+	}
+    }
+    
+	    ...main(){
+		Dad d = new Kid();
+		d.method();//输出：子类方法
+	    }
+    ```
+  - 静态函数: 编译和运行都看等号左边(父)
+    - 编译时期: 看的引用型变量所属的类中是否有所调用的变量
+      - 如果父类没有此方法，只有子类有，则编译报错
+    - 运行时期: 也是看引用型变量所属的类是否有调用的变量
+      - 使用父类调用静态方法，相当于使用变量类型的类名去调用 `d.method();` 
+    - 代码示例：
+    ```java
+    class Dad{ 
+    	public static void method(){
+		syso("父类静态方法");
+	} 
+    }
+    class Kid extends Dad{ 
+    	public static void method(){
+		syso("子类静态方法");
+	}
+    }
+    
+	    ...main(){
+		Dad d = new Kid();
+		d.method();//输出：父类方法
+	    }
+    ```
+  - 小结：  
+    - 编译时：都是看左边 
+      - 因为编译时是编译器在检查，那时还没有new对象，当然看左边的定义
+    - 运行时：成员方法看右边(动态绑定)，其他(成员变量和静态方法)看左边
+
 - ### 向上转型和向下转型
-- 
+  - 基本数据类型的转换：
+    - 自动类型转换和强制类型转换 
+  - 引用数据类型的转换：
+    - 向上转型和向下转型  
+  - 向上转型: 自动
+    - 由小到大(子类型转换为父类型) 
+    - 使用场景：多态，父类引用指向子类对象时
+    - 代码示例：`Animal a = new Dog();`
+  - 向下转型: 强制
+    - 由大到小
+    - 使用场景：当需要使用子类的特有成员时，父类没有，就需要转为子类的类型。
+    - 代码示例：`Dog d = (Dog)a;`
+    - 注意：原来是什么子类，向下转为该子类没有问题；原来是Dog转成Cat就有问题。
+  - 代码示例：
+  ```java
+  class Animail{
+  	public void eat(){
+		syso("吃东西");
+	}
+  }
+  class Dog extends Animal{
+ 	public void eat(){
+		syso("啃骨头");
+	}
+	public void swim(){
+		syso("狗刨");
+	}
+  }
+  
+  ...main(){
+  	Animal a = new Dog();
+	a.eat();//输出父类的：吃东西
+	//a.swim();//编译报错：成员方法看左边，父类没有此方法
+	Dog d = ()a;
+	d.swim();//输出子类的：狗刨
+  }
+  ```
+  
 - ### 多态的优缺点
-- 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  - 好处和作用：
+    - 多态的存在提高了程序的扩展性和后期可维护性(多态前提所保证的)
+  - 弊端:
+    - 父类调用的时候只能调用父类里的方法,不能调用子类的特有方法,因为你并不清楚将来会有什么样的子类继承你
+  - 代码示例：
+  ```java
+  class MiFactory{
+  	/*
+	public void createPhone(MiNote mi){
+		mi.call();
+	}
+	public void createPhone(RedMi mi){
+		mi.call();
+	}
+	*/
+	public void createPhone(Phone p){//提高了可扩展性
+		p.call();
+	}
+  }
+  interface Phone{
+  	public void call();
+  }
+  class MiNote implements Phone{
+  	public void call(){
+		syso("MiNote打电话");
+	}
+  }
+  class RedMi implements Phone{
+  	public void call(){
+		syso("红米打电话");
+	}
+  }
+  
+  ...main(){
+  	MiFactory factory = new MiFactory();
+	factory.createPhone(new MiNote());//MiNote打电话
+	factory.createPhone(new RedMi());//红米打电话
+  }
+  ```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
