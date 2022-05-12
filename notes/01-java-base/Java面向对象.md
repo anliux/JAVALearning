@@ -1913,14 +1913,68 @@
   	```
 	
 - ### 匿名内部类
+  - 概述：
+    - 可以看做是一个没用名字的局部内部类。
+    - 同样定义在方法中
+    - 必须在定义匿名内部类的的时候创建对象
+  - 前提：
+    - 内部类可以继承或实现一个外部类或者接口。
+  - 原理：
+    - 创建了继承这个类的子类对象，或是创建了实现这个接口的子类对象 
+    - 简单理解：建立一个带内容的外部类或者接口的子类匿名对象。
+  - 格式为：
+	  ```java
+	  new 类/接口(){
+		//如果是创建了继承这个类的子类对象，可以重写父类的方法； 
+		//如果是创建了实现这个接口的子类对象，必须要实现接口的所有方法。
+	  };
+	  ```
+  - 代码示例：
+  	```java
+	public class InnerDemo {
+		public static void main(String[] args) {
+			Outer o = new Outer();
+			o.method();//调用内部类所在的方法，输出：匿名内部类function
+		}
+	}
 
+	interface Inner{//供内部类实现的接口
+		public void function();
+	}
 
-
-
-
-
-
-
+	class Outer{
+		public void method() {//内部类所在方法
+			new Inner() {//创建接口子类并直接调用function方法
+				@Override
+				public void function() {
+					System.out.println("匿名内部类function");			
+				}		
+			}.function();
+		}
+	}  
+  	```
+  
+  	```java
+	class Outer{
+		public void method() {
+			Inner i = new Inner() {//赋值给父接口并命名，方便多次调用
+				@Override
+				public void function() {
+					System.out.println("匿名内部类function");			
+				}		
+			};
+			i.function();
+			i.function();
+			/* 输出：
+			匿名内部类function
+			匿名内部类function		
+			*/
+		}
+	}  
+  	```
+  - 使用场景
+    - 通常在使用方法是接口类型参数，并该接口中的方法不超过三个时，可以将匿名内部类作为参数传递。
+    - 简化书写,如果阅读实在费劲的话,可以写有名字的内部类
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
