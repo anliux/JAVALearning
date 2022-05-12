@@ -16,7 +16,7 @@
 - [Java基础语法](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95.md)
   -  xx
 - [Java面向对象](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md)
-  -  xx
+  - 面向对象思想，类与对象，成员变量和局部变量，私有private，封装，this，构造方法，标准类代码示例(以Student为例)，类名作为形参和返回值，static关键字，代码块，继承， 抽象类，接口，匿名对象，final关键字，多态，包与修饰符，内部类
 - [Java常用API](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%B8%B8%E7%94%A8API.md)
   -  API概述, 字符串(String与StringBuidler), 集合([]数组, ArrayList), IO流(), ...
 - [泛型与常见数据结构..待整理]()
