@@ -12,7 +12,7 @@
 * [ArrayList案例分析](#arraylist案例分析): 获取满足要求的元素, 存储自定义对象并遍历, 键盘录入数据存储并遍历
 * [集合版学生管理系统](#集合版学生管理系统): 学生类增删改查练习，含完整代码，篇幅较长可选择性跳过
 * [IO流](#io流): 概述IO流, FileWriter构造方法, 写数据方法, 换行, 追加写入, FileReader, 读数据方法(单个字符/字符数组), 字符缓冲流及特殊方法, 复制文本的5种方法, 集合数据的读写
-* [IO流版学生管理系统](#io流版学生管理系统)
+* [IO流版学生管理系统](#io流版学生管理系统): 用IO流改进学生管理系统
 * []()
 * []()
 * []()
@@ -1434,17 +1434,80 @@
   
   ```
 
-
-
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
 
 
 
+## Object
+- ### 对象
+  - 可以通过查阅API进行学习
+  - eclipse：ctrl/command+XX：查看源码
+   
+- ### 概述
+  - Object类 是类层次结构的根类, 在java.lang包下。
+  - 每个类都使用 Object 作为超类。
+  - 所有对象（包括数组）都实现这个类的方法
+  - 代码示例：
+    - `class Demo extends Object{...}//默认继承Object类`
 
-##
+- ### Object类要掌握的功能
+  - toString
+  - equals 
 
+- ### toString方法
+  - eclipse：ctrl/command+XX：查看源码
+    - command+toString跳转到其源码
+  - `String toString`: 返回对象的字符串表示
+    - 输出对比可知：输出对象，默认输出的是`对象.toString()` 
+  - toString源码：`return getClass().getName() + "@" + Integer.toHexString(hashCode());`  
+    - getClass()：返回运行时类，即字节码文件
+    - getName()：返回类名
+    - "@"：一个分隔符
+    - Integer.toHexString()：返回指定参数的十六进制字符串形式
+    - hashCode()：返回该对象的哈希码值(内存地址)
+  - 注意：
+    - toString的源码对于输出没有意义，一般重写toString方法
+    - eclipse提供了快捷重写：source -- Generate toString -- 选择变量 -- 自动生成重写的toString方法 
+  - toString方法的使用场景：
+    - 一般开发不用，自己写/学习/测试/调试的时候多用 
+  - 代码示例：
+  	```java
+	Fruit f = new Fruit();
+	System.out.println(f.toString());//test.demo.Fruit@6ff3c5b5
+	System.out.println(f);//test.demo.Fruit@6ff3c5b5 -- 输出对比
+  	```
+	
+	```java
+	public class ObjectDemo {
+		public static void main(String[] args) {
+			Fruit f = new Fruit();
+			System.out.println(f.toString());//test.demo.Fruit@6ff3c5b5
+			f.name = "橘子";
+			f.age = 12;
+			System.out.println(f);//test.demo.Fruit@6ff3c5b5
+		}
+	}
+
+	class Fruit extends Object{
+		String name;
+		int age;
+		@Override
+		public String toString() {
+			return "Fruit [name=" + name + ", age=" + age + "]";
+		}	
+	}
+	/*
+	输出：
+	Fruit [name=null, age=0]
+	Fruit [name=橘子, age=12]
+	*/
+	```
+
+- ### equals方法
+  - 
+- 
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
