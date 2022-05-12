@@ -1780,10 +1780,138 @@
     - 内部类不能用普通的方式访问。内部类是外部类的一个成员，因此内部类可以自由地访问外部类的成员变量，无论是否是private的。
 
 - ### 成员内部类
+  - 概述: 
+    - 位置：
+      - 在类中、方法外定义的类，即在成员的位置，和成员变量、成员方法的位置是一样的.
+    - 成员内部类可以直接访问外部类的成员，包括私有成员:
+      - 因为内部类中都持有一个外部类对象的引用: 外部类名.this
+  - 访问内部类的两种方法：
+    - 法1：import内部类，即`import 包名.外部类名.内部类名;` 
+    - 法2：按成员的方法创建内部类对象
+  - 成员内部类创建对象方式:
+    - 外部类名.内部类名 对象名 = new 外部类对象.new 内部类对象;
+  - 代码示例：
+  	```java
+	public class InnerDemo {
+		public static void main(String[] args) {
+			/* 外部类调用内部类的方法
+			 * Outer o = new Outer();
+			 * o.method();//输出：10
+			 */
+			 
+			//Inner i;//法1: import test.demo.Outer.Inner;
 
+			//法2: 以成员的方式创建并调用内部类
+			Outer.Inner i = new Outer().new Inner();//类似调用其他成员的形式
+			i.function();//输出：10
+		}
+	}
+
+	class Outer{//外部类
+		private int num = 10;
+
+		public void method() {
+			Inner i = new Inner();
+			i.function();
+		}
+
+		class Inner{//成员内部类：与其他成员的位置相同
+			public void function() {
+				System.out.println(num);//内部类访问外部类的私有成员
+			}
+		}	
+	}  
+  	```
+	
+- ### 成员内部类的修饰符
+  - 可用的修饰符有：
+    - final、abstract、public、private、protected和static等。
+  - public, default, protected:
+    - 都可  
+  - private：
+    - 可，无法在其他类中访问；可以在本类其他方法中写，然后调用其他访问(类似get/set)   
+  - abstract, final:
+    - 可，但使用场景不多   
+  - static:
+    - 静态内部类，不用再创建外部类对象了
+    - 访问方式：
+      - 方式1: 在外部类中访问静态内部类中的非静态成员
+        - `外部类名.内部类名 对象名 = 外部类名.内部类对象;`
+        - 通过创建对象访问，不需要创建外部类
+      - 方式2: 在外部类中访问静态内部类中的静态成员
+        - 可以通过上一种,也可以直接`外部类名.内部类名.成员;`
+        - 我们把静态内部类看成一个类中的成员，既然是静态修饰的, 就可以用类名.调用 
+      - 注意: 
+        - 如果成员内部类用static修饰就出现了访问局限性和静态方法是一个道理,就不能访问外部类的非静态成员了
+      - 静态内部类之所以可以直接访问外部类中的静态成员,其实是持有外部类名
+  - 代码示例：
+  	```java
+	public class InnerDemo {
+		public static void main(String[] args) {
+			Outer.Inner i = new Outer.Inner();
+			i.function();//输出：function
+		}
+	}
+
+	class Outer{
+		static class Inner{//静态类的非静态成员
+			public void function() {
+				System.out.println("function");
+			}
+		}	
+	}  
+  	```
+	
+	```java
+	public class InnerDemo {
+		public static void main(String[] args) {
+			Outer.Inner.function();//直接用类名调用，输出：function
+		}
+	}
+
+	class Outer{
+		static class Inner{//静态内部类的静态成员
+			public static void function() {
+				System.out.println("function");
+			}
+		}	
+	}	
+	```
+  
 - ### 局部内部类
+  - 位置: 定义在方法中的类，即在局部变量相同的位置。又叫方法内部类。
+  - 属性:
+    - 只能在定义该类的方法内使用和实例化：
+      - 同局部变量，出了类就消失了。
+    - 不能使用该内部类所在方法的非final局部变量。
+    - 可用修饰符：final和abstract。
+      - 同局部变量
+    - 静态方法是没有this引用的，因此在静态方法内的内部类遭受同样的待遇，即：只能访问外部类的静态成员。
+  - 使用场景：
+    - 用得不多，了解即可。
+  - 代码示例：
+  	```java
+	public class InnerDemo {
+		public static void main(String[] args) {
+			Outer o = new Outer();
+			o.method();
+		}
+	}
 
-
+	class Outer{
+		public void method() {
+			//Inner i = new Inner();//需要先定义后使用，有先后顺序，同局部变量。
+			class Inner{//局部内部类
+				public void function() {
+					System.out.println("内部类function");
+				}
+			}
+			Inner i = new Inner();
+			i.function();
+		}
+	}  
+  	```
+	
 - ### 匿名内部类
 
 
