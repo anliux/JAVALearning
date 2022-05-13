@@ -13,7 +13,7 @@
 * [集合版学生管理系统](#集合版学生管理系统): 学生类增删改查练习，含完整代码，篇幅较长可选择性跳过
 * [IO流](#io流): 概述IO流, FileWriter构造方法, 写数据方法, 换行, 追加写入, FileReader, 读数据方法(单个字符/字符数组), 字符缓冲流及特殊方法, 复制文本的5种方法, 集合数据的读写
 * [IO流版学生管理系统](#io流版学生管理系统): 用IO流改进学生管理系统
-* []()
+* [Object](#object): 
 * []()
 * []()
 * []()
@@ -1443,7 +1443,9 @@
 ## Object
 - ### 对象
   - 可以通过查阅API进行学习
-  - eclipse：ctrl/command+XX：查看源码
+  - eclipse：
+    - ctrl/command + 光标移动到某某XX：打开并查看源码
+    - ctrl/command + o: 展示代码结构(类、变量、方法等)，搜索输入可以查找
    
 - ### 概述
   - Object类 是类层次结构的根类, 在java.lang包下。
@@ -1506,15 +1508,157 @@
 	```
 
 - ### equals方法
-  - 
-- 
+  - boolean equals(Object 0):
+    - 使用==来比较两个对象是否相等，比较的是地址值是否相等
+    - 比较地址值没有什么意义，如果要使用，一般需要重写equals方法 
+  - 源码：
+	  ```java
+	  public boolean equals(Object obj) {
+		return (this == obj);
+	  }
+	  ```
+  - eclipse提供了快捷重写：
+    - source -- Generate HashCode() and equals() -- 选择变量 -- 自动生成重写的两个方法 
+  - 自动生成的代码：
+  	```java
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) //判断是否是本身：提高效率
+			return true;
+		if (obj == null) //判断是否为空：方法可以调用，那么this本身一定不是null，提高效率
+			return false;
+		if (getClass() != obj.getClass()) //判断类型是否不同，不同则一定不相等：提高健壮性，避免下一行向下转型抛出异常
+			return false;
+		
+		Fruit other = (Fruit) obj; //向下转型
+		
+		if (age != other.age)
+			return false;
+		if (name == null) {
+			if (other.name != null) //一个为null，一个不为null
+				return false;
+		} else if (!name.equals(other.name)) //基本判断
+			return false;
+		return true;//以上情况都没有时，返回true
+	}	  
+  	```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
 
 
-##
+
+## System
+- ### eclipse快捷键
+  - 方法抽取：
+    - 将方法抽取为一个独立的方法 
+  - 方法抽取快捷键：
+    - 右键 -- refactor -- extract method(这里会展示快捷键组合提示)
+    - windows: alt+shift+M
+    - Mac: option+command+M
+  - 抽取步骤：
+    - 选中想要抽取的代码
+    - 抽取操作(以上三种任选其一)
+    - 抽取为独立方法 
+
+- ### System类概述 
+  - 概述：
+    - System：包含一些有用的类字段和方法；不能被实例化。
+      - 类字段：静态所修饰的成员变量，属于所有的对象，因此称为类字段。
+      - 不能实例化：构造方法是私有的；
+        - 不能实例化的类：抽象类；构造私有的工具类。 
+      - 成员变量和成员方法静态修饰：static，直接用类名调用。 
+    - System类提供的设施中有：
+      - 标准输入、标准输出和错误输出流；
+      - 对外部定义的属性和环境变量的访问；
+      - 加载文件和库的方法；
+      - 快速复制数组的一部分的实用方法。 
+  - System类要掌握的功能
+    - arraycopy
+    - exit
+    - currentTimeMillis
+ 
+- ### arraycopy
+  - static void	arraycopy(Object src, int srcPos, Object dest, int destPos, int length) 
+    - 从指定源数组中复制一个数组，复制从指定的位置开始，到目标数组的指定位置结束。
+    - Object src: 源数组
+    - int srcPos: 源数组的起始索引位置
+    - Object dest: 目标数组
+    - int destPos: 目标数组的位置
+    - int length: 指定接收的元素个数
+  - 使用注意：
+    - 长度length：注意在源数组和目标数组都会存在越界问题
+    - 目标数组中，没有存放源数组复制到的新元素的位置，还是默认值
+      - 比如int[]中，仍是默认值0
+    - length灵活，不一定要复制完源数组中从索引值开始以后的所有元素，可以只复制部分
+  - 代码示例：
+  	```java
+	private static void method() {
+			int[] src = {1,2,3,4,5};
+			int[] dest = new int[5];
+	//		System.arraycopy(src, 0, dest, 0, 5);//12345
+	//		System.arraycopy(src, 2, dest, 0, 3);//34500
+	//		System.arraycopy(src, 2, dest, 2, 5);//Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException
+	//		System.arraycopy(src, 2, dest, 2, 3);//00345
+	//		System.arraycopy(src, 2, dest, 2, 1);//00300
+			System.arraycopy(src, 2, dest, 4, 3);//Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException
+
+			for(int i=0; i<dest.length;i++) {
+				System.out.print(dest[i]);
+			}
+		}  
+  	```
+  
+- ### currentTimeMillis
+  - static long	currentTimeMillis() 
+    - 返回以毫秒为单位的当前时间。
+      - 1000 毫秒 = 1秒 
+      - 返回的是相对时间
+      - 即：当前时间与协调世界时 1970 年 1 月 1 日午夜之间的时间差（以毫秒为单位测量）
+    - 示例：
+      - 1970-1-1 00:00:00：返回0
+      - 1970-1-1 00:00:01：返回1000
+      - 1970-1-1 00:01:00：返回1000 * 60
+      - 1970-1-1 01:00:00：返回1000 * 60 * 60
+    - 注意: 
+      - 当返回值的时间单位是毫秒时，值的粒度取决于底层操作系统，并且粒度可能更大。例如，许多操作系统以几十毫秒为单位测量时间。
+    - 应用场景：
+      - 可以在开始和结束分别求时间点，并相减得出程序的运行时间(单位：毫秒) 
+    - 代码示例：
+    	
+	```java
+	long start = System.currentTimeMillis();
+		for (int i = 0; i < 1000000; i++) {
+			System.out.println(i);
+		}
+		long end = System.currentTimeMillis();
+		System.out.println(end-start);    
+   	/* 输出：
+	...
+	999998
+	999999
+	1845
+	*/	
+	```
+    
+- ### exit
+  - static void	exit(int status) 
+    - 终止当前正在运行的 Java 虚拟机
+    - 参数用作状态码；根据惯例，非 0 的状态码表示异常终止。
+    - 终止代码：`System.exit(0);`
+    - 代码示例：
+    ```java
+	for (int i = 0; i < 1000; i++) {
+		System.out.println(i);
+		if(i==100)
+			System.exit(0);//当i==100时，终止虚拟机
+	}    
+    ```
+
+- ### gc
+  - static void	gc() 
+    - 运行垃圾回收器 
 
 
 <!--GFM-TOC -->
