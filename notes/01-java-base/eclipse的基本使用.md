@@ -123,6 +123,8 @@
 		source	alt+shift+s	调出source快捷菜单
 		看源码	光标定位+ctrl+双击	打开定位处的源码 
 		代码结构查看和检索    ctrl/command + o: 展示代码结构(类、变量、方法等)，搜索输入可以查找
+		
+		快速抽取函数       win: alt+shift+M / Mac: option+command+M
 
 		打印	选中+alt+/：可选自动把选中部分放入输出语句中
 				    即，可以通过生成的菜单选中sysout将选中语句放入输出语句
