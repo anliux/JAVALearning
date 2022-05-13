@@ -28,11 +28,19 @@
   - exe启动 - workspace选择 - 新建project项目(项目配置) - 新建package包(注意命名唯一性) - 包新建class类(类配置) - 写代码(实时编译，只需手动运行即可) - 运行 (run as: java application) - 下方控制台显示结果 
   - 详见下方第一个图文参考博文
 
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
 
 
 ## 图文参考链接
 - [【JAVA】eclipse-使用入门及常用快捷键](https://www.cnblogs.com/anliux/p/11525981.html)
 - [【学习总结】Eclipse常用快捷键](https://www.cnblogs.com/anliux/p/11436568.html)	
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -49,6 +57,10 @@
 	F:运行
 		选择要运行的文件或者在要运行的文件内容中
 		右键 -- Run as - Java Application即可
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -73,7 +85,11 @@
 	D:控制台找不到了，怎么办?
 		Window--Show View—Console
 
-	
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
 		
 ## 快捷键
 
@@ -84,6 +100,7 @@
 	提供解决方案	ctrl+1（数字1）
 		对小红叉提供解决方案：导包；异常处理；光标定位变量并重命名。
 		大红叉是语法错误，必须修改代码。
+	
 	快捷键
 		注释
 			单行	选中内容，ctrl+/ (Mac: command+/), 再来一次取消
@@ -92,19 +109,28 @@
 			- [mac下设置多行注释快捷键](https://www.cnblogs.com/maijunjin/archive/2013/04/24/3039463.html)
 		格式化	ctrl+shift+f 或者 右键 -- source -- format
 		导包    ctrl+shift+o
+		
 		光标	shift+enter	将光标切换至下一行起始处。
 		复制	ctrl+alt+向上箭头	光标处代码向上复制
-			ctrl+alt+向下箭头	光标处代码向下复制
+			 ctrl+alt+向下箭头	光标处代码向下复制
 		移动	ctrl+向上/向下箭头	光标处的代码向上或向下移动
 		删除	ctrl+d	删除选中行
 				注：单行光标定位，多行选中，可不全选
+		
 		大小写	ctrl+shift+x	选中部分全部大写
-			ctrl+shift+y	选中部分全部小写
+			  ctrl+shift+y	选中部分全部小写
+		
 		source	alt+shift+s	调出source快捷菜单
-		看源码	光标定位+ctrl+双击	打开定位处的源码
+		看源码	光标定位+ctrl+双击	打开定位处的源码 
+		代码结构查看和检索    ctrl/command + o: 展示代码结构(类、变量、方法等)，搜索输入可以查找
+
 		打印	选中+alt+/：可选自动把选中部分放入输出语句中
 				    即，可以通过生成的菜单选中sysout将选中语句放入输出语句
 		tab	tab或者shift+tab	选中代码整体后移或者前移
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -120,6 +146,10 @@
 		点击next,然后选择你要导入的项目
 			注意：这里选择的是项目名称
 
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
 
 
 ## 自动生成构成函数和getset方法
@@ -128,6 +158,13 @@
 		代码区域右键 -- Source -- Generate Constructors using Fields...: 带参构造函数
 	B：自动生成get、set方法：
 		代码区域右键 -- Source -- Generate Getters and Setters.. -- select all
+	C：自动重写toString 和 equals方法：
+		代码区域右键 -- Source -- Generate toString -- 选择变量 -- 自动生成重写的toString方法 
+		代码区域右键 -- Source -- Generate HashCode() and equals() -- 选择变量 -- 自动生成重写的两个方法
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -137,6 +174,10 @@
 - 3.弹出了下一个菜单中进行选择为rename的选项。
 - 4.弹出了一个提示,那么就可以对类名进行重新修改。
 - 5.修改完成之后,然后进行按键盘中的enter的键
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -151,11 +192,19 @@
 - ### 参考链接：
   - [github: OJ输入输出总结](https://github.com/anliux/PracticePool/blob/master/base/docs/io.md)
 
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
 
 
 ## 输出语句
 - println():ln是换行。
 - 可以在println()的括号中添加分隔符：比如制表符`\t`
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -201,6 +250,10 @@
 	}
   
  	 ```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
@@ -277,6 +330,10 @@
     - debug执行到带有输入的语句时：如果不在控制台输入，则step over按钮变灰，等待输入完成。
   - 方法调试图示：
     ![断点调试之方法调试](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/debug/%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95%E8%B0%83%E8%AF%95.bmp)
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
