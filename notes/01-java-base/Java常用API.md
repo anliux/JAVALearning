@@ -16,8 +16,8 @@
 * [Object](#object): 
 * [System](#system):
 * [Date](#date):
-* []():
-* []()
+* [DateFormat](#dateFormat):
+* [Calendar](#calendar): 
 * []()
 <!--GFM-TOC -->
 
@@ -36,6 +36,7 @@
 
 - ### API使用 (以Random为例)
   - 1:打开帮助文档。
+  - 
   - 2:点击显示，找到索引，看到输入框。
   - 3:在搜索框中里面输入需要学习的内容。
     - 举例：Random
@@ -1842,9 +1843,63 @@
 <!--GFM-TOC -->
 
 
-##
+## Calendar
+- ### Calendar类概述
+  - 日历类，用于替代Date类的使用。
+  - 它里面提供了很多功能来单独获取日历的某个数据。
 
+- ### Calendar类的使用
+  - util包下 `import java.util.Calendar;`
+  - 抽象类，但是提供方法用于获取子类对象
+  - 创建对象:
+    - static Calendar getInstance():
+      - 使用默认时区和语言环境获得一个日历 
+      - 静态，直接类名调用
+    - 代码示例：
+      - `Calendar c = Calendar.getInstance();` 
+  - 获取 
+    - int get(int field): 返回指定日历字段的值
+      - field: 给定的日历字段，即已经定义好的字符，可以由字段名调用
+      - 注意：
+        - MONTH: 在格里高利历和罗马儒略历中一年中的第一个月是 JANUARY，它为 0 -- 因此需要在获取值的基础上+1才是想要获取到的值
+    - 示例：
+      - public static final int YEAR = 1
+      - `System.out.println(Calendar.YEAR);//输出：1` 
+    - 代码示例：
+    ```java
+	import java.util.Calendar;
+	public class CalendarDemo {
+		public static void main(String[] args) {
+			Calendar c = Calendar.getInstance();
+			//System.out.println(Calendar.YEAR);//1
 
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH) + 1;//此处注意MONTH的起始值是0，实际月应+1
+			int day = c.get(Calendar.DAY_OF_MONTH);
+			System.out.println(year + "年" + month + "月" + day + "日");//2022年5月16日
+			//注意：year等变量是int类型，syso语句直接用加号+连接会数值相加
+		}
+	}    
+    ```
+  - 修改
+    - void set(int field, int value):
+      - 把指定字段field修改为指定的值 
+    - 示例：
+    ```java
+	c.set(Calendar.YEAR, 1999);
+	int year = c.get(Calendar.YEAR); 
+	syso(year);//输出：1999
+    ```
+  - 添加
+    - void add(int field, int value):
+      - 在指定字段上加上指定的值
+    - 示例：
+    ```java
+	c.add(Calendar.MONTH, -3);//可以是负数(时间倒流)，和可以超过12(自动累加到第二年)
+	int month = c.get(Calendar.MONTH)+1;
+	syso(month);//2022年2月17日
+    ```
+     
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
