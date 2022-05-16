@@ -1653,13 +1653,43 @@
 		System.out.println(i);
 		if(i==100)
 			System.exit(0);//当i==100时，终止虚拟机
-	}    
+	}  
+	/* 输出：
+	...
+	97
+	98
+	99
+	100
+	*/
     ```
 
 - ### gc
-  - static void	gc() 
+  - static void	gc():
     - 运行垃圾回收器 
+    - 调用 gc 方法暗示着 Java 虚拟机做了一些努力来回收未用对象，以便能够快速地重用这些对象当前占用的内存。
+    - 当控制权从方法调用中返回时，虚拟机已经尽最大努力从所有丢弃的对象中回收了空间。
+      - "尽最大努力"：意味着不一定会全部回收。 
+    - 系统会自动调用。 
+  - Object中的 protected void finalize(): 
+    - 当垃圾回收器确定不存在对该对象的更多引用时，由对象的垃圾回收器调用此方法。
+    - 可以重写并加入一些首尾的工作。
+  - 代码示例：
+	```java
+	public class SystemDemo {
+		public static void main(String[] args) {
+			new Demomo();
+			System.gc();//多次执行后，输出："我被回收了"
+		}
+	}
 
+	class Demomo{//默认继承并重写Object的finalize方法
+		@Override
+		protected void finalize() throws Throwable {
+			// TODO Auto-generated method stub
+			System.out.println("我被回收了");
+		}
+	}	
+	```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -1667,8 +1697,64 @@
 
 
 
+## Date
+- ### 类 Date 概述
+  - 表示特定的瞬间，精确到毫秒。
+  - 可以通过方法来设定自己所表示的时间，可以表示任意时间。
+  - util包和sql包(util的子类)下都有同名Date类，现在主要看util下的
+    - 注意导包不要导错。 
 
-##
+- ### Date类的构造方法
+  - 空构造 Date():
+    - 创建的是一个表示当前系统时间的Date对象。
+    - toLocaleString方法：返回系统时区格式相匹配的方法，但是过时了
+    - 代码示例：
+    ```java
+	import java.util.Date;
+
+	public class DateDemo {
+		public static void main(String[] args) {
+			Date d = new Date();
+			System.out.println(d);//Fri May 13 18:43:35 CST 2022
+			System.out.println(d.toLocaleString());//2022年5月13日 下午6:44:02
+		}
+	}    
+    ```
+  - 有参构造Date(long date)：参数为毫秒值的构造方法
+    - 根据“指定时间”创建Date对象 
+    - 基本时间仍然是：1970-1-1 00:00:00 + 时区差
+    - 参数：在基本时间基础上添加的毫秒数之后的date值
+    - 代码示例：    
+    ```java
+	import java.util.Date;
+	public class DateDemo {
+		public static void main(String[] args) {
+			Date d2 = new Date(1000 * 60 * 60 * 24);//基本时间+1秒*1分*1小时*1天
+			System.out.println(d2.toLocaleString());//1970年1月2日 上午8:00:00 - 8点是东八区快8小时
+		}
+	}    
+    ```
+ 
+- ### Date类要掌握的功能
+  - 毫秒到日期的转换
+    - void setTime(long time); 
+      - 使用给定毫秒时间值设置现有 Date 对象 
+    - 设置date，返回值是void，参数是long。
+  - 日期到毫秒的转换
+    - long getTime();
+    - 获取值，返回值是long，参数是void
+  - 代码示例：
+  	```java
+	import java.util.Date;
+	public class DateDemo {
+		public static void main(String[] args) {
+			Date d = new Date();
+			d.setTime(1000 * 60 * 60);
+			System.out.println(d.toLocaleString());
+			System.out.println(d.getTime());
+		}
+	}  
+  	```
 
 
 <!--GFM-TOC -->
