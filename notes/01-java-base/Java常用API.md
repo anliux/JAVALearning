@@ -14,9 +14,9 @@
 * [IO流](#io流): 概述IO流, FileWriter构造方法, 写数据方法, 换行, 追加写入, FileReader, 读数据方法(单个字符/字符数组), 字符缓冲流及特殊方法, 复制文本的5种方法, 集合数据的读写
 * [IO流版学生管理系统](#io流版学生管理系统): 用IO流改进学生管理系统
 * [Object](#object): 
-* []()
-* []()
-* []()
+* [System](#system):
+* [Date](#date):
+* []():
 * []()
 * []()
 <!--GFM-TOC -->
@@ -1740,6 +1740,7 @@
     - void setTime(long time); 
       - 使用给定毫秒时间值设置现有 Date 对象 
     - 设置date，返回值是void，参数是long。
+    - 毫秒值到date值的其他方法：Date(long date)：参考上面的带参构造方法
   - 日期到毫秒的转换
     - long getTime();
     - 获取值，返回值是long，参数是void
@@ -1761,5 +1762,101 @@
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
 
+
+
+## DateFormat
+- ### DateFormat概述
+  - DateFormat类是对日期进行格式化的类 
+  - 位于java.text包下：
+    - 这个包下大部分是格式化相关的类
+  - DateFormat: 抽象类
+    - 抽象类的使用：通过子类调用 / 通过静态方法调用 
+    - 直接已知子类：SampleDateFormat:
+      - SampleDateFormat：以与语言环境有关的方式来格式化和解析日期的具体类，允许进行格式化(日期->文本)、解析(文本->日期)和规范化。
+
+- ### DateFormat要掌握的功能
+  - 从日期到字符串的转换：格式化
+    - Date to String
+      - eg. 想要"2049年8月26日"而不是"2049-8-26"这种格式
+    - String format(Date date) 
+  - 从字符串到日期的转换：解析
+    - String to Date
+      - eg. 想要"2049年8月26日"的后一天 
+    - Date parse(String sourse)
+  - 构造方法：
+    - SimpleDateFormat(): 使用默认的模式进行对象的构建
+      - 示例：`SimpleDateFormat sdf = new SimpleDateFormat();` 
+    - SimpleDateFormat(Sting pattern): 使用指定的模式进行对象的构建
+      - 示例：`SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");`
+  - 指定模式：
+    - API规定的模式字母（所有其他字符 'A' 到 'Z' 和 'a' 到 'z' 都被保留）
+      - 详见API SampleDateFormat文档 
+    - 常用：
+      - 年 月 日 时:分:秒 -- yyyy年MM月dd日 HH:mm:ss 
+  - 注意：
+    - 需要导入相应的包 
+    - 解析的字符串，模式必须和构建对象的模式一样；
+    - 否则会报错：java.text.ParseException 
+  - PS: parse |pa:z| 解析
+  - 代码示例：
+  	```java
+	import java.text.ParseException;
+	import java.text.SimpleDateFormat;
+	import java.util.Date;
+	
+	//class...
+	public static void main(String[] args) throws ParseException {//抛出异常：sdf.parse()
+		//使用默认模式进行对象的构建
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		Date d = new Date();//创建日期对象
+		
+		//格式化：把日期对象转换成字符串
+		String s = sdf.format(d);
+		System.out.println(s);//2022/5/16 下午6:24
+		
+		//解析：把字符串转换成日期对象
+		Date date = sdf.parse("2022/5/16 下午6:24");
+		System.out.println(date.toLocaleString());//2022年5月16日 下午6:24:00
+		
+		//Date date2 = sdf.parse("2020年2月28日");//Exception in thread "main" java.text.ParseException: Unparseable date: "2020年2月28日"
+		
+	}  
+  	```
+	
+	```java
+	public static void main(String[] args) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");//指定模式的构造方法
+		Date d = new Date();
+		
+		String s = sdf.format(d);//格式化
+		System.out.println(s);//2022年05月16日 18:44:45
+		
+		Date date = sdf.parse("2088年05月16日 18:44:45");//解析
+		System.out.println(date.toLocaleString());//2088年5月16日 下午6:44:45 (修改传入的日期，则输出结果也相应地改变)
+		
+	}	
+	```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+##
+
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+
+
+##
+
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 ### END
