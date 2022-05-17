@@ -16,7 +16,7 @@
 * [Object](#object): 
 * [System](#system):
 * [Date](#date):
-* [DateFormat](#dateFormat):
+* [DateFormat](#dateformat):
 * [Calendar](#calendar): 
 * [包装类](#包装类):
 * [正则表达式](#正则表达式):
@@ -1961,8 +1961,9 @@
     - 方式3：static String toString(int i)
       - 静态方法，类名调用
     - 代码示例：
+    
     ```java
-    	String s2 = Integer.toString(10);
+	String s2 = Integer.toString(10);
 	System.out.println(s2.getClass());//class java.lang.String
     ```
    
