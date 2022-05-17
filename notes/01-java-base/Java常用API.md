@@ -18,7 +18,8 @@
 * [Date](#date):
 * [DateFormat](#dateFormat):
 * [Calendar](#calendar): 
-* []()
+* [包装类](#包装类):
+* [正则表达式](#正则表达式):
 <!--GFM-TOC -->
 
 
@@ -1907,7 +1908,77 @@
 
 
 
-##
+## 包装类
+- ### 概述
+  - 由于基本数据类型只能做一些简单的操作和运算，所以Java为我们封装了基本数据类型，为每种数据类型提供了包装类。
+  - 包装类：封住了基本数据类型的类，提供了更多的复杂方法和一些变量。
+  - 位置：lang包下，不需要导包
+
+- ### 组成
+  - byte  ----	Byte
+  - short  ---- Short
+  - char  ----	Character 
+  - int   ----	Interger
+  - long  ----	Long
+  - float  ----	Float
+  - double  ---- Double
+  - boolean  ---- Boolean
+
+- ### Integer
+  - 其他包装类操作类似
+  - 构造方法：
+    - Integer(int value)
+      - `Integer i = new Integer(23);//i是Integer类型(getClass()可得)`
+    - Integer(String s)
+      - 示例：`Integer i = new Integer("10");//i是Integer类型(getClass()可得)` 
+  - String to int的转换
+    - 方式1：int intValue()
+      - 没有参数，返回值是int，需要创建Integer对象
+    - 代码示例：
+    ```java
+	Integer i = new Integer("10");
+	System.out.println(i.getClass());//class java.lang.Integer
+	int num = i.intValue();
+	System.out.println(num+10);//20; PS num没有Class()方法    
+    ```
+    - 方式2：static int parseInt(String s)
+      - 静态方法，Integer类名调用，传入String类型参数，返回int
+    - 代码示例:
+    ```java
+	int num2 = Integer.parseInt("10");
+	System.out.println(num2 + 10);//20   
+    ```
+  - int to String的转换
+    - 方式1：直接加空字符串 `+""`
+    - 方式2：String toString()
+    - 代码示例：
+    ```java
+	Integer i2 = new Integer(23);
+	System.out.println(i2.getClass());//class java.lang.Integer
+	String s1 = i2.toString();
+	System.out.println(s1.getClass());//class java.lang.String    
+    ```
+    - 方式3：static String toString(int i)
+      - 静态方法，类名调用
+    - 代码示例：
+    ```java
+    	String s2 = Integer.toString(10);
+	System.out.println(s2.getClass());//class java.lang.String
+    ```
+   
+- ### 自动装箱和拆箱
+
+
+- ### 
+
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+## 正则表达式
+- ### 
 
 
 <!--GFM-TOC -->
