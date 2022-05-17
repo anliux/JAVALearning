@@ -96,11 +96,59 @@
 
 ## 集合类
 - ### 集合类的体系结构
-  - 
+  - 体系结构:
+    - 怎么学习？
+      - 从最顶层开始学习，因为最顶层包含了所有的共性。 
+    - 怎么使用？
+      - 使用最底层，因为最底层就是具体的实现。
+  - 集合的体系结构：
+    - 由于不同的数据结构(数据的组织、存储方式)，所以Java为我们提供了不同的集合。
+    - 不同的集合功能相似，不断向上提取，将共性抽取出来，就是集合体系结构的原因。 
+  - ArrayList --> List --> Collection 
+    - Collection: 最顶层 
+
 - ### Collection常用功能
+  - Collection: 
+    - 接口，不能实例化 -- 用子类创建(多态)
+    - 示例：`Collection c = new ArrayList();//多态,父类引用指向子类对象`
+    - java.util包下
+  - boolean add(E e)：添加元素e，返回是否添加成功
+    - ArrayList: 允许重复，返回值恒为true
+    - 示例：`c.add("hello");`
+      - 可以直接输出；可赋值给Boolean类型的变量 
+  - void clear(): 清空集合
+    - 会清空集合中所有元素，慎用
+    - 示例：`c.clear();`
+  - boolean contains(Object o): 判断集合中是否包含指定元素
+    - 示例：`syso(c.contains("hello"));//true`
+  - boolean isEmpty()：判断集合是否为空
+    - 示例：`syso(c.isEmpty());//false`
+    - 注：`c.clear();` 后会判空为true
+  - boolean remove(Object o): 删除元素，返回删除成功与否
+    - 示例：`syso(c.remove("Java"));//删除没有的元素，返回false`
+  - int size(): 返回集合中的元素个数
+    - 求集合对象的个数或长度： 注意与 数组length属性 和  String的length()方法区分。
+    - 示例：`syso(c.size());`  
+  - Object toArray(): 将集合转换为Object类型的数组
+    - Object类型：任意类型的父类型，确保涵盖所有类型的元素。
+    - 使用场景：用数组思路遍历集合时可以先转为数组类型
+    - 示例：`Object[] objs = c.toArray();//转为Object类型的数组后遍历` 
+  - Interator<E> interator(): 迭代器
+    - 下一小节详述
+  
 - ### 迭代器与并发修改异常
+  - 集合的遍历方式：
+    - 法1：toArray() 把集合转为数组，然后以数组的方式遍历
+      - 局限性：不是所有集合都与索引相关
+    - 法2：interator(): 返回一个迭代器对象，通过迭代器对象来迭代集合 
+  - 迭代器：
+  
 
 
+  
+  
+  
+  
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
