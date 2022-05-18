@@ -342,8 +342,31 @@
 
 
 ## List
+- ### List概述
+  - List接口：
+    - 有序的 collection（也称为序列）。
+    - 此接口的用户可以对列表中每个元素的插入位置进行精确地控制。
+    - 用户可以根据元素的整数索引（在列表中的位置）访问元素，并搜索列表中的元素。
+  - List特点：
+    - 有序的(存储和读取的顺序是一样的); 
+    - 有整数索引；
+    - 允许重复。 
 
-
+- ### List的特有功能
+  - 针对Collection父类的特有功能，集中体现为索引值相关的增删改查
+  - 创建可用的List对象：
+    - 示例：`List list = new ArrayList();` 
+  - `void add(int index, E element)`: 
+    - 在指定索引位置添加指定元素
+    - 指定索引位置已有元素时，会将已有元素向 索引值+1 的位置移动一位，将新元素放在指定索引位置。
+    - 示例：`list.add(1,"hello");`
+  - `E get(int index)`:
+  - `E remove(int index)`:
+  - `E set(int index, E element)`:
+  - 代码示例：
+  ```java
+  
+  ```
 
 
 
