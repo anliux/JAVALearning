@@ -321,7 +321,7 @@
 
 ## 常见数据结构
 - ### 数组
-  - 特点：查找快，增删慢 
+  - 查找快，增删慢 
   - ![常见数据结构（数组）](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/collections/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E6%95%B0%E7%BB%84%EF%BC%89.bmp) 
 
 - ### 链表
