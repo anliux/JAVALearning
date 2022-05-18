@@ -158,17 +158,33 @@
     - E next()方法：
       - 返回下一个元素
       - 没有下一个元素时报错：
-        - 抛出异常：
+        - 抛出异常：Exception in thread "main" java.util.NoSuchElementException
       - 代码示例：`syso(it.next());//返回获取到的元素，或者报错`
-    - 
     - boolean hasNext(): 
       - 判断是否有下一个元素可以获取，有则返回true，否则false
     - 代码示例：
     ```java
-    
-    
+      import java.util.ArrayList;
+      import java.util.Collection;
+      import java.util.Iterator;
+
+      public class InteratorDemo {
+        public static void main(String[] args) {
+          Collection c = new ArrayList();
+          c.add("hello");
+          c.add("world");
+          c.add("java");
+
+          Iterator it = c.iterator();
+          while(it.hasNext()) {
+            System.out.println(it.next());
+          }
+          System.out.println(it.next());//java.util.NoSuchElementException
+        }
+      }  
     ```
-  
+  - 并发修改异常
+    -    
   
 
 
