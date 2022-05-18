@@ -4,10 +4,10 @@
 ### 目录
 
 <!--GFM-TOC -->
-* [ArrayList](#arraylist): 
-* [集合类](#集合类):
-* [](#):
-* [](#):
+* [ArrayList](#arraylist): 集合类, ArrayList, 构造方法, 添加方法, 增删改查方法, 集合遍历
+* [集合类](#集合类): 集合类的体系结构, Collection常用功能, 迭代器与并发修改异常, 泛型, foreach循环
+* [常见数据结构](#常见数据结构): 数组, 链表, 栈和队列的简单图解
+* [List](#list):
 * [](#):
 * [](#):
 * [](#):
@@ -31,7 +31,7 @@
   - 此部分在“Java常用API”系列中首次出现，这里直接复制并简化了相关内容。
   - 详见：[Java常用API: 集合类与ArrayList](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%B8%B8%E7%94%A8API.md#%E9%9B%86%E5%90%88%E7%B1%BB%E4%B8%8Earraylist)
 
-- ### 集合类
+- ### 集合类概述
   - 引入
     - 面向对象语言对事物的描述是通过对象体现的; 为了方便对多个对象进行操作，必须把这多个对象进行存储。
     - 而要想存储多个对象，就不能是一个基本的变量，而应该是一个容器类型的变量。
@@ -43,7 +43,7 @@
   - 集合类的特点：
     - 长度可变 (相比数组的优势)
 
-- ### ArrayList概述  
+- ### ArrayList概述
   - 最常用的集合，通过阅读API学习
   - java.util包下：因此需要导包 `import java.util.ArrayList;`
   - `ArrayList<E>`：大小可变数组的实现。
@@ -142,7 +142,8 @@
     - 法1：toArray() 把集合转为数组，然后以数组的方式遍历
       - 局限性：不是所有集合都与索引相关
     - 法2：`Iterator<E> iterator()`: 
-      - 返回一个迭代器对象，通过迭代器对象来迭代集合 
+      - 返回一个迭代器对象，通过迭代器对象来迭代集合
+      - 后面还有一个foreach循环方法 
   - 迭代器：
     - `Iterator<E> iterator()`: 
       - 注意区别前后两个迭代器 
@@ -155,12 +156,12 @@
     - 获取迭代器方法：
       - 由Collection对象的iterator()方法获取
       - 代码示例：`Iterator it = c.iterator();` 
-    - E next()方法：
+    - `E next()`方法：
       - 返回下一个元素
       - 没有下一个元素时报错：
         - 抛出异常：Exception in thread "main" java.util.NoSuchElementException
       - 代码示例：`syso(it.next());//返回获取到的元素，或者报错`
-    - boolean hasNext(): 
+    - `boolean hasNext()`: 
       - 判断是否有下一个元素可以获取，有则返回true，否则false
     - 代码示例：
     ```java
