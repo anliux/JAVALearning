@@ -5,23 +5,23 @@
 
 <!--GFM-TOC -->
 * [ArrayList](#arraylist): 
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
+* [集合类](#集合类):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
+* [](#):
 <!--GFM-TOC -->
 
 
@@ -134,27 +134,27 @@
     - Object类型：任意类型的父类型，确保涵盖所有类型的元素。
     - 使用场景：用数组思路遍历集合时可以先转为数组类型
     - 示例：`Object[] objs = c.toArray();//转为Object类型的数组后遍历` 
-  - 迭代器：`Interator<E> interator()`
+  - 迭代器：`Iterator<E> iterator()`
     - 下一小节详述 
 
 - ### 迭代器与并发修改异常
   - 集合的遍历方式：
     - 法1：toArray() 把集合转为数组，然后以数组的方式遍历
       - 局限性：不是所有集合都与索引相关
-    - 法2：`Interator<E> interator()`: 
+    - 法2：`Iterator<E> iterator()`: 
       - 返回一个迭代器对象，通过迭代器对象来迭代集合 
   - 迭代器：
-    - `Interator<E> interator()`: 
+    - `Iterator<E> iterator()`: 
       - 注意区别前后两个迭代器 
-        - interator(): 是Collection类的一个方法
-        - Interator接口：是一个接口
-      - Collection对象的这个interator()方法的作用就是返回一个迭代器对象，因此可以通过此方法获取迭代器对象。
-    - Interator接口：
+        - iterator(): 是Collection类的一个方法
+        - Iterator接口：是一个接口
+      - Collection对象的这个iterator()方法的作用就是返回一个迭代器对象，因此可以通过此方法获取迭代器对象。
+    - Iterator接口：
       - 用于遍历集合
       - 有三种方法：hasNext(), next(), remove()
     - 获取迭代器方法：
-      - 由Collection对象的interator()方法获取
-      - 代码示例：`Interator it = c.interator();` 
+      - 由Collection对象的iterator()方法获取
+      - 代码示例：`Iterator it = c.iterator();` 
     - E next()方法：
       - 返回下一个元素
       - 没有下一个元素时报错：
@@ -168,7 +168,7 @@
       import java.util.Collection;
       import java.util.Iterator;
 
-      public class InteratorDemo {
+      public class IteratorDemo {
         public static void main(String[] args) {
           Collection c = new ArrayList();
           c.add("hello");
@@ -184,31 +184,151 @@
       }  
     ```
   - 并发修改异常
-    -    
-  
+    - 并发修改异常：
+      - ConcurrentModificationException 
+    - 异常分析：
+      - 迭代器是依赖于集合的，相当于集合的一个副本；
+      - 当迭代器操作时，如果发现和集合不一样，会抛出异常。 
+      - 迭代中途给集合添加元素触发了“不一样”
+    - 异常代码示例：
+    ```java
+      import java.util.ArrayList;
+      import java.util.Collection;
+      import java.util.Iterator;
 
+      public class IteratorDemo {
+        public static void main(String[] args) {
+          Collection c = new ArrayList();
+          c.add("hello");
+          c.add("world");
+          c.add("java");
 
-  
-  
-  
-  
+          Iterator it = c.iterator();
+          while(it.hasNext()) {
+            String s = (String)it.next();
+            if(s.equals("java"))
+              c.add("android");//java.util.ConcurrentModificationException
+          }
+        }
+      }
+   
+    ```
+    - 使用ListIterator解决
+      - 让迭代器去添加或修改，会同步到集合中，这样就不会触发并发修改异常
+      - 在Iterator接口中没有发现add相关方法，找Iterator的子接口ListIterator中找到add()方法
+      - ListIterator创建：`ListIterator<E>	listIterator()`
+        - 返回此列表元素的列表迭代器（按适当顺序）。
+      - 综上：
+        - 创建集合部分，用List代替Collection；
+        - 创建迭代器部分，用list.listIterator()方法；
+        - 添加元素部分：用ListIterator迭代器的add()方法
+    - 改进后的代码示例：
+    ```java
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.ListIterator;
+
+        public class IteratorDemo {
+          public static void main(String[] args) {
+            //Collection c = new ArrayList();
+            List c = new ArrayList();//也可以ArrayList代替List
+            c.add("hello");
+            c.add("world");
+            c.add("java");
+
+            //Iterator it = c.iterator();
+            ListIterator lit = c.listIterator();
+            while(lit.hasNext()) {
+              String s = (String)lit.next();
+              if(s.equals("java"))
+                //c.add("android");//java.util.ConcurrentModificationException
+                lit.add("android");//不要用集合添加，而是使用迭代器添加，迭代器会同步到集合
+            }
+
+            System.out.println(c);//[hello, world, java, android]
+          }
+        }      
+    ```
+
+- ### 泛型
+  - 泛型概述：
+    - 引入：
+      - 集合可以存储任意类型的数据
+      - 当存储了不同类型的数据，就有可能在转换的时候发生类型转换异常 ClassCastException
+      - java为了解决这个问题，就引入了一种机制，即泛型。 
+    - 概述：
+      - 一种广泛的类型
+      - 把明确数据类型的工作提前到了编译时期
+      - 借鉴了数组的特点
+    - 好处：
+      - 避免了数据类型转换异常的发生；
+      - 减少了编辑器里的黄色警告标识；
+      - 简化了代码的书写
+  - 泛型使用：
+    - 查阅API/Ctrl查看源码，当看到类或接口有`<E>`，就可以使用泛型。 
+    - 可以标明泛型而没有写，编辑器会给黄色警告线
+    - 注意：`<E>`中的E在实际代码中需要替换为具体的对象类型
+    - 示例：
+      - `Collection<Student> c = new ArrayList<Student>();//声明集合c总存储的对象类型为Student`
+      - `Iterator<Student> it = c.iterator();`
+  - 代码示例：
+
+- ### foreach循环
+  - foreach:
+    - 增强for循环，一般用于遍历集合或数组
+  - 格式：
+    - 每次循环，将 (冒号后的)集合或数组对象中的一个元素 放入 (冒号前的)定义为元素类型的变量中，并在循环中使用取出的变量 
+  ```java
+  for(元素的类型  变量 : 集合或者数组对象){
+    可以直接使用变量;
+  }
+  ```
+  - 注意：
+    - 增强for循环提供了一种新的遍历集合的方法。
+    - 增强for循环中不能修改集合，否则会出现并发修改异常。
+    - 增强for循环底层是迭代器循环(上一条的原因)
+      - Collection 的父接口 Iterator：
+      - 其中有一条说明：`public interface Iterable<T>`
+        - 实现这个接口允许对象成为 "foreach" 语句的目标。 
+  - 代码示例：
+  ```java
+    import java.util.ArrayList;
+    import java.util.Collection;
+    import java.util.List;
+    import java.util.ListIterator;
+
+    public class IteratorDemo {
+      public static void main(String[] args) {
+        Collection<String> c = new ArrayList<String>();
+        c.add("hello");
+        c.add("world");
+        c.add("java");
+
+        for (String string : c) {
+          System.out.println(string);
+        }
+      }
+    }
+
+  ```
+
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
-
-
-
-## 泛型
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
 
 
 
 ## 常见数据结构
+- ### 数组
+  - 特点：查找快，增删慢 
+  - ![常见数据结构（数组）](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/collections/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E6%95%B0%E7%BB%84%EF%BC%89.bmp) 
+
+- ### 链表
+  - ![常见数据结构（链表）](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/collections/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E9%93%BE%E8%A1%A8%EF%BC%89.bmp) 
+
+- ### 栈和队列
+  - ![常见数据结构（栈和队列）](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/collections/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E6%A0%88%26%E9%98%9F%E5%88%97%EF%BC%89.bmp) 
+
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
