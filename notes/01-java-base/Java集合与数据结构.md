@@ -109,9 +109,10 @@
 
 - ### Collection常用功能
   - Collection: 
+    - java.util包下
     - 接口，不能实例化 -- 用子类创建(多态)
     - 示例：`Collection c = new ArrayList();//多态,父类引用指向子类对象`
-    - java.util包下
+
   - boolean add(E e)：添加元素e，返回是否添加成功
     - ArrayList: 允许重复，返回值恒为true
     - 示例：`c.add("hello");`
@@ -133,15 +134,41 @@
     - Object类型：任意类型的父类型，确保涵盖所有类型的元素。
     - 使用场景：用数组思路遍历集合时可以先转为数组类型
     - 示例：`Object[] objs = c.toArray();//转为Object类型的数组后遍历` 
-  - Interator<E> interator(): 迭代器
-    - 下一小节详述
-  
+  - 迭代器：`Interator<E> interator()`
+    - 下一小节详述 
+
 - ### 迭代器与并发修改异常
   - 集合的遍历方式：
     - 法1：toArray() 把集合转为数组，然后以数组的方式遍历
       - 局限性：不是所有集合都与索引相关
-    - 法2：interator(): 返回一个迭代器对象，通过迭代器对象来迭代集合 
+    - 法2：`Interator<E> interator()`: 
+      - 返回一个迭代器对象，通过迭代器对象来迭代集合 
   - 迭代器：
+    - `Interator<E> interator()`: 
+      - 注意区别前后两个迭代器 
+        - interator(): 是Collection类的一个方法
+        - Interator接口：是一个接口
+      - Collection对象的这个interator()方法的作用就是返回一个迭代器对象，因此可以通过此方法获取迭代器对象。
+    - Interator接口：
+      - 用于遍历集合
+      - 有三种方法：hasNext(), next(), remove()
+    - 获取迭代器方法：
+      - 由Collection对象的interator()方法获取
+      - 代码示例：`Interator it = c.interator();` 
+    - E next()方法：
+      - 返回下一个元素
+      - 没有下一个元素时报错：
+        - 抛出异常：
+      - 代码示例：`syso(it.next());//返回获取到的元素，或者报错`
+    - 
+    - boolean hasNext(): 
+      - 判断是否有下一个元素可以获取，有则返回true，否则false
+    - 代码示例：
+    ```java
+    
+    
+    ```
+  
   
 
 
