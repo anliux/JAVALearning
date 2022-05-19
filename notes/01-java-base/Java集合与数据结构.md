@@ -515,18 +515,26 @@
         int result = 1;
         result = prime * result + age;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
+        //加入一些额外的计算，在hash值比较阶段筛掉一些对象
         return result;
       }
       
       @Override
       public boolean equals(Object obj) {
+        //判断是否为同一对象，提高效率
         if (this == obj)
           return true;
+        
+        //判断比较对象是否为空，提高效率
         if (obj == null)
           return false;
+        
+        //判断类型，提高健壮性
         if (getClass() != obj.getClass())
           return false;
-        Student other = (Student) obj;
+        Student other = (Student) obj;//向下转型
+        
+        //比较成员变量的是否一致
         if (age != other.age)
           return false;
         if (name == null) {
@@ -537,6 +545,89 @@
         return true;
       }    
     ```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+
+## Collections工具类
+- ### 常见面试题：
+  - Collection和Collections有什么区别？
+  - Collection:
+    - 集合体系的最顶层，包含了集合体系的共性 
+  - Collections: 
+    - 一个工具类，方法都是用于操作Collection的
+    - 工具类不需要创建对象，方法是静态的，直接用类名调用。 
+
+- ### Collections的常见方法
+  - `static int binarySearch(List list, T key)`:
+    - 使用二分搜索法搜索指定列表，以获得指定对象。
+    - 参数只能是List: 数据要求是有序的
+      - set是无序的，不行；Collection也不行，可能是set 
+    - 注意：
+      - 对象需要是List类型
+      - 泛型位置不能是int, 而应该是Integer，因为ArrayList存放的是对象元素
+    - 代码示例：
+    ```java
+        import java.util.ArrayList;
+        import java.util.Collections;
+        import java.util.List;
+
+        public class CollectionsDemo {
+          public static void main(String[] args) {
+            //二分查找
+            List<Integer> list = new ArrayList<Integer>();//Integer，不是int
+            list.add(1);//自动装箱
+            list.add(2);
+            list.add(4);
+            list.add(6);
+            int index = Collections.binarySearch(list, 4);
+            System.out.println(index);//2
+          }
+        }    
+    ```
+  - `static void copy(List dest, List src)`: 
+    - 将所有元素从一个列表复制到另一个列表，即把原列表中的数据覆盖到目标列表。
+    - 目标列表在前，源列表在后，不要搞混!!
+    - 注意：目标列表的长度至少等于源列表的长度
+      - 新建目标列表的长度为空，可以先添加空串或任意内容到目标列表，使其长度大于源列表。 
+    - 代码示例：
+    ```java
+        public static void main(String[] args) {
+          //copy
+          List<String> src = new ArrayList<String>();
+          src.add("hello");
+          src.add("world");
+          src.add("java");
+
+          List<String> dest = new ArrayList<String>();
+          dest.add("");//为保证目标长度大于源长度，可以添加空串
+          dest.add("");
+          dest.add("");
+
+          Collections.copy(dest, src);
+          System.out.println(dest);//[hello, world, java]
+        } 
+    ```
+  - `static void fill(List list, Object obj) `
+    - 使用指定元素替换指定列表中的所有元素。
+    - 代码示例：
+    ```java
+        public static void main(String[] args) {
+            List<String> list = new ArrayList<String>();
+            list.add("hello");
+            list.add("world");
+            list.add("java");
+            
+            System.out.println(list);//[hello, world, java]
+            Collections.fill(list, "android");
+            System.out.println(list);//[android, android, android]
+        }    
+    ```
+  - ``:
+
 
 
 
