@@ -7,21 +7,10 @@
 * [ArrayList](#arraylist): 集合类, ArrayList, 构造方法, 添加方法, 增删改查方法, 集合遍历
 * [集合类](#集合类): 集合类的体系结构, Collection常用功能, 迭代器与并发修改异常, 泛型, foreach循环
 * [常见数据结构](#常见数据结构): 数组, 链表, 栈和队列的简单图解
-* [List](#list):
-* [Set](#set):
-* [Map](#map):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
-* [](#):
+* [List](#list): List概述, List的特有功能, List的子类(ArrayList和LinkedList), 源码阅读tips
+* [Set](#set): Set接口的特点, HashSet的add()方法以及hashCode()和equals()方法的重写
+* [Collections工具类](#collections工具类): Collection和Collections的区别(面试题), Collections的常用方法, 模拟斗地主发牌小题
+* [Map](#map): Map接口概述, Map的功能, Map的两种遍历方法, HashMap存储对象并遍历(自定义对象为key时重写两个方法)
 <!--GFM-TOC -->
 
 
@@ -342,7 +331,7 @@
 
 
 ## List
-- ### List概述 List概述,,,,,
+- ### List概述
   - List接口：
     - 有序的 collection（也称为序列）。
     - 此接口的用户可以对列表中每个元素的插入位置进行精确地控制。
@@ -552,7 +541,7 @@
 
 
 
-## Collections工具类
+## Collections工具类 
 - ### 常见面试题：
   - Collection和Collections有什么区别？
   - Collection:
