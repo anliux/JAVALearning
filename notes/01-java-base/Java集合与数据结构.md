@@ -626,10 +626,86 @@
             System.out.println(list);//[android, android, android]
         }    
     ```
-  - ``:
+  - `static void reverse(List list)`:
+    - 反转指定列表中元素的顺序。
+    - 代码示例：`Collections.reverse(list);//反转后的[1，2，3，4]列表变为[4,3,2,1]` 
+  - `static void shuffle(List list)`: 
+    - 使用默认随机源对指定列表进行置换。
+    - "傻否"，随机置换：每次运行后的结果可能都不一样。
+    - 代码示例: `Collections.shuffle(list);//随机置换后的结果为任意排列` 
+  - `static void sort(List list)`:
+    - 根据元素的自然顺序对指定列表按升序进行排序。
+    - 注：String类也能排，可能是按首字母对应的int
+    - 代码示例：`Collections.sort(list);` 
+  - `static void swap(List list, int i, int j)`:
+    - 在指定列表的指定位置处交换元素。
+    - 代码示例：``Collections.swap(list, 0, 2);
+  - 小结：
+    - 方法返回值是void:
+      - 大概率传入的列表发生了变化 
+    - 方法返回值是具体的值，非void:  
+      - 大概率传入的列表没有变化，而是从其中取了某个元素等返回了 
 
+- ### 模拟斗地主发牌
+  - 步骤：
+    - 买牌：创建存放卡牌的box容器，并将54张牌放入box中；
+    - 洗牌：调用Collections的洗牌方法shuffle();
+    - 发牌：(创建三个玩家集合) 遍历box元素，并将这些牌分给三个玩家。
+  - 代码示例：
+  ```java
+        import java.util.ArrayList;
+        import java.util.Collections;
 
+        public class CollectionsTest {
+          public static void main(String[] args) {
+            //买牌
+            String[] arr = {"红桃","方块","黑桃","梅花"};
+            String[] arr2 = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+            ArrayList<String> box = new ArrayList<String>();
+            for(int i = 0; i < arr.length; i++) {
+              for(int j = 0; j < arr2.length; j++) {
+                box.add(arr[i]+arr2[j]);
+              }			
+            }
+            box.add("大王");
+            box.add("小王");
 
+            System.out.println(box);
+            System.out.println(box.size());//54
+
+            //洗牌
+            Collections.shuffle(box);
+
+            //发牌
+            ArrayList<String> player1 = new ArrayList<String>();
+            ArrayList<String> player2 = new ArrayList<String>();
+            ArrayList<String> player3 = new ArrayList<String>();
+
+            for(int i = 0; i < box.size()-3; i++) {//留三张底牌给地主
+              //对取模，余数为0，1，2分别派给三个玩家
+              if(i % 3 == 0) {
+                player1.add(box.get(i));
+              }else if(i % 3 == 1) {
+                player2.add(box.get(i));
+              }else if(i % 3 == 2) {
+                player3.add(box.get(i));
+              }
+            }
+
+            //看牌
+            System.out.println("玩家1"+player1);
+            System.out.println("玩家2"+player2);
+            System.out.println("玩家3"+player3);
+            /*
+             * [红桃A, 红桃2, 红桃3, 红桃4, 红桃5, 红桃6, 红桃7, 红桃8, 红桃9, 红桃10, 红桃J, 红桃Q, 红桃K, 方块A, 方块2, 方块3, 方块4, 方块5, 方块6, 方块7, 方块8, 方块9, 方块10, 方块J, 方块Q, 方块K, 黑桃A, 黑桃2, 黑桃3, 黑桃4, 黑桃5, 黑桃6, 黑桃7, 黑桃8, 黑桃9, 黑桃10, 黑桃J, 黑桃Q, 黑桃K, 梅花A, 梅花2, 梅花3, 梅花4, 梅花5, 梅花6, 梅花7, 梅花8, 梅花9, 梅花10, 梅花J, 梅花Q, 梅花K, 大王, 小王]
+              54
+              玩家1[黑桃Q, 梅花J, 方块4, 梅花9, 梅花7, 黑桃10, 方块7, 红桃6, 红桃9, 梅花3, 方块K, 梅花Q, 黑桃3, 黑桃K, 梅花4, 黑桃7, 方块2]
+              玩家2[梅花6, 红桃10, 方块8, 梅花K, 红桃3, 梅花2, 红桃J, 方块A, 红桃8, 方块6, 大王, 黑桃J, 黑桃2, 小王, 红桃7, 黑桃A, 梅花10]
+              玩家3[梅花5, 梅花A, 方块5, 方块3, 黑桃5, 黑桃8, 红桃2, 方块J, 黑桃9, 黑桃6, 红桃5, 方块9, 红桃A, 红桃Q, 黑桃4, 方块10, 红桃K] 
+             * */
+          }  
+
+  ```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -638,55 +714,177 @@
 
 
 ## Map
+- ### Map接口概述
+  - Map:
+    - 一种用于存储对应关系的集合 
+    - 例如：姓名-学号这样的对应关系
+  - `Map<K,V>接口`：
+    - Map接口，独立于Collection的另一种集合形式 
+    - 将键映射到值的对象。
+    - 一个映射不能包含重复的键，每一个键最多只能映射到一个值。
+      - 一对一：一个学号对应一个姓名 
+  - Map和Collection的区别？
+    - Map: 
+      - 是一个双列集合，常用于处理有对应关系的集合，key不可以重复
+      - 又称为“夫妻对集合”。
+    - Collection:
+      - 单列集合
+      - Collection有不同的子体系，有的允许重复有索引有序，有的不允许重复而且无序
+      - 又称为“单身汉集合”
 
+- ### Map的功能
+  - Map类型对象：
+    - 多态创建：
+      - 代码示例：`Map<String,String> map = new HashMap<String,String>();//创建HashMap对象` 
+    - 输出Map对象：大括号中存放键值对，且键值对用等号连接。
+      - 代码示例：`System.out.println(map);//{IT002=李四, IT001=王五}`
+  - 映射功能：
+    - `V	put(K key, V value)`：
+      - 添加或修改映射关系：
+        - 将key值映射到value，如果key存在，则覆盖value，并将原value返回。 
+      - 返回值：
+        - 添加成功返回null，key重复时覆盖并返回key对应的原value值。
+      - 代码示例：
+        - 添加成功返回null： `System.out.println(map.put("IT002", "李四"));//null`
+        - key值重复返回关联的原value值：`System.out.println(map.put("IT001", "王五"));//张三`
+  - 获取功能
+    - `V	get(Object key)`:
+      - 根据指定的key返回对应的value
+      - 代码示例：`System.out.println(map.get("IT001"));//王五`
+      - get与remove：返回值看着差不多，但是get只做了获取的动作，remove是删除后获取，对map集合进行了修改
+    - `int	size()` 
+      - 返回对应关系的个数
+      - 代码示例: `System.out.println(map.size());//2`
+  - 判断功能
+    - `boolean	containsKey(Object key)`:
+      - 判断某个key值是否存在 
+      - 代码示例：`System.out.println(map.containsKey("IT001"));//true`
+    - `boolean	containsValue(Object value)`:
+      - 判断某个value值是否存在 
+      - 代码示例：`System.out.println(map.containsValue("张三"));//false`
+    - 以上两个功能注意：
+      - 键值需要与方法对应，如果判key，传入了value值，也是不匹配的；
+      - 特别是键值对类型相同时，注意不要混淆
+    - `boolean	isEmpty()`:
+      - 判断是否有对应关系，即判空
+      - 注：清空clear()后的map必为空
+      - 代码示例：`map.clear(); System.out.println(map.isEmpty());//true
+  - 删除功能
+    - `void	clear()`:
+      - 清空所有对应关系
+      - 代码示例：`map.clear();`
+    - `V	remove(Object key)`:   
+      - 根据指定的key删除对应关系，并返回key对应的value，如果没有删除成功则返回null
+      - 代码示例：`System.out.println(map.remove("IT001"));//null`
+  - 获取所有元素的方法
+    - `Set<K>	keySet()`:
+      - 以Set的形式返回所有的key
+        - key值不允许重复，所以用Set装正好
+      - 注意：Set的泛型是什么类型，需要看定义的key值是什么类型
+      - 代码示例：`Set<String> keys = map.keySet();`
+        - 之后可以用foreach遍历此集合：`for (String key : keys) { System.out.println(key); }` 
+    - `Collection<V>	values()` 
+      - 以Collection的形式返回所有的value值
+        - value值允许重复，因此没有使用Set装
+      - 查看values()方法的源码发现：底层并不是List, 因此不能强转为List类型  
+      - 代码示例：`Collection<String> values = map.values();`
+        - 之后可以用foreach遍历此集合：`for (String value : values) { System.out.println(value); }`
 
+- ### Map的遍历
+  - 遍历方法1：
+    - 思路：
+      - 先获取所有的Key，然后遍历所有Key，并根据每个Key值依次获取对应的value值  
+    - 涉及方法：
+      - map.keySet(); map.get(key);
+    - 代码示例：
+    ```java
+          import java.util.HashMap;
+          import java.util.Map;
+          import java.util.Set;
 
+          public class MapDemo {
+            public static void main(String[] args) {
+              Map<String, String> map = new HashMap<String, String>();
+              map.put("IT001", "张三");//null
+              map.put("IT002", "李四");//null
+              map.put("IT003", "王五");//张三
+
+              System.out.println(map);//{IT002=李四, IT001=王五}
+
+              Set<String> keys = map.keySet();//获取所有key值
+              for (String key : keys) {//遍历所有key值，并获取对应的value值
+                String value = map.get(key);
+                System.out.println(key+"---"+value);
+              }
+            }
+          }    
+    ```
+  - 遍历方法2：
+    - 思路：
+      -  偏面向对象思想；
+      -  通过entrySet()方法获取映射关系，然后通过映射关系里的getKey()和getValue()方法分别获取键值对的值。
+    - `Set<Map.Entry<K,V>>	entrySet()`:
+      - 返回此映射中包含的映射关系的 Set 视图。
+      - 包含getKey()和getValue()方法，可以通过此entry对象调用获取对应的键值对的值。 
+    - 优势：
+      - 相比两层for循环，效率提升了很多 
+    - 代码示例：
+    ```java
+    //entrySet()相当于结婚证对象，通过结婚证对象来获取丈夫和媳妇
+    class 结婚证<K,V>{
+      K 丈夫;
+      V 媳妇;
+    }
+    public 结婚证(K 丈夫, V 媳妇){
+      this.丈夫 = 丈夫;
+      this.媳妇 = 媳妇;
+    }
+    public K get丈夫(){
+      return 丈夫;
+    }
+    public V get媳妇(){
+      return 媳妇;
+    }
+    ```
+    
+    ```java
+        import java.util.HashMap;
+        import java.util.Map;
+        import java.util.Set;
+
+        public class MapDemo {
+          public static void main(String[] args) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("IT001", "张三");//null
+            map.put("IT002", "李四");//null
+            map.put("IT003", "王五");//张三
+
+            System.out.println(map);//{IT002=李四, IT001=王五}
+
+            Set<Map.Entry<String, String>> entrys = map.entrySet();
+            for (Map.Entry<String, String> entry : entrys) {
+              String key = entry.getKey();
+              String value = entry.getValue();
+              System.out.println(key+"---"+value);
+            }
+          }
+        }    
+    ```
+
+- ### HashMap存储对象并遍历
+  - 字符串对象作为key
+    - 同上一节的Map遍历
+    - 包含以上两种遍历方法
+  - 自定义对象作为key 
+    - 同样包括两种遍历方法
+    - 不同点：
+      - 以Student为例: `new Student("张三",18);`与`new Student("张三",18);`
+      - Key值需要具有唯一性，自定义对象作为key值时，默认的方法不会判定成员变量相同的为重复(new了不同的对象)
+      - 解决方法：与之前类似，定义对象的代码中重写hashCode(), equals()方法
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
-
-
-
-
-
-
-
-
-
-
-## 
-
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
-
-
-
-## 
-
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
-
-
-## 
-
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
-
-
-
 
 
 
