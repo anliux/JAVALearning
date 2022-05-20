@@ -21,8 +21,8 @@
 - [Java常用API](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%B8%B8%E7%94%A8API.md)
   - API概述, String类, StringBuilder类, 对象数组, 集合类与ArrayList, 案例, 集合版学生管理系统, IO流, IO流版学生管理系统, Object类, System类, Date类与DateFormat类, Calendar类, 包装类与自动装箱拆箱, 正则表达式
 - [集合类与常见数据结构](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E9%9B%86%E5%90%88%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)
-  - xx 
-- [异常处理..待整理]()
+  - ArrayList, 集合类, 三种数据结构简介, List, Set, Collections工具类, Map
+- [异常处理](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.md)
   - xx 
 - [IO流..待整理]()
   - xx 
@@ -30,8 +30,6 @@
   - xx 
 - [网络编程..待整理]()
   -  xx
-- []()
-  - xx
 
 
 
