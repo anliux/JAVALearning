@@ -207,11 +207,132 @@
     - 自动填充`e.printStackTrace();`，可以手动修改catch传入的异常类型
 
 - ### finally
-  - 
+  - finally概述：
+    - try-catch-finally组合使用，finally用于释放资源等收尾工作
+    - 无论try-catch语句如何执行，finally的代码都一定会执行。
+  - finally格式：
+    ```java
+    try{
+      有可能出问题的代码;
+    }catch(异常对象 异常名){
+      处理异常;
+    }finally{
+      释放资源;
+      清理垃圾;
+    }    
+    ```
+  - IO流中使用异常捕获的正确方法
+    - 思路：
+      - `FileWriter fw = new FileWriter("exception.txt");`: 
+        -  两种异常处理方式，之前IO流部分选抛出异常，这次选try-catch环绕，自动生成try-catch代码块
+      - `fw.close();`: 
+        - 如果写在try部分，中途有异常语句(比如'10除以0')，后面不执行，则不刷新，则异常前的也无法写入
+        - 要保证close()执行，则把这条语句放在finally里
+      - `FileWriter fw = new FileWriter("exception.txt");`: 定义FileWriter对象
+        - 如果定义在try代码块，则finally的fw.close()会有问题，看不到fw对象
+        - 所以需要在try-catch代码块外先定义好: `FileWriter fw;`
+      - `fw.close()`: 
+        - 此时finally部分的close代码仍然需要处理异常，继续选try-catch处理
+        - 根据错误提示，fw初始化为null：`FileWriter fw = null;`
+        - 注意：开始写入才需要close，如果在fw创建IO对象/写入语句执行之前就有异常，则抛出相应的异常 (参考如下代码)  
+          - finally部分的fw看不到try部分的fw做了什么，可能在任何位置异常中断，因此需要在代码块外赋初值null
+    - 代码示例： 
+    ```java
+          import java.io.FileWriter;
+          import java.io.IOException;
+
+          public class ExceptionDemo {
+            public static void main(String[] args) {
+              FileWriter fw = null;////finally的fw看不到try部分的任何操作，需要有初始化值
+              try {
+                System.out.println(10/0);//此句异常：抛出异常，没有生成"exception.txt"文件
+                fw = new FileWriter("exception.txt");
+                fw.write("hello");
+                fw.write("java");
+                //System.out.println(10/0);//此句异常：中断刷新后，仍然写入了hellojava
+                fw.write("world");
+
+              } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+              } finally {
+                try {//close: 放在finally中保证执行此句代码，由此衍生出另一个try-catch代码块
+                  if(fw != null)//不加这条判断，会抛出空指针异常
+                    fw.close();//加上这条判断：java.lang.ArithmeticException
+                } catch (IOException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+                }
+              }		
+            }
+          }
+    ```
 
 - ### 异常的分类
+  - 运行时异常
+    - RuntimeException的子类就是运行时异常
+    - 在编译时期可以自由选择处理或不处理
+    - 举例：数组越界异常、空指针异常、数学运算异常(除以0)等都是运行时异常，编译阶段并不会报错。
+  - 编译时异常
+    - Exception的子类，且非RuntimeException的子类
+    - 在编译时期就必须处理
+    - 举例: IOException
+  - 在方法名处throws异常 
+    - 如果是编译时异常，必须抛出；
+    - 如果是运行时异常，可以不抛出。 
 
 - ### 自定义异常
+  - throw和throws:
+    - throws: 处理异常的一种方式，把异常抛出，由调用者来处理
+      - 示例：`public static void main(String[] args) throws IOException` 
+    - throw: 制造异常的方式，同时结束方法
+      - 示例：`throw new MyException("考试成绩不符合要求");`
+    - 注意：
+      - 如果抛出(throw)的是编译时异常，则必须在方法声明处抛出(throws)   
+  - 查看异常的源码学习如何自定义一个异常
+    - 异常的父类：按照异常分类定义，运行时异常继承RuntimeException，编译时异常继承Exception
+    - 关键点：写一个无参构造继承父类，一个带参构造(传入String类型)继承父类
+    - eclipse可以自动生成构造：只选取无参和带String参两种构造即可
+  - 自定义一个MyException异常，并在main方法中调用
+    ```java
+    //MyException.java
+
+    public class MyException extends RuntimeException{
+
+      public MyException() {
+        super();
+        // TODO Auto-generated constructor stub
+      }
+
+      public MyException(String message) {
+        super(message);
+        // TODO Auto-generated constructor stub
+      }
+    }  
+    ```
+    
+    ```java
+    //ExceptionDemo.java
+    
+    public class ExceptionDemo {
+      public static void main(String[] args) {
+          try {
+            checkScore(110);
+          } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+      }
+
+      public static void checkScore(int score) {
+        if(score>100 || score<0) {
+          throw new MyException("考试成绩不符合要求");
+        }
+        System.out.println("考试成绩符合要求");
+      }
+    }    
+    ```
+  
 
 
 - ### 递归
