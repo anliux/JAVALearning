@@ -163,6 +163,8 @@
 	C：自动重写toString 和 equals方法：
 		代码区域右键 -- Source -- Generate toString -- 选择变量 -- 自动生成重写的toString方法 
 		代码区域右键 -- Source -- Generate HashCode() and equals() -- 选择变量 -- 自动生成重写的两个方法
+	D: 生成try-catch代码：
+  		选中语句 -- 右键 -- surroundwith - try/catch block: 自动填充`e.printStackTrace();`，可以手动修改catch传入的异常类型
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
