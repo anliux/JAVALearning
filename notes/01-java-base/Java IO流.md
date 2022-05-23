@@ -436,13 +436,61 @@
 
 
 ## File类
-- ### 
+- ### File类概述
+  - 文件和目录路径名的抽象表示形式。
+    - 目录：即路径 
+  - File类的实例是不可变的。
+    - 也就是说，一旦创建，File 对象表示的抽象路径名将永不改变 
+  - 位置：java.io包
 
+- ### File的构造方法
+  - 背景：
+    - 在D盘下创建文件夹a, 并在文件夹a中创建文件b.txt
+    - 路径：`D:\\a\\b.txt`
+  - `File(String pathname)`:
+    - 将指定的路径名转换成一个File对象
+    - 示例：`File f = new File("D:\\a\\b.txt");` 
+    - 注：
+      - 如果删掉b.txt文件再运行，没有新建b.txt文件
+      - 因此：本条语句只是创建了一个File对象指向特定路径而已，没有做其他事
+  - `File(String parent, String child)`:
+    - 根据指定的父路径和文件路径创建File对象
+    - 父路径和文件路径的划分：
+      - 父`D:\\a`, 文件路径`b.txt`: 可
+      - 父`D:\\`, 文件路径`a\\b.txt`: 可
+    - 示例: `File f = new File("D:\\a, "b.txt");` 或 `File f = new File("D:\\, "a\\b.txt");` 
+  - `File(File parent, String child)`:
+    - 根据指定的父路径对象和文件路径创建File对象
+    - 与上一条的区别：父路径是File对象
+    - 示例：
+      - 先创建：`File parent = new File("D:\\a"); File f = new File(parent, "b.txt");`
+      - 匿名调用：`File f = new File(new File("D:\\a"), "b.txt");`  
 
-- ###
-- ###
-
-
+- ### File的创建和删除功能
+  - 绝对路径和相对路径：
+    - 绝对路径：
+      - 固定不可变的路径，以盘符开头 
+    - 相对路径：  
+      - 相对于某个参照物的路径，不以盘符开头
+      - 在eclipse中，相对路径是指相对于当前项目的根目录 
+  - 创建功能的返回值：
+    - 如果是void，则一定会创建成功；
+    - 如果是boolean，则不一定会创建成功，某些条件下会创建失败。 
+  - 注：需要抛出异常：
+    - `..main() throws IOException{..}` 
+  - `boolean createNewFile()`:
+    - 创建文件的功能
+    - 返回值为boolean类型：
+      - 当指定文件不存在时：创建文件并返回true, 选中eclipse中的项目名刷新后会在根目录下显示新建的文件
+      - 当指定文件已存在时：返回false 
+    - 示例：`File f = new File("a.txt"); syso(f.createNewFile());//true, 再次运行为false`
+  - `boolean mkdir()`:
+    - 创建文件夹的功能
+    - 返回值boolean型：
+      - 指定文件夹不存在时创建并返回true，否则，若文件夹已存在时返回false
+    - 示例：`File f = new File("b"); syso(f.mkdir());//结果：返回true, 且在项目根目录下新建b文件夹` 
+  - `boolean mkdirs()`:
+    - 创建多个文件夹的功能 
 
 - ###
 
