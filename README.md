@@ -23,8 +23,8 @@
 - [集合类与常见数据结构](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E9%9B%86%E5%90%88%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)
   - ArrayList, 集合类, 三种数据结构简介, List, Set, Collections工具类, Map
 - [异常处理](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.md)
-  - xx 
-- [IO流..待整理]()
+  - java异常, 异常的处理方式, 处理多个异常, Throwable的常用方法, finally, 异常的分类, 自定义异常, 递归
+- [IO流](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%20IO%E6%B5%81.md)
   - xx 
 - [多线程..待整理]()
   - xx 
