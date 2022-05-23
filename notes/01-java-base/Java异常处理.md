@@ -11,7 +11,7 @@
 * [finally](#finally): finally概述, finally格式, IO流中使用异常捕获的正确方法
 * [异常的分类](#异常的分类): 编译时异常, 运行时异常
 * [自定义异常](#自定义异常): throw和throws, 查看源码学习定义一个异常的格式, 自定义一个MyException异常
-* [递归](#递归): 
+* [递归](#递归): 递归概述, 求5的阶乘, 用debug分析递归算法的执行流程, 斐波那契数列
 <!--GFM-TOC -->
 
 
@@ -265,7 +265,7 @@
       - 注意：开始写入才需要close，如果在fw创建IO对象/写入语句执行之前就有异常，则抛出相应的异常 (参考如下代码)  
         - finally部分的fw看不到try部分的fw做了什么，可能在任何位置异常中断，因此需要在代码块外赋初值null
   - 代码示例： 
-    ```java
+      ```java
           import java.io.FileWriter;
           import java.io.IOException;
 
@@ -294,7 +294,7 @@
               }		
             }
           }
-    ```
+      ```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -342,42 +342,42 @@
   
 - ### 自定义一个MyException异常，并在main方法中调用的代码示例：
     ```java
-    //MyException.java
+      //MyException.java
 
-    public class MyException extends RuntimeException{
+      public class MyException extends RuntimeException{
 
-      public MyException() {
-        super();
-        // TODO Auto-generated constructor stub
-      }
+        public MyException() {
+          super();
+          // TODO Auto-generated constructor stub
+        }
 
-      public MyException(String message) {
-        super(message);
-        // TODO Auto-generated constructor stub
-      }
-    }  
+        public MyException(String message) {
+          super(message);
+          // TODO Auto-generated constructor stub
+        }
+      }  
     ```
     
     ```java
-    //ExceptionDemo.java
-    
-    public class ExceptionDemo {
-      public static void main(String[] args) {
-          try {
-            checkScore(110);
-          } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
-      }
+      //ExceptionDemo.java
 
-      public static void checkScore(int score) {
-        if(score>100 || score<0) {
-          throw new MyException("考试成绩不符合要求");
+      public class ExceptionDemo {
+        public static void main(String[] args) {
+            try {
+              checkScore(110);
+            } catch (Exception e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
         }
-        System.out.println("考试成绩符合要求");
-      }
-    }    
+
+        public static void checkScore(int score) {
+          if(score>100 || score<0) {
+            throw new MyException("考试成绩不符合要求");
+          }
+          System.out.println("考试成绩符合要求");
+        }
+      }    
     ```
 
 <!--GFM-TOC -->
@@ -406,8 +406,7 @@
       show(n-1);//微调
     }
     ```
-  
-  
+   
 - ### 求5的阶乘
   - 思路：
     - 5! = 5 * 4!
@@ -416,7 +415,7 @@
     - 2! = 2 * 1!;
     - 1! = 1; 这里是出口 
   - 代码示例：
-  ```java
+    ```java
       public class RecurrenceDemo {
         public static void main(String[] args) {
           int result = jC(5);
@@ -431,54 +430,52 @@
           }
         }
       }    
-  ```
+    ```
   - 图解：
   ![递归求5的阶乘图解](https://raw.githubusercontent.com/anliux/JAVALearning/master/images/01-java-base/method/%E9%80%92%E5%BD%92%E6%B1%825%E7%9A%84%E9%98%B6%E4%B9%98%E5%9B%BE%E8%A7%A3.bmp)
 
-- ###
+- ### 用debug分析递归算法的执行流程
+  - 以递归求5的阶乘为例
+  - 在`int result = jC(5);`处打断点
+  - 右键debug as执行断点调试
+    - 可以看到一共入栈了5次jC()方法，变量列表的n值也从5到1，之后从1到5 
+    - 主函数遇到jC()点step into；
+    - 调用函数中：if判断用step over, 遇到调用jC()时用step into
+  - 注意：
+    - 顺序执行用： step over
+    - 进入调用的函数用：step into
+  - 遇到jC()用step into，包括调用函数里的`return n * jC(n-1);`: 
+    - 这样才会显示递归多次调用产生的多个jC()函数进栈 
 
+- ### 斐波那契数列
+  - 兔子：1 1 2 3 5 8 13 ..
+  - 规律：除了第一个月和第二个月，其余每个月都是前两个月之和。
+  - 出口：前两个月的数量是确定的  
+  - 代码示例： 
+    ```java
+      public class RecurrenceDemo {
+        public static void main(String[] args) {
+          int result = method(7);
+          System.out.println(result);//120
+        }
 
-- ###
+        public static int method(int n) {
+          if(n == 1) {//出口
+            return 1;
+          }else if (n == 2){
+            return 1;
+          }else {
+            return method(n-1) + method(n-2);
+          }
+        }
+      }  
+    ```
 
 
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
-
-
-
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
-
-
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
-
-
-
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
-
-
-
-
-
-<!--GFM-TOC -->
-* ### [返回目录](#目录)
-<!--GFM-TOC -->
-
 
 
 
