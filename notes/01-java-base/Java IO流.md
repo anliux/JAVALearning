@@ -442,6 +442,9 @@
   - File类的实例是不可变的。
     - 也就是说，一旦创建，File 对象表示的抽象路径名将永不改变 
   - 位置：java.io包
+  - 注意不同系统的路径表示不同：
+    - Windows：与注释相反方向的斜杠分割路径 "D:\abc\file.txt"
+    - mac: 与注释相同方向的斜杠分割路径 "/users/abc/.."
 
 - ### File的构造方法
   - 背景：
@@ -466,7 +469,7 @@
       - 先创建：`File parent = new File("D:\\a"); File f = new File(parent, "b.txt");`
       - 匿名调用：`File f = new File(new File("D:\\a"), "b.txt");`  
 
-- ### File的创建和删除功能
+- ### File的创建功能
   - 绝对路径和相对路径：
     - 绝对路径：
       - 固定不可变的路径，以盘符开头 
@@ -476,7 +479,7 @@
   - 创建功能的返回值：
     - 如果是void，则一定会创建成功；
     - 如果是boolean，则不一定会创建成功，某些条件下会创建失败。 
-  - 注：需要抛出异常：
+  - 注：按需抛出异常并导异常包：
     - `..main() throws IOException{..}` 
   - `boolean createNewFile()`:
     - 创建文件的功能
@@ -490,14 +493,215 @@
       - 指定文件夹不存在时创建并返回true，否则，若文件夹已存在时返回false
     - 示例：`File f = new File("b"); syso(f.mkdir());//结果：返回true, 且在项目根目录下新建b文件夹` 
   - `boolean mkdirs()`:
-    - 创建多个文件夹的功能 
+    - 创建多层文件夹的功能 
+    - 创建指定文件夹，当文件夹所在的目录不存在，则顺道一块创建了 
+      - mkdir没有的功能，没有上层文件时返回false
+      - 注：mac系统路径格式问题(路径是另一个方向的斜杠)：
+        - 没有上层文件时创建名为路径名的单层文件夹(eg. 'c\d\e')，mkdirs()返回的也是这个
+    - 示例：
+      - `File f = new File("c\\d\\e"); syso(f.mkdirs());//创建多层文件夹。而使用f.mkdir()返回false (指没有c\\d文件夹时)`
+      - mac系统：路径是另一个方向的斜杠 `File f = new File("c//d//e");`，两个方法的返回结果同wins系统
+    - 注：mkdirs()可以覆盖mkdir()方法，即可以用mkdirs() 替代mkdir()方法
+  - 创建的是文件还是文件夹，关键看使用的方法是哪个
+    - 代码：`File f = new File("c.txt"); syso(f.mkdir());`    
+    - 看似创建的是c.txt文件，但是调用的是mkdir的方法，因此结果是生成一个名为“c.txt”的文件夹
+    - 注意：不要被new的部分迷惑，关键看调用的方法是要创建什么
 
-- ###
+- ### File的删除功能
+  - `boolean delete()`:
+    - 当指定的文件或文件夹存在时，删除该文件或文件夹，并返回true; 否则返回false
+    - 注意：
+      - 创建文件或文件夹有多个不同方法，但删除只有这一种；
+      - 删除文件夹：
+        - 当文件夹下没有其他文件或文件夹时，才能被删除 (系统删除的时候也是这样，先删除里面的内容，再删文件夹)
+        - 也因此，delete没办法删除多层文件夹，类似`c\\d\\e`
+      - 用此方法删除的文件或文件夹不走回收站，直接删除。  
+    - 示例：
+      - 删除文件：`File f = new File("a.txt"); syso(f.delete());//删除文件a.txt 成功返回true`
+      - 删除空文件夹：`File f = new File("b"); syso(f.delete());//删除文件夹b 成功返回true`
+      - 删除多层文件夹的里层文件夹：`File f = new File("c//d//e"); syso(f.delete());//删除位于最里层的文件夹e`
 
+- ### 判断功能
+  - `boolean exists()`:
+    - 判断文件或文件夹是否存在，存在时返回true，否则返回false
+    - 示例：`File f = new File("a.txt"); syso(f.exists);//文件存在，返回true`
+  - `boolean isAbsolute()`:
+    - 判断File对象指向的路径是否是绝对路径，是则true，不是则false
+      - 注：不管判断的路径是否存在，只看格式是否是绝对路径 
+    - 示例1：`File f = new File("f.txt"); syso(f.isAbsolute);//相对路径，返回false`
+    - 示例2：`File f = new File("/users/a.txt"); syso(f.isAbsolute);//绝对路径，返回true` 
+  - `boolean isDirectory()`:
+    - 判断File对象指向的路径是否存在且是文件夹，是返回true，不是返回false
+    - 注：和isAbsolute()的区别：这里明确说明需要”存在“且”是“。
+    - 示例：`File f = new File("c//d"); syso(f.isDirectory());//是文件夹，返回true`
+  - `boolean isFile()`:
+    - 判断File对象指向的路径是否存在且是文件，是返回true，不是返回false
+    - 注：和isAbsolute()的区别：这里明确说明需要”存在“且”是“。同isDirectory()
+    - 示例：`File f = new File("a.txt"); syso(f.isFile());//是文件夹，返回true`
+  - `boolean isHidden()`:
+    - 判断File对象指向的路径(文件或文件夹)是否有隐藏属性，是则返回true，否则返回false
+    - 不同系统关于 隐藏 的具体定义不同:
+      - 在 UNIX 系统上，如果文件名以句点字符 ('.') 开头，则认为该文件被隐藏。
+      - 在 Windows 系统上，如果在文件系统中文件被标记为隐藏，则认为该文件被隐藏。 
+    - 示例：`File f = new File("a.txt"); syso(f.isHidden());//被标记了隐藏，则为true，否则为false`
 
-- ###
+- ### 获取功能
+  - `File getAbsoluteFile()`:
+    - 以File对象的形式返回当前File对象所指向的绝对路径, 等同于`new File(this.getAbsolutePath())`。
+      - 相当于把路径打包为File对象返回了 
+    - 方法后加句点`.`，可以调用File的若干方法 
+    - 注意：不管传入对象使用的是绝对路径还是相对路径，输出的都是绝对路径
+    - 示例：`File f = new File("a.txt"); syso(f.getAbsoluteFile());//Users/x...u/eclipse/eclipse-workspace/Demo/a.txt`
+  - `String getAbsolutePath()`:
+    - 返回File对象所指向的绝对路径
+    - 方法后加句点`.`，只可以调用String的若干方法 
+    - 注意：不管传入对象使用的是绝对路径还是相对路径，输出的都是绝对路径，同getAbsoluteFile();
+    - 示例：`File f = new File("a.txt"); syso(f.getAbsolutePath());//Users/x...u/eclipse/eclipse-workspace/Demo/a.txt`
+  - `String getParent()`和`File getParentFile()`：
+    - `String getParent()`:
+      - 返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null。
+    - `File getParentFile()`:
+      - 返回此抽象路径名父目录的抽象路径名；如果此路径名没有指定父目录，则返回 null。
+    - Patent需要提前指定，否则为null
+    - 注意：当父路径不存在，但定义过时，也会返回定义的父路径
+    - 代码示例：
+    ```java
+	import java.io.File;
+	import java.io.IOException;
 
+	public class FileDemo {
+		public static void main(String[] args) throws IOException {
+			//先创建父路径，后求父路径
+			File parent = new File("b//c");
+			File f = new File(parent, "f.txt");
+			if(!parent.exists()) {
+				parent.mkdirs();//不知道是几层路径，直接用这个方法
+			}
+			System.out.println(f.createNewFile());//true
+			System.out.println(f.getParent());//b/c
+			System.out.println(f.getParentFile());//b/c
 
+			//父路径不存在时：
+			File f2 = new File(new File("d//e"), "f2.txt");
+			System.out.println(f2.getParent());//d/e
+			System.out.println(f2.getParentFile());//d/e
+		}
+	}    
+    ```
+  - `String getName()`:
+    - 获取文件或文件夹的名称
+    - 示例1：`File f = new File("b//c//a.txt"); syso(f.getName());//a.txt`
+    - 示例2：`File f = new File("b//c"); syso(f.getName());//c`
+  - `String getPath()`:
+    - 返回创建File对象时所给的路径
+      - 即创建时是绝对路径则返回绝对，是相对路径则返回相对，是文件夹则返回文件夹名 
+    - 示例：`File f = new File("b//c"); syso(f.getPath());//b/c`  
+  - `long lastModified()`:
+    - 以毫秒值的形式返回最后修改时间，与右键查看文件属性所得的最后修改时间一致
+    - 代码示例：
+    ```java
+	import java.io.File;
+	import java.io.IOException;
+	import java.sql.Date;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException {
+			File f = new File("a.txt");
+			System.out.println(f.lastModified());//1653365294140
+
+			Date d = new Date(1653365294140L);//Date的有参构造：输入long类型数据，加L
+			System.out.println(d.toLocaleString());//2022年5月24日 下午12:08:14，参考a.txt文件可知这个时间正是最后修改时间
+		}
+	}    
+    ```
+  - `long length()`:
+    - 返回文件的字节数，与右键查看文件属性所得的文件byte大小一致 
+      - 不存在的文件或文件夹的大小返回：0 
+    - 注意：只能查看文件的字节数，用此方法查看文件夹为0
+      - 此条：mac系统并不是，文件夹也会返回2的N次幂大小，即使是空文件夹也会返回
+    - 示例1：`File f = new File("a.txt"); syso(f.length());//查看属性是13 bytes，输出为13`
+    - 示例2：`File f = new File("c//d//a.txt"); syso(f.length())//长路径名返回的也是最里层的文件或文件名的大小：13`
+  - `String[] list()`
+    - 返回当前路径下所有的文件和文件夹的名称
+    - 注意：只有指向文件夹的File对象才可以调用此方法，文件调用返回空指针异常。
+    - 示例：
+    ```java
+	public class FileDemo {
+		public static void main(String[] args) throws IOException {
+			File f = new File("b");
+			String [] s = f.list();
+			System.out.println(s);//[Ljava.lang.String;@d716361
+			for(int i = 0; i<s.length; i++) {
+				System.out.println(s[i]);//输出f.txt和c, 分别为b目录下的两个文件和文件夹
+			}	
+		}
+	}    
+    ```
+  - `File[] listFiles()`:
+    - 以File的形式返回当前路径下所有的文件和文件夹的绝对路径
+    - 注：同样，只有指向文件夹的File对象才可以调用此方法，文件调用返回空指针异常。
+    - 与list()方法的区别：返回值类型不同，返回值为File()类型，可以调用File相关方法
+    - 示例：`File f = new File("b"); File[] files = f.listFiles();`
+  - `static File[] listRoots()`:
+    - 列出可用的文件系统根，即返回所有盘符
+    - 静态：可以直接用类名调用`File.listRoots();`
+    - 注意：
+      - Windows系统：一般返回几个盘符目录 `C:\\` and `D:\\`
+      - mac系统：一般返回`/` 
+    - 示例：
+    ```java
+	File[] roots = File.listRoots();
+	for (File root : roots) {
+		System.out.println(root);
+	}    
+    ```
+
+- ### 修改名字功能
+  - `boolean renameTo(File dest)`:
+    - 修改文件的名字
+    - 有两个参数，因此需要至少两个File
+    - 注意：不能修改为重名的文件
+    - 示例：
+    ```java
+	File f = new File("a.txt");
+	File f2 = new File("m.txt");
+	System.out.println(f.renameTo(f2));//true
+    ```	
+
+- ### File的方法应用
+  - 题目：
+    - 输出指定目录下的所有Java文件名 (包含子目录) 
+  - 思路： 
+    - 先考虑不包含子目录的所有Java文件，之后考虑通过递归处理子目录下的文件判断
+    - listFile()获取所有文件和文件夹，遍历并判断是否是以".java"结尾的Java文件
+    - 之后处理一些细节，完善逻辑，增加鲁棒性等，详见代码注释
+  - 注意：包名中的句点 `.` 分隔符也是文件夹分级分隔符，路径中用斜杠分割
+  - 代码示例：
+    ```java
+	import java.io.File;
+	import java.io.IOException;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException {
+			File f = new File("src//test//StudentArray");
+			method(f);		
+		}
+		public static void method(File file) {
+			if(file.isDirectory()) {//如果传入的是文件而不是文件名，程序也不会异常抛出终止，增加健壮性
+				File[] files = file.listFiles();//以File的形式返回当前路径下所有的文件和文件夹的绝对路径
+				for (File f : files) {//遍历并判断
+					if(f.isFile()) {
+						if(f.getName().endsWith(".java")) {//获取字符串并判断是否是Java文件
+							System.out.println(f.getName());//如果符合，输出
+						}
+					}else {//不是文件，就是文件夹，或者加个if判断
+						method(f);//如果是文件夹，递归调用method方法，以获取子目录下的Java文件
+					}
+				}
+			}
+		}
+	}    
+    ```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
