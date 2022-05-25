@@ -4,15 +4,14 @@
 ### 目录
 
 <!--GFM-TOC -->
-* [IO流基础](#IO流基础): 
-* [](#): 
-* [](#): 
-* [](#): 
-* [](#): 
-* [](#): 
-* [](#): 
-* [](#): 
-* [](#): 
+* [IO流基础](#IO流基础): 关联其他文件的备注, IO流概述和分类
+* [FileWriter](#fileWriter): FileWriter概述, 构造方法和成员方法, FileWriter写数据的方法, FileWriter写数据的换行, 追加写入
+* [FileReader](#fileReader): FileReader概述, FileReader读数据的方法, IO流案例之复制文本文件
+* [字符缓冲流](#字符缓冲流): 字符缓冲流概述, 字符缓冲流的特殊功能：newLine()和readLine(), 字符缓冲流复制文件
+* [字符流读写应用](#字符流读写应用): 复制文本文件的5种方法, 集合数据的读写应用
+* [File类](#file类): File类概述, File类的构造方法, File类的创建/删除/判断/获取/修改功能, File的方法应用
+* [IO流分类](#io流分类): 
+* [输入输出流](#输入输出流): 
 * [](#): 
 * [](#): 
 <!--GFM-TOC -->
@@ -144,7 +143,7 @@
 
 
 ## FileReader
-- ### FileReader概述  
+- ### FileReader概述
   - 输入流写数据，通过阅读API学习
   - java.io包下：因此需要导包 `import java.io.FileReader;`
   - 构造方法：`FileReader(String filename)` -- 传递文件名称
@@ -257,7 +256,7 @@
 
 
 ## 字符缓冲流
-- ### 字符缓冲流
+- ### 字符缓冲流概述
   - BufferedWriter:
     - 将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组、字符串的高效写入
       - 注意参数：传入一个new的输出流对象
@@ -270,7 +269,8 @@
       - 仍然分为读取单个字符和读取字符数组两种方式。
   - 导包：
     - `import java.io.BufferedWriter/BufferedReader;`
-  - 用缓冲流复制文件
+  
+- ### 用缓冲流复制文件
     - 注意：记得开始导包和抛出异常
     - 数据源：a.java -- 读数据 -- FileReader -- 高效读数据 -- BufferedReader
     - 目的地：b.java -- 写数据 -- FileWriter -- 高效写数据 -- BufferedWriter
@@ -349,7 +349,7 @@
 
 
 
-## IO流应用
+## 字符流读写应用
 - ### 复制文本文件的5种方法
   - 基本流一次读写一个字符
   - 基本流一次读写一个字符数组
@@ -364,7 +364,7 @@
     - 此处涉及异常抛出注意点：
       - 当所调用的方法抛出了异常时，所调用的方法也需要抛出异常，即main方法也需要加`throws IOException`
 
-- ### 集合数据的读取
+- ### 集合数据的读写应用
   - IO流：将集合中的数据写入文本文件
     - 题目：
       - 把ArrayList集合中的字符串数据存储到文本文件，每一个字符串元素作为文件中的一行数据 
@@ -521,7 +521,7 @@
       - 删除空文件夹：`File f = new File("b"); syso(f.delete());//删除文件夹b 成功返回true`
       - 删除多层文件夹的里层文件夹：`File f = new File("c//d//e"); syso(f.delete());//删除位于最里层的文件夹e`
 
-- ### 判断功能
+- ### File的判断功能
   - `boolean exists()`:
     - 判断文件或文件夹是否存在，存在时返回true，否则返回false
     - 示例：`File f = new File("a.txt"); syso(f.exists);//文件存在，返回true`
@@ -545,7 +545,7 @@
       - 在 Windows 系统上，如果在文件系统中文件被标记为隐藏，则认为该文件被隐藏。 
     - 示例：`File f = new File("a.txt"); syso(f.isHidden());//被标记了隐藏，则为true，否则为false`
 
-- ### 获取功能
+- ### File的获取功能
   - `File getAbsoluteFile()`:
     - 以File对象的形式返回当前File对象所指向的绝对路径, 等同于`new File(this.getAbsolutePath())`。
       - 相当于把路径打包为File对象返回了 
@@ -656,7 +656,7 @@
 	}    
     ```
 
-- ### 修改名字功能
+- ### File的修改名字功能
   - `boolean renameTo(File dest)`:
     - 修改文件的名字
     - 有两个参数，因此需要至少两个File
@@ -713,7 +713,33 @@
   - 注意：不要随意删文件!!!
   - 代码示例:
   ```java
-  
+	import java.io.File;
+	import java.io.IOException;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException {
+			File f = new File("b");
+			System.out.println(f.exists());
+			method(f);		
+		}
+		public static void method(File file) {
+			if(file.isDirectory()) {
+				//干掉自己的所有子文件和子目录
+				//先获取所有子文件和子目录
+				File[] files = file.listFiles();
+				for (File f: files) {
+					if(f.isFile()) {//判断是否是文件
+						System.out.println(f.getName());//可视化此删除操作,非必要
+						f.delete();
+					}else if(f.isDirectory()) {//如果是文件夹，递归调用
+						method(f);
+					}
+				}		
+				//干掉自己这个目录
+				file.delete();
+			}
+		}
+	}  
   ```
 
 <!--GFM-TOC -->
@@ -722,10 +748,160 @@
 
 
 
+## IO流分类
+- ### 根据流向分：
+  - 输入流：
+    - 读取数据
+    - FileReader -- 父类Reader 
+  - 输出流：
+    - 写出数据
+    - FileWriter -- 父类Writer 
+
+- ### 根据数据类型分：
+  - 字节流：
+    - 字节输入流：
+      - 读取数据：Inputstream 
+    - 字节输出流： 
+      - 写出数据：OutputStream 
+      - 注意：字符流直接写入文件，不存缓冲区，因此可以不flush()
+  - 字符流： 
+    - 字符输入流：
+      - 读取数据：Reader 
+    - 字符输出流： 
+      - 写出数据：Writer 
+  - 区别：
+    - 比如汉字，如果按字节读取，会很慢，需要多次才能读一个，这时就需要字符流
+    - 但是有些数据就必须按字节读取，比如读取图片数据等
+    - 综上：字符流能做的字节流都能做，但是字节流能做的字符流不一定能做。 
+
+- ### 字节流对象
+  - 字节输入流FileInputStream的构造方法：
+    - 两种：`FileInputStream(File file)`和`FileInputStream(String name)`  
+    - `FileInputStream(String name)`的底层：
+      - `this(name != null ? new File(name) : null);`: 同File构造方法，先判断路径下文件是否存在，不存在则先创建File()对象
+  - 题目：使用字节流复制文本文件
+    - 思路:
+      - 创建字节输入/输出流对象；
+      - 两种读写方法：1. 一次读写一个字节；2. 一次读写一个字节数组；
+      - 释放资源。 
+    - 代码示例：
+    ```java
+	import java.io.File;
+	import java.io.FileInputStream;
+	import java.io.FileOutputStream;
+	import java.io.IOException;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException{
+			//复制测试.png
+			//创建字节流对象
+			FileInputStream fis = new FileInputStream("Student.java");
+			FileOutputStream fos = new FileOutputStream("c//Student_copy.java");
+
+			//一次读取一个字节
+			/*
+			int by;
+			while((by = fis.read()) != -1) {
+				fos.write(by);
+			}*/
+
+			//一次复制一个字节数组
+			int len;//用于存储读到的字符个数
+			byte[] bys = new byte[1024];
+			while((len = fis.read(bys)) != -1) {
+				fos.write(bys, 0, len);
+			}
+
+			//释放资源
+			fis.close();
+			fos.close();
+
+			System.out.println(new File("c//Student_copy.java").exists());//true	
+		}
+	}    
+    ```
+- ### 分别用字符流和字节流复制图片文件
+  - 字符类复制：
+    - 复制文件成功，但是会打不开，字符流复制图像文件的过程中丢失了部分字节导致图像文件打不开了
+    - 代码示例：
+    ```java
+	import java.io.File;
+	import java.io.FileReader;
+	import java.io.FileWriter;
+	import java.io.IOException;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException {
+			//复制测试.png
+			//创建字符流对象
+			FileReader fr = new FileReader("复制测试.png");
+			FileWriter fw = new FileWriter("c//复制测试.png");
+
+			//一次复制一个字符数组
+			int len;//用于存储读到的字符个数
+			char[] chs = new char[1024];
+			while((len = fr.read(chs)) != -1) {
+				fw.write(chs, 0, len);
+				fw.flush();
+			}
+
+			//释放资源
+			fw.close();
+			fr.close();
+
+			System.out.println(new File("c//复制测试.png").exists());//测试是否创建成功：true
+		}
+	}  
+    ```
+  - 字节流复制
+    - 图像文件复制成功，且可以顺利打开
+    - 代码示例： 
+    ```java
+	import java.io.File;
+	import java.io.FileInputStream;
+	import java.io.FileOutputStream;
+	import java.io.IOException;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException{
+			//复制测试.png
+			//创建字节流对象
+			FileInputStream fis = new FileInputStream("复制测试.png");
+			FileOutputStream fos = new FileOutputStream("c//复制测试.png");
+
+			//一次复制一个字符数组
+			int len;//用于存储读到的字符个数
+			byte[] bys = new byte[1024];
+			while((len = fis.read(bys)) != -1) {
+				fos.write(bys, 0, len);
+			}
+
+			//释放资源
+			fis.close();
+			fos.close();
+
+			System.out.println(new File("c//复制测试.png").exists());//true
+		}
+	}  
+    ```
+  - 小结：
+    - 二进制文件只能使用字节流进行复制
+      - 根据表将字节转换为字符，中间会丢失部分字节，对于二进制文件来说这种复制的文件会打不开 
+      - 二进制文件：指使用Windows自带记事本打开是乱码的文件 
+    - 文本文件的复制：
+      - 既可以使用字符流，也可以使用字节流
+    - 如果不确定使用字符流还是字节流：
+      - 使用字符流 
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
+
+
+
+## 输入输出流
+
+
 
 
 
