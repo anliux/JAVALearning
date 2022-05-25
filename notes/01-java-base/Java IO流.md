@@ -4,9 +4,9 @@
 ### 目录
 
 <!--GFM-TOC -->
-* [IO流基础](#IO流基础): 关联其他文件的备注, IO流概述和分类
-* [FileWriter](#fileWriter): FileWriter概述, 构造方法和成员方法, FileWriter写数据的方法, FileWriter写数据的换行, 追加写入
-* [FileReader](#fileReader): FileReader概述, FileReader读数据的方法, IO流案例之复制文本文件
+* [IO流基础](#io流基础): 关联其他文件的备注, IO流概述和分类
+* [FileWriter](#filewriter): FileWriter概述, 构造方法和成员方法, FileWriter写数据的方法, FileWriter写数据的换行, 追加写入
+* [FileReader](#filereader): FileReader概述, FileReader读数据的方法, IO流案例之复制文本文件
 * [字符缓冲流](#字符缓冲流): 字符缓冲流概述, 字符缓冲流的特殊功能：newLine()和readLine(), 字符缓冲流复制文件
 * [字符流读写应用](#字符流读写应用): 复制文本文件的5种方法, 集合数据的读写应用
 * [File类](#file类): File类概述, File类的构造方法, File类的创建/删除/判断/获取/修改功能, File的方法应用
@@ -900,10 +900,97 @@
 
 
 ## 输入输出流
+- ### 标准输入输出流概述
+  - System类的三个静态成员变量：
+    - err, in, out, 重点看后两个 
+    - 静态：直接用类名调用
+  - 标准输入流：`public static final InputStream in`
+    - 字节输入流，用来读取键盘录入的数据
+    - 引用类型`InputStream`: 类似于`ublic static final int a;`，int是基本数据类型
+    - 静态：直接用类名调用
+      - `System.in;` 或赋值给特定变量`InputStream is = System.in;`
+    - 常见应用：读取键盘录入的数据
+      - 示例：`Scanner sc = new Scanner(System.in);`  
+  - 标准输出流：`public static final PrintStream out` 
+    - 字节输出流，将数据输出到命令行
+    - 示例：`System.out.println();`
+
+
+- ### OutputStreamWriter
+  - 标准输出流的局限性：
+    - 由于标准输出流是字节输出流，只能输出字节或者字节数组，但是读取到的是字符串时，想进行输出还需要转换成字节数组，很麻烦
+    - 代码示例：注意读取的是String, 写入的是字节流byte，需要转换
+    ```java
+	import java.io.BufferedReader;
+	import java.io.FileReader;
+	import java.io.IOException;
+	import java.io.OutputStream;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException{
+			//题目：读取指定文件，并输出到命令行
+			//创建输入流对象
+			BufferedReader br = new BufferedReader(new FileReader("Student.java"));
+			//创建输出流对象
+			OutputStream os = System.out;
+
+			String line;//用于存储读取到的数据
+			while((line = br.readLine()) != null) {//readLine()是String, 写入字节流需要转换为字节
+				os.write(line.getBytes());//String换行为字节，下同
+				os.write("\r\n".getBytes());
+			}
+
+			//释放资源
+			os.close();
+			br.close();		
+		}
+	}    
+    ```
+  - 转换流：OutputStreamWriter：
+    - 要想通过标准输出流输出字符串，把标准输出流转换成一种字符输出流即可，即OutputStreamWriter  
+    - OutputStreamWriter：
+      - 父类Writer，子类FileWriter, 是字符流通向字节流的桥梁，会把字符输出流转换成字节输出流
+      - 构造方法为传入OutputStream对象
+    - 为了获得最高效率，可考虑将 OutputStreamWriter 包装到 BufferedWriter 中，以避免频繁调用转换器。例如：
+      - `Writer out = new BufferedWriter(new OutputStreamWriter(System.out));//多态`
+    - 改进代码示例：
+    ```java
+	import java.io.BufferedReader;
+	import java.io.BufferedWriter;
+	import java.io.FileReader;
+	import java.io.IOException;
+	import java.io.OutputStreamWriter;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException{
+			//题目：读取指定文件，并输出到命令行
+			//创建输入流对象
+			BufferedReader br = new BufferedReader(new FileReader("Student.java"));
+			//创建输出流对象: 转换流改进 + 缓冲流
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+			String line;//用于存储读取到的数据
+			while((line = br.readLine()) != null) {//转换流改进
+				bw.write(line);//
+				bw.newLine();
+			}
+
+			//释放资源
+			bw.close();
+			br.close();		
+		}
+	}    
+    ```
 
 
 
 
+- ### 
+  
+  
+  
+
+- ###
 
 
 <!--GFM-TOC -->
