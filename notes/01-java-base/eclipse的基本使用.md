@@ -122,7 +122,8 @@
 		
 		source	alt+shift+s	调出source快捷菜单
 		看源码	光标定位+ctrl+双击	打开定位处的源码 
-		代码结构查看和检索    ctrl/command + o: 展示代码结构(类、变量、方法等)，搜索输入可以查找
+		代码结构查看和检索    	ctrl/command + O: 展示代码结构(类、变量、方法等)，搜索输入可以查找
+		任意代码内搜索源码	ctrl+shift+T: 搜索关键词打开源码
 		
 		快速抽取函数       win: alt+shift+M / Mac: option+command+M
 
