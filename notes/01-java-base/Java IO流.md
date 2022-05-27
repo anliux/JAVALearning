@@ -1283,8 +1283,8 @@
       - 当输入过程中意外到达文件或流的末尾时，抛出此异常：手动循环到末尾时会直接抛出异常
       - 不能解决的异常，需要try-catch来处理
       - 其他许多输入操作返回一个特殊值表示到达流的末尾，而不是抛出异常：可以作为循环终止的判定条件
-    - ``
-  - 这里涉及到的序列化与反序列化问题，参考：[java对象的序列化和反序列化详细解释](https://blog.csdn.net/qq_43842093/article/details/118763937)
+  - 这里涉及到的序列化与反序列化问题
+    - 参考：[java对象的序列化和反序列化详细解释](https://blog.csdn.net/qq_43842093/article/details/118763937)
     - 代码示例：
     ```java
 	import java.io.*;
@@ -1370,8 +1370,72 @@
 
 
 
+## Properties
+- ### Properties概述
+  - 集合：
+    - Collections: 单列集合
+    - Map: 双列集合 
+    - Properties：实现了Map集合
+  - Properties：可以与IO流结合使用
+  - Properties：实现了Map接口，父类是Hashtable
+    - Hashtable小番外：
+      - t应该大写，误写为小写了，但是版本太高了，将错就错使用小写沿用至今...
+    - Hashtable和HashMap:
+      - Hashtable是同步的，安全性高，效率低；
+      - HashMap是非同步的，安全性低，效率高
+  - Properties类：属性列表
+    - 表示了一个持久的属性集。(不是临时写入，程序结束就消失那种，而是较持久地写入了文件或什么中)
+    - Properties 可保存在流中或从流中加载。
+    - 属性列表中每个键及其对应值都是一个字符串。
+  
+- ### Properties的构造方法和简单应用
+  - Properties的构造方法：
+    - Properties() 和 Properties(Properties defaults) 
+    - 一般用空构造即可
+  - 简单应用：创建并遍历
+    - 步骤：
+      - 创建属性列表对象
+      - 添加映射关系
+      - 遍历属性列表
+    - 注：Properties也有相关的特有方法，不过用Map继承的方法也足够用了
+    - 代码示例：
+    ```java
+	import java.util.Map;
+	import java.util.Properties;
+	import java.util.Set;
 
-##
+	public class PropertiesDemo {
+		public static void main(String[] args) {
+			//创建属性列表对象
+			Properties prop = new Properties();
+
+		    //添加映射关系: 使用Map的赋值方法
+			prop.put("ID001", "zhangsan");
+			prop.put("ID002", "lisi");
+			prop.put("ID003", "wangwu");
+
+			//遍历属性列表
+			//方法1：获取所有的key, 通过key获取value
+			Set<Object> keys = prop.keySet();//注意：Properties是String, 但现在使用Set的方法，泛型需要是Object类，下同
+			for (Object key : keys) {//同理，泛型需要是Object类
+				Object value = prop.get(key);
+				System.out.println(key + "---" + value);
+			}
+			//方法2：获取所有的映射关系对象
+			Set<Map.Entry<Object, Object>> entrys = prop.entrySet();
+			for (Map.Entry<Object, Object> entry : entrys) {
+				Object key = entry.getKey();
+				Object value = entry.getValue();
+				System.out.println(key + "---" + value);
+			}
+		}
+	}    
+    ```
+
+- ### Properties与IO流结合的功能
+  -  
+
+
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -1379,11 +1443,23 @@
 
 
 
-##
+## 编码表
+- ### 编码表概述
+
+
+- ### Java中字符串的编码
+
+
+
+
+
+- ### 字符流中的编码
+
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
+
 
 
 ### END
