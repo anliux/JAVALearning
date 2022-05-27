@@ -12,8 +12,8 @@
 * [File类](#file类): File类概述, File类的构造方法, File类的创建/删除/判断/获取/修改功能, File的方法应用
 * [IO流分类](#io流分类): 
 * [输入输出流](#输入输出流): 
-* [](#): 
-* [](#): 
+* [打印流](#打印流): 
+* [对象操作流](#对象操作流): 
 <!--GFM-TOC -->
 
 
@@ -906,7 +906,7 @@
     - 静态：直接用类名调用
   - 标准输入流：`public static final InputStream in`
     - 字节输入流，用来读取键盘录入的数据
-    - 引用类型`InputStream`: 类似于`ublic static final int a;`，int是基本数据类型
+    - 引用类型`InputStream`: 类似于`public static final int a;`，int是基本数据类型
     - 静态：直接用类名调用
       - `System.in;` 或赋值给特定变量`InputStream is = System.in;`
     - 常见应用：读取键盘录入的数据
@@ -970,11 +970,13 @@
 			//创建输入流对象
 			BufferedReader br = new BufferedReader(new FileReader("Student.java"));
 			//创建输出流对象: 转换流改进 + 缓冲流
+			//OutputStream os = System.out;
+			//Writer w = new OutputStreamWriter(System.in);
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 			String line;//用于存储读取到的数据
 			while((line = br.readLine()) != null) {//转换流改进
-				bw.write(line);//
+				bw.write(line);
 				bw.newLine();
 			}
 
@@ -990,19 +992,377 @@
     - 数据源：读取键盘录入的数据 System.in
     - 目的地：指定路径的文件中 FileWriter 
   - 标准输入流的局限性：
-    -  
+    - 标准输入流是字节输入流，写入需要的是字符输出流(FileWriter只能输入String或字符数组)，这中间需要转换，麻烦
+    - 代码示例：
+    ```java
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.io.InputStream;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException{
+			//题目：读取键盘录入的数据，并输出到指定路径的文件中
+			//创建输入流对象
+			InputStream is = System.in;
+			//创建输出流对象
+			FileWriter fw = new FileWriter("a.txt");
+
+			//读写数据
+			byte[] bys = new byte[1024];
+			int len;
+			while((len = is.read(bys)) != -1) {
+				fw.write(new String(bys,0,len));//write需要传入String或字符数组，先把byte[]转为String
+				fw.flush();
+			}
+
+			//释放资源
+			fw.close();
+			is.close();		
+		}
+	}    
+    ```
   - 转换流：InputStreamReader
-    - 
+    - 需要把字节输入流转换成字符输入流，InputStreamReader
+    - OutputStreamWriter：
+      - 父类Reader，子类FileReader, 是字节流通向字符流的桥梁, 会把字节输入流转换成字符输入流
+      - 构造方法为传入InputStream对象
+    - 为了达到最高效率，可要考虑在 BufferedReader 内包装 InputStreamReader。例如：
+      - `BufferedReader in = new BufferedReader(new InputStreamReader(System.in));`
+    - 改进的代码示例：
+    ```java
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.io.Reader;
+
+	public class FileDemo {
+		public static void main(String[] args) throws IOException{
+			//题目：读取键盘录入的数据，并输出到指定路径的文件中
+			//创建输入流对象
+			//InputStream is = System.in;
+			Reader r = new InputStreamReader(System.in);//使用转换流
+			//创建输出流对象
+			FileWriter fw = new FileWriter("a.txt");
+
+			//读写数据
+			char[] chs = new char[1024];//修改为char数据
+			int len;
+			while((len = r.read(chs)) != -1) {
+				fw.write(chs,0,len);//直接读取不需要转换了
+				fw.flush();
+			}
+
+			//释放资源
+			fw.close();
+			r.close();		
+		}
+	}    
+    ```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
-- ### 
-  
-  
-  
+## 打印流
+- ### 打印流概述：
+  - 打印流只有输出流：
+    - 分为 字符打印流PrintWriter 和字节打印流PrintStream  
+  - PrintWriter:
+    - 父类：Writer 
+    - 向文本输出流打印对象的格式化表示形式。此类实现在 PrintStream 中的所有 print 方法 
+    - `println()`: 可以自动换行，不受不同系统的换行符的限制
+    - 不能输出字节，可以输出其他任意类型
+    - 通过某些配置，可以实现自动刷新 （只有在调用 println、printf 或 format 的其中一个方法时才可能完成此操作）
+    - 也是包装类，不具备写出功能
+    - 此类中的方法不会抛出 I/O 异常，尽管其某些构造方法可能抛出异常
+    - 也可以把字节输出流转换成字符输出流
+  - PrintStream
+    - 父类：FilterOutputStream; 父类的父类：OutputStream
+    - PrintStream 打印的所有字符都使用平台的默认字符编码转换为字节
+    - PrintStream 为其他输出流添加了功能，使它们能够方便地打印各种数据值表示形式
+  - 代码示例：
+	```java
+	import java.io.IOException;
+	import java.io.PrintWriter;
 
-- ###
+		public class PrintWriterDemo {
+		public static void main(String[] args) throws IOException {
+			//创建打印流对象
+			PrintWriter pw = new PrintWriter("b.txt");
 
+			//写出数据
+			pw.write("hello world ");
+			pw.write("java");
+
+			//释放资源
+			pw.close();
+		}
+	}  
+  	```
+
+- ### 打印流特有功能
+  - 自动换行
+    - 使用PrintWriter的方法println()实现自动换行
+    - 代码示例：
+    ```java
+	//创建打印流对象
+	PrintWriter pw = new PrintWriter("b.txt");
+	//写出数据
+	pw.println("hello world ");
+	pw.println("java");
+	//释放资源
+	pw.close();    
+    ```
+  - 自动刷新
+    - 构造函数部分：`PrintWriter(Writer out, boolean autoFlush)` 
+      - autoFlush传入是否自动刷新的boolean类型参数
+      - 注意前半部分传入的是Writer类型 
+      - 另有：`PrintWriter(OutputStream out, boolean autoFlush)`
+      - 只有在调用 println、printf 或 format 的其中一个方法时才进行自动刷新
+    - 注意：
+      - 创建FileWriter的对象时传入的boolean参数：是否追加
+      - 创建打印流对象时传入的boolean参数：是否自动刷新 
+    - 代码示例：
+    ```java
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.io.PrintWriter;
+
+	public class PrintWriterDemo {
+		public static void main(String[] args) throws IOException {
+			//创建打印流对象
+			PrintWriter pw = new PrintWriter(new FileWriter("b.txt"), true);
+
+			//写出数据
+			pw.println("hello world ");
+			pw.println("java");
+
+			//释放资源: 注释掉以后仍然可以刷新到文件中
+			//pw.close();
+		}
+	}        
+    ```
+
+
+- ### 使用打印流复制文本文件
+  - 数据源：Student.java BufferedReader
+  - 目的地：c//d//Student.java PrintWriter
+  - 打印流的优势：
+    - 省了两个步骤：换行和刷新，正是打印流的特有功能 
+  - 代码示例：
+    ```java
+	import java.io.BufferedReader;
+	import java.io.FileReader;
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.io.PrintWriter;
+
+	public class PrintWriterDemo {
+		public static void main(String[] args) throws IOException {
+			//创建输入流对象
+			BufferedReader br = new BufferedReader(new FileReader("Student.java"));
+			//创建输出流对象
+			PrintWriter pw = new PrintWriter(new FileWriter("c//d//Student.java"), true);//开启自动刷新
+
+			String line;//用于存储读取到的每行数据
+			while((line = br.readLine()) != null) {
+				pw.println(line);//省去换行和刷新
+			}
+			//释放资源
+			pw.close();
+			br.close();
+		}
+	}    
+    ```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+
+## 对象操作流
+- ### 对象操作流概述
+  - 对象操作流：可以用于读写任意类型的对象 
+  - ObjectOutputStream:
+    - writeObject
+    - ObjectOutputStream(OutputStream out)
+  - ObjectInputStream:
+    - readObject
+    - ObjectInputStream(InputStream in)
+  - 注意：
+    - 使用对象输出流写出对象，只能使用对象输入流来读取对象
+    - 只能支持java.io.Serializable接口的对象写入流中  
+
+- ### 使用对象操作流读写数据
+  - 使用对象输出流写数据
+    - 步骤：
+      - 预备一个Student.java代码 
+      - 创建对象输出流对象 
+      - 创建学生对象
+      - 写出学生对象
+      - 释放资源
+    - 注意点：
+      - Student.java: 为了输出需要重写toString方法；针对序列化异常需要实现此异常接口，并重写方法
+        - PS：虽然序列化异常的接口是空的，不需要额外重写什么方法
+      - 打开a.txt发现乱码多：
+        - 因为是需要对象输入流去读取的，不是人去读取  
+    - 代码示例：
+    ```java
+	//Student.java
+	public class Student implements Serializable{...}
+    ```
+    
+    ```java
+    	//bjectStreamDemo.java
+	import java.io.FileOutputStream;
+	import java.io.IOException;
+	import java.io.ObjectOutputStream;
+
+	public class ObjectStreamDemo {
+		public static void main(String[] args) throws IOException {
+			//创建对象输出流的对象
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("a.txt"));
+
+			//创建学生对象
+			Student s = new Student("zhangsan",18);
+			Student s2 = new Student("lisi",19);
+			//写出学生对象
+			oos.writeObject(s);
+			oos.writeObject(s2);
+
+			//释放资源
+			oos.close();
+		}
+	}    
+    ```
+  - 使用对象输入流读数据
+    - 步骤：
+      - 创建对象输入流的对象
+      - 读取对象
+      - 释放资源 
+    - 注意点：
+      - 如果上一步写入的文件不太对，例如第一次运行时莫名其妙跑序列化异常，可以重新生成一下a.txt文件
+      - 首次遇到 EOFException 异常，用try-catch处理
+    - 代码示例：
+    ```java
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+			//创建对象输入流的对象
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("a.txt"));
+
+			//读取对象
+			try {
+				while(true) {
+					Object obj = ois.readObject();
+					System.out.println(obj);
+				}
+			}catch(EOFException e) {
+				System.out.println("读到文件末尾了");
+			}
+
+			//释放资源
+			ois.close();
+			/*
+			 * Student [name=zhangsan, age=18]
+			   Student [name=lisi, age=19]
+			   读到文件末尾了
+			 * */
+		}    
+    ```
+  - 遇到的异常： 
+    - `Exception in thread "main" java.io.NotSerializableException: test.demo.Student`
+      - NotSerializableException: 当实例需要具有序列化接口时，抛出此异常。序列化运行时或实例的类会抛出此异常。参数应该为类的名称。
+      - ObjectOutputStream: 只能将支持 java.io.Serializable 接口的对象(Student.java)写入流中
+      - Serializable: 
+        - 源码：`public interface Serializable {}`
+        - 序列化，是一个标识窗口，只能起标识作用，没有方法；
+        - 当一个类的对象需要IO流进行读写时，这个类必须实现该接口
+    - `Exception in thread "main" java.io.EOFException`
+      - 当输入过程中意外到达文件或流的末尾时，抛出此异常：手动循环到末尾时会直接抛出异常
+      - 不能解决的异常，需要try-catch来处理
+      - 其他许多输入操作返回一个特殊值表示到达流的末尾，而不是抛出异常：可以作为循环终止的判定条件
+    - ``
+  - 这里涉及到的序列化与反序列化问题，参考：[java对象的序列化和反序列化详细解释](https://blog.csdn.net/qq_43842093/article/details/118763937)
+    - 代码示例：
+    ```java
+	import java.io.*;
+
+	public class ObjectStreamTest {
+		public static void main(String[] args) throws IOException, ClassNotFoundException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("b.txt")));
+		oos.writeObject(new Student("d",1));//序列化Student对象,写入文件
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("b.txt")));
+	       /* System.out.println(ois.readObject());*/
+		Student stu = (Student) (ois.readObject());//将Student对象加载到Java程序中,反序列化
+		System.out.println(stu);
+		ois.close();
+		oos.close();
+	    }
+	}    
+    ```
+
+- ### 解决对象输入流读取对象异常的问题
+  - 针对`EOFException 异常`, 用try-catch解决显得有点被动
+  - 考虑提前算好加入的对象个数，可以将对象存到ArrayList中，之后遍历集合即可，避免程序读着读着就挂了
+    - 写入时：先添加到集合中，然后直接写入集合对象即可
+    - 读取时：先向下转型转为集合类，然后遍历集合即可
+  - 代码示例：
+	```java
+	import java.io.FileInputStream;
+	import java.io.FileOutputStream;
+	import java.io.IOException;
+	import java.io.ObjectInputStream;
+	import java.io.ObjectOutputStream;
+	import java.util.ArrayList;
+
+	public class ObjectStreamDemo {
+		public static void main(String[] args) throws IOException, ClassNotFoundException {
+			//创建对象输出流的对象
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("b.txt"));
+			//写入创建集合，并写入学生对象
+			ArrayList<Student> list = new ArrayList<Student>(); 
+			list.add(new Student("zhangsan",80));
+			list.add(new Student("lisi",60));
+			oos.writeObject(list);
+
+			//创建对象输入流的对象
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("b.txt"));
+
+			//读取对象
+			Object obj = ois.readObject();
+			//System.out.println(obj);//[Student [name=zhangsan, age=80], Student [name=lisi, age=60]]
+
+			//向下转型：获取具体的子类对象
+			ArrayList<Student> list2 = (ArrayList<Student>) obj;
+			for (Student student : list2){
+				System.out.println(student);
+			}
+			/*
+			 * Student [name=zhangsan, age=80]
+			 * Student [name=lisi, age=60]
+			 * */
+
+			//释放资源
+			oos.close();
+			ois.close();
+		}
+	}  
+	```
+
+- ### 序列化中的serialVersionUID号
+  - 参考：[java对象的序列化和反序列化详细解释](https://blog.csdn.net/qq_43842093/article/details/118763937)
+  - serialVersionUID是序列化前后的唯一标识符
+    - 中间发生了变化会导致对不上暗号，造成反序列化失败 
+  - 默认如果没有人为显式定义过serialVersionUID，那编译器会为它自动声明一个
+    - 例如根据该类的各方面信息自动地为它生成一个默认的serialVersionUID
+    - 当序列化前后对类进行了修改，如增删了成员变量，会导致默认序列号的变化，导致对不上暗号
+  - 为了serialVersionUID的确定性，凡是implements Serializable的类，建议人为显式地为它声明一个serialVersionUID明确值
+    - 对类加实现`implements Serializable`之后eclipse会产生黄色感叹号，可以生成序列号
+    - 两种，一种是默认序列号，一种是生成一个序列号，建议用生成序列号
+      - 默认：`private static final long serialVersionUID = 1L;` 
+      - 生成：`private static final long serialVersionUID = 7578031297319648676L;`
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -1011,12 +1371,19 @@
 
 
 
+##
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
 
 
+
+##
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 ### END
