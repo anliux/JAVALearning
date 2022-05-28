@@ -25,8 +25,8 @@
 - [异常处理](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.md)
   - java异常, 异常的处理方式, 处理多个异常, Throwable的常用方法, finally, 异常的分类, 自定义异常, 递归
 - [IO流](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%20IO%E6%B5%81.md)
-  - xx 
-- [多线程..待整理]()
+  - IO流基础概述, FileWriter, FileReader, 字符缓冲流, 字符流读写应用, File类, IO流分类, 输入输出流, 打印流, 对象操作流, Properties, 编码表
+- [多线程](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B.md)
   - xx 
 - [网络编程..待整理]()
   -  xx
