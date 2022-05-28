@@ -14,6 +14,8 @@
 * [输入输出流](#输入输出流): 
 * [打印流](#打印流): 
 * [对象操作流](#对象操作流): 
+* [Properties](#properties):
+* [编码表](#编码表):
 <!--GFM-TOC -->
 
 
@@ -1433,10 +1435,106 @@
     ```
 
 - ### Properties与IO流结合的功能
-  -  
+  - `void list(PrintWriter out)`
+    - 将属性列表输出到指定的输出流。
+    - 步骤：
+      - 创建属性列表对象
+      - 添加映射关系
+      - 创建打印流对象
+      - 使用list()方法
+      - 释放资源 
+    - 代码示例：
+    ```java
+	import java.io.IOException;
+	import java.io.PrintWriter;
+	import java.util.Properties;
 
+	public class PropertiesDemo {
+		public static void main(String[] args) throws IOException {
+			//创建属性列表对象
+			Properties prop = new Properties();
 
+		    	//添加映射关系: 使用Properties自己的赋值方法
+			prop.setProperty("ID001", "zhangsan");//setProperty输入的是字符串对象
+			prop.setProperty("ID002", "lisi");
+			prop.setProperty("ID003", "wangwu");
 
+			//创建打印流对象
+			PrintWriter out = new PrintWriter("a.txt");
+			prop.list(out);
+			/* a.txt文件：
+			-- listing properties --
+			ID001=zhangsan
+			ID002=lisi
+			ID003=wangwu
+			 * */
+
+			//释放资源
+			out.close();
+		}
+	}    
+    ```
+  - `void load(Reader reader)`: 
+    - 按简单的面向行的格式从输入字符流中读取属性列表（键和元素对）
+    - 步骤：
+      - 创建属性列表对象
+      - 创建输入流对象
+      - 使用load()方法
+      - 释放资源
+    - 在上一步已经写入文件的基础上，可以用load方法进行加载，并输出
+    - 代码示例：
+    ```java
+	public static void main(String[] args) throws IOException {
+			//创建属性列表对象
+			Properties prop = new Properties();
+			//创建一个输入流对象
+			FileReader fr = new FileReader("a.txt");
+		    	//load()方法
+			prop.load(fr);
+			//释放资源
+			fr.close();
+			System.out.println(prop);//{--=listing properties --, ID001=zhangsan, ID002=lisi, ID003=wangwu}
+	}    
+    ```
+  - `void store(Writer writer, String comments)`: 
+    - 以适合使用 load(Reader) 方法的格式，将此 Properties 表中的属性列表（键和元素对）写入输出字符
+    - comments: 会以comments描述的方式在第一行显示
+    - 步骤：
+      - 创建属性列表对象
+      - 添加映射关系
+      - 创建输出流对象
+      - 使用store()方法
+      - 释放资源
+    - 代码示例：
+    ```java
+	public static void main(String[] args) throws IOException {
+		//创建属性列表对象
+		Properties prop = new Properties();		
+
+		//添加映射关系: 使用Properties自己的赋值方法
+		prop.setProperty("ID001", "zhangsan");
+		prop.setProperty("ID002", "lisi");
+		prop.setProperty("ID003", "wangwu");
+
+		//创建输出流对象
+		FileWriter fw = new FileWriter("b.txt");
+		prop.store(fw, "hello world");
+		/*	b.txt:
+		 * 	#hello world
+			#Sat May 28 18:29:16 CST 2022
+			ID001=zhangsan
+			ID002=lisi
+			ID003=wangwu
+		 * */
+
+		//释放资源
+		fw.close();
+	}    
+    ```
+  - list()和store()的区别：
+    - list只能接受打印流
+    - store()可以接收任意输出流
+     
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
