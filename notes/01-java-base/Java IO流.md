@@ -10,12 +10,12 @@
 * [字符缓冲流](#字符缓冲流): 字符缓冲流概述, 字符缓冲流的特殊功能：newLine()和readLine(), 字符缓冲流复制文件
 * [字符流读写应用](#字符流读写应用): 复制文本文件的5种方法, 集合数据的读写应用
 * [File类](#file类): File类概述, File类的构造方法, File类的创建/删除/判断/获取/修改功能, File的方法应用
-* [IO流分类](#io流分类): 
-* [输入输出流](#输入输出流): 
-* [打印流](#打印流): 
-* [对象操作流](#对象操作流): 
-* [Properties](#properties):
-* [编码表](#编码表):
+* [IO流分类](#io流分类): 根据流向(输入流/输出流)和数据类型分(字节流/字符流), 字节流对象, 分别用字节流和字符流复制图片, 小结
+* [输入输出流](#输入输出流): 标准输入输出流概述, 两个转换流, OutputStreamWriter
+* [打印流](#打印流): 打印流概述, 打印流特有功能(自动换行/自动刷新), 使用打印流复制文件
+* [对象操作流](#对象操作流): 对象操作流概述, 使用对象操作流读写数据, 序列化与反序列化, 异常处理, 序列化中的serialVersionUID号
+* [Properties](#properties): Properties概述(属性列表), Properties的构造和简单应用, roperties与IO流结合的功能(list, load, store)
+* [编码表](#编码表): 编码表概述, Java中字符串的编码, 字符流中的编码
 <!--GFM-TOC -->
 
 
@@ -54,6 +54,7 @@
     - 释放资源。<即通知系统释放和该文件相关的资源，因为创建输出流对象是调用系统资源创建的>
 
 - ### FileWriter的构造方法和成员方法
+- 
   - 构造方法：
     - `FileWriter(String fileName)`: 传递一个文件名称 <或路径+文件名>
   - 成员方法：
@@ -750,7 +751,7 @@
 
 
 
-## IO流分类
+## IO流分类 
 - ### 根据流向分：
   - 输入流：
     - 读取数据
@@ -901,7 +902,7 @@
 
 
 
-## 输入输出流
+## 输入输出流 
 - ### 标准输入输出流概述
   - System类的三个静态成员变量：
     - err, in, out, 重点看后两个 
@@ -916,7 +917,9 @@
   - 标准输出流：`public static final PrintStream out` 
     - 字节输出流，将数据输出到命令行
     - 示例：`System.out.println();`
-
+  - 两个转换流：
+    - OutputStreamWriter和InputStreamReader
+    - 字节流与字符流转换的桥梁
 
 - ### OutputStreamWriter
   - 题目：读取指定文件，并输出到命令行
@@ -1068,7 +1071,7 @@
 
 
 ## 打印流
-- ### 打印流概述：
+- ### 打印流概述：  
   - 打印流只有输出流：
     - 分为 字符打印流PrintWriter 和字节打印流PrintStream  
   - PrintWriter:
@@ -1186,7 +1189,7 @@
 
 
 ## 对象操作流
-- ### 对象操作流概述
+- ### 对象操作流概述 
   - 对象操作流：可以用于读写任意类型的对象 
   - ObjectOutputStream:
     - writeObject
@@ -1543,16 +1546,96 @@
 
 ## 编码表
 - ### 编码表概述
-
+  - 编码表：
+    - 计算机底层：都是二进制数据
+    - 编码表：把计算机底层的二进制数据转换成我们能看懂的字符 
+  - 编码表进化史简介：
+    - ASCII: 最初的编码表，包含有限的编码 (一些符号数字和字母，类似a-97)
+    - GB2312：中文最初的编码表，且完全包含了ASCII表
+    - GBK：中文进化的编码表
+      - 并且各种语言都进化出自己的编码表 
+    - Unicode: 整合大部分国家语言的编码表，所有字符都占2字节
+      - Java中字符的默认码表就是Unicode 
+    - UTF-8: 针对Unicode的字节位浪费，进化出长度可变的编码表
+      - 更灵活，节省了空间  
+  - ANSI：本地编码表，根据本机语言设置选择编码表
+    - 如计算机的语言是简体中文，则码表为GBK
 
 - ### Java中字符串的编码
+  - Java中字符串默认使用的是ANSI(GBK)
+    - 注：Mac默认文件编码方式是UTF-8，且没有ANSI或GBK 
+  - 乱码：
+    - 编码方式前后不一致导致，改为前后一致即可解决
+  - 如果修改了文件中的默认编码方式，则在读写过程中，可以指定其他编码方式
+    - 文件 -- 右键 -- 属性：可以查看或修改编码方式 
+  - 写入数据指定编码方式
+    - Sting的方法：`byte[] getBytes()`: 
+      - 空参数，通过默认编码转换为数组，并将结果存储到一个新的 byte 数组中。
+    - Sting的方法：`byte[] getBytes(String charsetName)`: 
+      - 使用指定的编码方式将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。
+    - 代码示例： 
+    ```java
+	import java.io.FileOutputStream;
+	import java.io.IOException;
 
+	public class EncoderDemo {
+		public static void main(String[] args) throws IOException {
+			String s = "高薪就业";
+			//byte[] bys = s.getBytes();//通过默认编码方式转为数组
+			byte[] bys = s.getBytes("UTF-16");//指定文件编码方式
+			FileOutputStream fos = new FileOutputStream("a.txt");
+			fos.write(bys);
+			fos.close();
+		}
+	}    
+    ```
+  - 读取数据指定编码方式：
+    - `String(byte[] bytes, int offset, int length, String charsetName)`:
+      - 通过使用指定的字符集解码指定的 byte 子数组，构造一个新的 String。
+    - 代码示例：
+    ```java
+	public static void main(String[] args) throws IOException {
+			FileInputStream fis = new FileInputStream("a.txt");
+			byte[] bys = new byte[1024];
+			int len = fis.read(bys);
+			System.out.println(new String(bys,0,len,"UTF-16"));//高薪就业
+	}    
+    ```
 
-
-
-
-- ### 字符流中的编码
-
+- ### 字符流中的编码 
+  - 核心思想： 字符流 = 字节流 + 编码 
+  - 遇到编码不一致问题，有以下两种解决思路
+  - 法1：用上面的老方法，String转为数组时标记编码方式，然后写入时new String并传入该数组
+    - 注：Mac系统,转换后仍然乱码，不明原因
+    - 代码示例：
+    ```java
+	public class EncoderDemo {
+		public static void main(String[] args) throws IOException {
+			FileWriter fw = new FileWriter("a.txt");
+			String s = "高薪就业";
+			byte[] bys = s.getBytes("UTF-16");
+			fw.write(new String(bys));//仍然是乱码，未解决
+			fw.close();
+		}
+	}    
+    ```
+  - 法2：探索底层，底层来看，字符流到底还是需要转为字节，查看源码也可得，在输入流部分做功课
+    - FileWriter的父类是OutputStreamWriter
+    - OutputStreamWriter: 
+      - 转换流，字符流通向字节流的桥梁
+      - 构造时：空参数表示默认编码，传入指定编码方式可以用其他编码方式进行编码
+      - `OutputStreamWriter(OutputStream out, String charsetName)`
+    - 代码示例：
+    ```java
+	public class EncoderDemo {
+		public static void main(String[] args) throws IOException {
+			OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("a.txt"), "UTF-16");
+			String s = "月薪过万";
+			osw.write(s);//可，写入文件的是s的内容
+			osw.close();
+		}
+	}    
+    ```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
