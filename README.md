@@ -27,8 +27,8 @@
 - [IO流](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%20IO%E6%B5%81.md)
   - IO流基础概述, FileWriter, FileReader, 字符缓冲流, 字符流读写应用, File类, IO流分类, 输入输出流, 打印流, 对象操作流, Properties, 编码表
 - [多线程](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B.md)
-  - xx 
-- [网络编程..待整理]()
+  - 多线程概述, 多线程的实现方法, 多线程模拟火车站售票, 同步代码块与同步方法, 线程的生命周期
+- [网络编程](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B.md)
   -  xx
 
 
