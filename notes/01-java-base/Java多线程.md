@@ -134,9 +134,16 @@
   - 创建MyThread类并定义
     - 两个要点：继承Thread方法；重新run()方法
     - 代码示例：
-    ```java
-    
-    ```
+     ```java
+      public class MyThread implements Runnable{
+        @Override
+        public void run() {//这里可以输入run后用alt+/自动填充
+          for (int i = 0; i < 100; i++) {
+            System.out.println(Thread.currentThread().getName()+ ": " + i);//getName()不可用了
+          }
+        }
+      }    
+     ```
   - 在main方法中创建并使用MyThread对象  
     - 两个要点：创建子类对象；启动子类示例
     - 两种方法：
@@ -144,7 +151,7 @@
       - 共用同一个MyThead实例，分别传入两个Thread实例中
         - 弊端：如果MyThread带参构造，new时传入参数，并在run()中进行了输出等使用，则结果会不同
     - 代码示例：
-    ```java
+     ```java
         //分别创建两个MyThread实例和两个Thread实例
         public class ThreadDemo {
           public static void main(String[] args) {
@@ -175,7 +182,7 @@
             t2.start();
           }
         }        
-    ```
+     ```
 
 - ### 两种方式的区别：
   - 第一种是继承，而第二种是实现。
@@ -201,7 +208,7 @@
     - 设置票数变量tickets，且调用时使用同一个TicketThread对象实例，以保证是同一个票数对象在变化
     - tickets--：放在循环里，节约写代码的空间
   - 代码示例： 
-  ```java
+    ```java
       public class TicketThread implements Runnable{
         int tickets = 100;
 
@@ -214,7 +221,7 @@
           }
         }
       }  
-  ```
+    ```
 
 - ### 主函数
   - 步骤：
@@ -223,7 +230,7 @@
     - 启动线程
     - 卖票结束后需要手动终止程序 (这个设定危，一定一定要记得终止程序!!!!)
   - 代码示例：
-  ```java
+    ```java
       public class ThreadDemo {
         public static void main(String[] args) {
           //创建线程实例
@@ -242,7 +249,7 @@
           t3.start();
         }
       }  
-  ```
+    ```
 
 - ### 线程中加入sleep()
   - `static void sleep(long millis)`:
@@ -252,7 +259,7 @@
   - 加入sleep()的问题：
     - 结果会出问题，比如售出相同票编号多于一次，或售出0甚至负数编号的票 
   - 代码示例：
-  ```java
+    ```java
       //TicketThread.java
       public class TicketThread implements Runnable{
         int tickets = 100;
@@ -271,7 +278,7 @@
           }
         }
       }  
-  ```
+    ```
   - 加入sleep()后出现问题的原因分析：
     - 三个售票窗口t1, t2, t3
     - 假设只剩下1张票，则仍然符合'if(tickets>0){}'的判断，可以进入if代码块中，即会执行里面的sleep()和syso()语句
@@ -294,16 +301,16 @@
     - 同步(锁)，可以修饰代码块和方法，被修饰的代码块和方法一旦被某个县城访问，则直接锁住，其他的线程将无法访问
   - 同步代码块： 
     - 注意：锁对象需要被所有的线程所共享(否则如果有线程不认识，就难办了) 
-  ```java
-    Synchronized(锁对象){
-      //coding...
-    }
-  ```
+    ```java
+      Synchronized(锁对象){
+        //coding...
+      }
+    ```
   - 用同步改进后的TickedThread类：
     - 首先要创建一个被所有线程所共享的锁，并传入同步代码块中
     - 把需要锁起来的代码放在同步代码块中
     - 注：加了同步以后明显能感觉到运行变慢了，这是同步的缺点
-    ```java
+     ```java
         public class TicketThread implements Runnable{
           int tickets = 100;
           Object obj = new Object();//放在这里，可以被所有线程所共享，可以作为锁
@@ -324,7 +331,7 @@
             }
           }
         }  
-    ```
+     ```
   - 同步与非同步的优缺点：
     - 同步：安全性高，效率低
     - 非同步：效率高，安全性低
