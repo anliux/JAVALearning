@@ -21,6 +21,7 @@
 
 - ### 网络编程
   - 就是用来实现网络互连的不同计算机上运行的程序间可以进行数据交换
+  - 又称Socket编程或套接字编程
 
 - ### Socket(套接字)  
   - 用于描述IP地址和端口，是一个通信链的句柄。
@@ -82,7 +83,7 @@
     - B-A：B收到A发送的数据，再给A发送一条数据
     - A-B：A收到B发送的数据后，再给B发送一条自己收到了的数据
 
-- ### UDP与TCP协议  
+- ### UDP与TCP协议 
   - UDP协议：
     - DatagramSocket与DatagramPacket
     - 建立发送端，接收端。
@@ -139,7 +140,7 @@
         }
       }    
     ```
-  - `String	getHostAddress()`
+  - `String getHostAddress()`
     - 非静态，对象调用
     - 返回 IP 地址字符串（以文本表现形式）
     - 代码示例：getByName传入的参数不同，获取到的结果都是IP地址
@@ -152,7 +153,7 @@
     InetAddress address2 = InetAddress.getByName("192.168.0.106");
     String hostAddress = address2.getHostAddress();//192.168.0.106
     ```
-  - `String	getHostName()`: 
+  - `String getHostName()`: 
     - 非静态，对象调用
     - 获取此 IP 地址的主机名
     - 代码示例：getByName传入的参数不同，获取到的结果不同
@@ -200,26 +201,134 @@
     - 输出数据
     - 释放资源
 
-- ### DategramSocket类
+- ### 注：datagram
+  - 数据报的意思 
 
+- ### DatagramSocket类
+  - 此类表示用来发送和接收数据报包的套接字。
+  - 在 DatagramSocket 上总是启用 UDP 广播发送. 即基于UDP协议
+  - 构造方法：
+    - `DatagramSocket()`: 
+      - 构造数据报套接字并将其绑定到本地主机上任何可用的端口。随机分配端口
+      - 发送端可用
+    - `DatagramSocket(int port)`: 
+      - 创建数据报套接字并将其绑定到本地主机上的指定端口。
+      - 接收端可用
+    - `new DatagramSocket();`: 会抛出异常SocketException, 其父类是IOException
 
-- ### DategramPacket类
+- ### DatagramPacket类
+  - 由DatagramSocket对象调用的send方法查看源码得知，send传入的是DatagramPacket对象
+  - 此类表示数据报包。数据报包用来实现无连接包投递服务
+  - 构造方法：
+    - `DatagramPacket(byte[] buf, int length, InetAddress address, int port)`:
+      - 构造数据报包，用来将长度为 length 的包发送到指定主机上的指定端口号。
+      - 可用于发送端打包
+      - 具备UDP收发数据的数据包需要的各种参数：数据，长度，IP，端口...
+        - 数据：`byte[] buf`
+        - 设备的地址：IP
+        - 进程的地址：端口号
+    - `DatagramPacket(byte[] buf, int length)`
+      - 简单的构造方法，可用于接收端接收数据 
+  - 解析接收到的数据：
+    - 可用以下几个getXxx()方法 
+  - `InetAddress getAddress()`:
+    - 返回某台机器的 IP 地址，此数据报将要发往该机器或者是从该机器接收到的。 
+    - 获取发送端的IP地址
+  - `byte[] getData()`: 
+    - 返回数据缓冲区，即用字节数组接收发送来的数据
+    - 也可以直接使用创建包对象时的数组
+  - `int getLength()`:
+    - 返回将要发送或接收到的数据的长度
+    - 获取具体收到的字节的个数
 
 - ### UDP收发数据的代码示例
   - 发送端
-    - 
-  - 接收端 
-    -  
+    ```java
+	//SendDemo.java
+	import java.io.IOException;
+	import java.net.DatagramPacket;
+	import java.net.DatagramSocket;
+	import java.net.InetAddress;
+	import java.net.SocketException;
 
+	public class SendDemo {
+		public static void main(String[] args) throws SocketException, IOException {
+			//创建发送端Socket对象
+			DatagramSocket ds = new DatagramSocket();
+
+			//创建数据并打包
+			//DatagramPacket(byte[] buf, int length, InetAddress address, int port) 
+			String s = "Hello UDP, im coming!";
+			byte[] bys = s.getBytes();
+			int length = bys.length;
+			InetAddress address = InetAddress.getByName("Mac_liuxuan");
+			int port = 8888;//接收端是什么就是哪个端口号
+			//打包
+			DatagramPacket dp = new DatagramPacket(bys,length,address,port);
+
+			//发送数据
+			ds.send(dp);
+
+			//释放资源
+			ds.close();		
+		}
+	}    
+    ```
+  - 接收端 
+    ```java
+	import java.io.IOException;
+	import java.net.DatagramPacket;
+	import java.net.DatagramSocket;
+	import java.net.InetAddress;
+
+	public class ReceiveDemo {
+		public static void main(String[] args) throws IOException {
+			//创建接收端Socket对象
+			DatagramSocket ds = new DatagramSocket(8888);
+
+			//接收数据
+			byte[] bys = new byte[1024];
+			DatagramPacket dp = new DatagramPacket(bys,bys.length);
+
+			System.out.println("阻塞前");
+			ds.receive(dp);//阻塞中
+			System.out.println("阻塞后");
+
+			//解析数据
+			InetAddress address = dp.getAddress();//获取IP地址
+			byte[] data = dp.getData();//获取数据
+			int length = dp.getLength();//获取发送或接收到的数据的长度
+
+			//输出数据
+			System.out.println("sender:"+address.getHostAddress());
+			System.out.println(new String(data,0,length));//加length防止输出上面字节数组的1024个元素，即后面的空字符(直接复制会有)
+			System.out.println(new String(bys,0,length)); //或者直接输出接收数据的字节数组也可
+			/* 阻塞前
+				阻塞后
+				sender:192.168.0.106
+				Hello UDP, im coming!
+			*/
+
+			//释放资源
+			ds.close();	
+		}
+	}    
+    ```
+  - 注意：
+    - 需要先启动接收端，再启动发送端
+    - 接收端卡在此条语句：`ds.receive(dp);//阻塞中` -- 阻塞
+      - 接收端开始运行后，程序会在receive()方法这里有一个阻塞，即等待 
+  - 注意控制台：多条程序会有多个控制台
+    - 接收数据的结果在ReceiveDemo.java的控制台可以看到
 
 - ### UDP收发数据的注意事项
-  - 需要先启动接收端，再启动发送端
-    - 接收端卡在此条语句：
-  - 
-
-
-
-
+  - 端口号错误：不报错，但是数据收不到
+    - 对比主机名异常：会报错抛异常`java.net.UnknownHostException`
+  - 接收端程序在运行的过程中，再次启动接收端程序，则抛异常：
+    - `java.net.BindException: Address already in use (Bind failed)`
+    - 该端口已经在使用中了，再次运行，已占用，绑定失败，抛异常
+    - 端口号：标记线程，不能重复，否则就不知道指的是哪条进程了
+    - 同理，需要注意常见程序已占用的端口号，否则同样会抛上述异常
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -228,8 +337,23 @@
 
 
 ## TCP协议收发数据
-- ### TCP协议发送数据
-  - 
+- ### TCP协议收发数据分析
+  - 回顾TCP协议收发数据的特点：
+    - 必须建立连接，形成传输数据的通道；
+    - 在连接中进行大数据量传输；
+    - 通过三次握手完成连接
+  - TCP协议发送数据的步骤(客户端)
+    - 创建发送端Socket对象（创建连接）
+    - 获取输出流对象
+    - 发送数据
+    - 释放资源
+  - TCP协议接收数据的步骤(服务端)
+    - 创建接收端Socket对象(ServerSocket类)
+    - 监听(阻塞)：等着客户端过来
+    - 获取输入流对象
+    - 获取数据
+    - 输出数据
+    - 释放资源
 
 - ### TCP协议接收数据
   - 
