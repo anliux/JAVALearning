@@ -55,6 +55,8 @@
     - 根据安全性不同可以分为这两种 
   - 如何获取和操作IP地址呢？
     - 为了方便对IP地址的获取和操作，java提供了一个 类InetAddress 供我们使用
+  - cmd窗口查询：ipconfig
+    - 注：mac系统不灵 
   
 - ### 端口号
   - 物理端口: 网卡口
@@ -76,9 +78,9 @@
     - 通过三次握手完成连接，是可靠协议；
     - 必须建立连接，效率会稍低
   - 三次握手：
-    - A-B
-    - B-A
-    - A-B
+    - A-B：A给B发送数据
+    - B-A：B收到A发送的数据，再给A发送一条数据
+    - A-B：A收到B发送的数据后，再给B发送一条自己收到了的数据
 
 - ### UDP与TCP协议  
   - UDP协议：
@@ -112,13 +114,110 @@
 
 - ### InetAddress常用方法
   - `static InetAddress[]	getAllByName(String host)`: 
+    - 静态，类名调用
     - 在给定主机名的情况下，根据系统上配置的名称服务返回其 IP 地址所组成的数组。
     - 返回数组：是因为主机名不唯一，可能返回多个IP地址
-  - `
-  - `
-  - `
-  - `
-  - ` 
+  - `static InetAddress	getByName(String host)`:
+    - 静态，类名调用
+    - throws UnknownHostException
+    - 在给定主机名的情况下确定主机的 IP 地址。
+      - 即传入主机名，返回主机名和IP地址 
+    - 注：此方法，如果传入的是IP地址，则获取到的是IP地址
+    - 代码示例：
+    ```java
+      import java.net.InetAddress;
+      import java.net.UnknownHostException;
+
+      public class InetAddressDemo {
+        public static void main(String[] args) throws UnknownHostException {
+          //分别传入主机名和IP地址
+          InetAddress address = InetAddress.getByName("Mac_liuxuan");
+          System.out.println(address);//Mac_liuxuan/192.168.0.106
+          
+          InetAddress address2 = InetAddress.getByName("192.168.0.106");
+		      System.out.println(address2);//192.168.0.106
+        }
+      }    
+    ```
+  - `String	getHostAddress()`
+    - 非静态，对象调用
+    - 返回 IP 地址字符串（以文本表现形式）
+    - 代码示例：getByName传入的参数不同，获取到的结果都是IP地址
+    ```java
+    InetAddress address = InetAddress.getByName("Mac_liuxuan"); 
+    String hostAddress = address.getHostAddress();//192.168.0.106`    
+    ```
+    
+    ```java
+    InetAddress address2 = InetAddress.getByName("192.168.0.106");
+    String hostAddress = address2.getHostAddress();//192.168.0.106
+    ```
+  - `String	getHostName()`: 
+    - 非静态，对象调用
+    - 获取此 IP 地址的主机名
+    - 代码示例：getByName传入的参数不同，获取到的结果不同
+      - getByName(主机名)：获取主机名
+      - getByName(主机名)：仍然获取IP地址
+    ```java
+    InetAddress address = InetAddress.getByName("Mac_liuxuan"); 
+    String hostName = address.getHostName();//Mac_liuxuan
+    ```
+    
+    ```java
+    InetAddress address2 = InetAddress.getByName("192.168.0.106");
+    String hostName = address2.getHostName();//192.168.0.106
+    ```
+  - `static InetAddress	getLocalHost()`: 
+    - 静态，类名调用
+    - 返回本地主机的 IP 地址。
+    - 示例：
+      - `InetAddress adds = InetAddress.getLocalHost(); System.out.println(adds);//Mac_liuxuan/192.168.0.106`
+    - 与`static InetAddress getByName(String host)`的区别：
+      - getByName: 可以返回其他的IP地址，比如别的主机的IP地址
+      - getLocalHost: 只能获取本机的IP地址
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
+
+
+
+## UDP协议收发数据
+- ### UDP协议收发数据
+  - 回顾UDP协议收发数据的特点：
+    - 打包发送数据：将数据和地址、长度、端口都打包到一起
+    - 不建立连接，只管发送，不管是否收到
+    - 每个数据包有大小限制：64k
+  - UDP协议发送数据的步骤
+    - 创建发送端的Socket对象
+    - 创建数据并打包
+    - 发送数据
+    - 释放资源
+  - UDP协议接收数据的步骤
+    - 创建接收端的Socket对象
+    - 接收数据
+    - 解析数据
+    - 输出数据
+    - 释放资源
+
+- ### DategramSocket类
+
+
+- ### DategramPacket类
+
+- ### UDP收发数据的代码示例
+  - 发送端
+    - 
+  - 接收端 
+    -  
+
+
+- ### UDP收发数据的注意事项
+  - 需要先启动接收端，再启动发送端
+    - 接收端卡在此条语句：
+  - 
+
+
 
 
 
@@ -128,12 +227,27 @@
 
 
 
-##
+## TCP协议收发数据
+- ### TCP协议发送数据
+  - 
+
+- ### TCP协议接收数据
+  - 
+
+
+- ### TCP收发数据的注意事项
+  - 
+
+
 
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
 <!--GFM-TOC -->
+
+
+
+
 
 
 
