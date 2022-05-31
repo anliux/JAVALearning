@@ -5,10 +5,10 @@
 
 <!--GFM-TOC -->
 * [网络编程概述](#网络编程概述): 计算机网络, 网络编程, Socket套接字, 网络编程三要素(IP, 端口号, 传输协议), UDP与TCP协议 
-* [InetAddress](#inetaddress): 
-* [](#): 
-* [](#): 
-* [](#): 
+* [InetAddress](#inetaddress): InetAddress概述, InetAddress常用方法 (getAllByName, getByName, getHostAddress, getHostName, getLocalHost)
+* [UDP协议收发数据](#UDP协议收发数据): UDP收发数据的特点和步骤, DatagramSocket类, DatagramPacket类, UDP收发数据的代码示例, 注意事项
+* [TCP协议收发数据](#TCP协议收发数据): TCP收发数据的特点和步骤, Socket类, ServerSocket类, TCP收发数据的代码示例, TCP收发数据并返回的案例分析
+* [模拟用户登录](#模拟用户登录): 题目, 收发步骤, 收发代码示例, 改进(更加面向对象 + 数据库思想)
 <!--GFM-TOC -->
 
 
@@ -21,7 +21,8 @@
 
 - ### 网络编程
   - 就是用来实现网络互连的不同计算机上运行的程序间可以进行数据交换
-  - 又称Socket编程或套接字编程
+    - 又称Socket编程或套接字编程
+  - 网络编程的底层：IO流
 
 - ### Socket(套接字)  
   - 用于描述IP地址和端口，是一个通信链的句柄。
@@ -97,6 +98,8 @@
     - 建立连接后，通过Socket中的IO流进行数据的传输
     - 关闭socket
     - 同样，客户端与服务器端是两个独立的应用程序
+    - 注：
+      - TCP协议中的数据传输管道：指IO流 
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -104,7 +107,7 @@
 
 
 
-## InetAddress
+## InetAddress 
 - ### InetAddress概述
   - 此类表示互联网协议 (IP) 地址。
     - IP 地址是 IP 使用的 32 位或 128 位无符号数字，它是一种低级协议，UDP 和 TCP 协议都是在它的基础上构建的
@@ -114,7 +117,7 @@
   - 无构造方法：静态调用或子类实现
 
 - ### InetAddress常用方法
-  - `static InetAddress[]	getAllByName(String host)`: 
+  - `static InetAddress[] getAllByName(String host)`: 
     - 静态，类名调用
     - 在给定主机名的情况下，根据系统上配置的名称服务返回其 IP 地址所组成的数组。
     - 返回数组：是因为主机名不唯一，可能返回多个IP地址
@@ -144,6 +147,7 @@
     - 非静态，对象调用
     - 返回 IP 地址字符串（以文本表现形式）
     - 代码示例：getByName传入的参数不同，获取到的结果都是IP地址
+      - getByName(主机名)或getByName(IP地址)：getHostAddress()获取到的都是IP地址
     ```java
     InetAddress address = InetAddress.getByName("Mac_liuxuan"); 
     String hostAddress = address.getHostAddress();//192.168.0.106`    
@@ -157,8 +161,8 @@
     - 非静态，对象调用
     - 获取此 IP 地址的主机名
     - 代码示例：getByName传入的参数不同，获取到的结果不同
-      - getByName(主机名)：获取主机名
-      - getByName(主机名)：仍然获取IP地址
+      - getByName(主机名)：getHostName()获取主机名
+      - getByName(IP地址)：getHostName()仍然获取IP地址
     ```java
     InetAddress address = InetAddress.getByName("Mac_liuxuan"); 
     String hostName = address.getHostName();//Mac_liuxuan
@@ -184,7 +188,7 @@
 
 
 ## UDP协议收发数据
-- ### UDP协议收发数据分析
+- ### UDP协议收发数据分析 
   - 回顾UDP协议收发数据的特点：
     - 打包发送数据：将数据和地址、长度、端口都打包到一起
     - 不建立连接，只管发送，不管是否收到
@@ -340,7 +344,7 @@
 - ### TCP协议收发数据分析
   - 回顾TCP协议收发数据的特点：
     - 必须建立连接，形成传输数据的通道；
-    - 在连接中进行大数据量传输；
+    - 在连接中进行大数据量传输: 没有大小限制了
     - 通过三次握手完成连接
   - TCP协议发送数据的步骤(客户端)
     - 创建发送端Socket对象（创建连接）
@@ -355,15 +359,173 @@
     - 输出数据
     - 释放资源
 
-- ### TCP协议接收数据
-  - 
+- ### Socket类
+  - java.net.Socket包下
+  - 此类实现客户端套接字（也可以就叫“套接字”）。
+    - 套接字是两台机器间通信的端点。
+  - 构造方法：`Socket(InetAddress address, int port)` 
+    - 创建一个流套接字并将其连接到指定 IP 地址的指定端口号。
+    - 是所需的构造方法和参数
 
+- ### ServerSocket类
+  - java.net.ServerSocket包
+  - 此类实现服务器套接字，可用于TCP接收端
+    - 服务器套接字等待请求通过网络传入。它基于该请求执行某些操作，然后可能向请求者返回结果。
+  - 构造方法：`ServerSocket(int port)` 
+    - 创建绑定到特定端口的服务器套接字。
+    - 这个有参构造适用于TCP接收端
+  - `Socket accept()`:
+    - 侦听并接受到此套接字的连接。
+    - 由于需要操作输入流输出流，而ServerSocket并没有相关的方法，因此需要先获取到Socket
 
-- ### TCP收发数据的注意事项
-  - 
+- ### TCP协议收发数据代码
+  - 发送端/客户端
+      ```java
+  	//ClientDemo.java
+	import java.io.IOException;
+	import java.io.OutputStream;
+	import java.net.InetAddress;
+	import java.net.Socket;
 
+	public class ClientDemo {
+		public static void main(String[] args) throws IOException{
+			//发送数据
+			//创建发送端Socket对象（创建连接）
+			Socket s = new Socket(InetAddress.getByName("Mac_liuxuan"),9999);
+			//获取输出流对象: 需要一个可以传送任意类型数据的IO流
+			OutputStream os = s.getOutputStream();
+			//发送数据
+			String str = "hello TCP, im coming";
+			os.write(str.getBytes());
+			//释放资源
+			os.close();//这条不关也可，s.close()会帮助做这条
+			s.close();
 
+			//没有连接到接收端时报错：
+			//java.net.ConnectException: Connection refused
+		}
+	}  
+      ```
+  - 接收端/服务端
+      ```java
+	//ServerDemo.java
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.net.InetAddress;
+	import java.net.ServerSocket;
+	import java.net.Socket;
 
+	public class ServerDemo {
+		public static void main(String[] args) throws IOException {
+			//接收数据
+			//创建接收端Socket对象(等待连接)
+			ServerSocket ss = new ServerSocket(9999);
+			//监听(阻塞)
+			Socket s = ss.accept();
+			//获取输入流对象
+			InputStream is = s.getInputStream();
+			//获取数据
+			byte[] bys = new byte[1024];
+			int len;//用于存储读到的字节个数
+			len = is.read(bys);
+			//输出数据
+			InetAddress address = s.getInetAddress();
+			System.out.println("client:" + address.getHostName());//192.168.0.106 - 似乎应该返回主机名但仍是IP地址
+			System.out.println(new String(bys,0,len));//hello TCP, im coming
+			//释放资源
+			s.close();
+			ss.close();//服务端可以不关
+		}
+	}  
+      ```
+
+- ### TCP收发数据并返回的案例分析
+  - 题目：
+    - 使用TCP协议发送数据，并将接收的数据转换成大写返回 
+  - 步骤：
+    - 客户端发出数据；
+    - 服务端接收数据；
+    - 服务端转换数据；
+    - 服务端发出数据；
+    - 客户端接收数据 
+  - 注意：
+    - 客户端和服务端交换功能以后，步骤仍是相似的
+    - 代码运行之后：
+      - 客户端(发送端)的控制台也会输出一条接收到的数据 
+  - 代码示例：
+    - 发送端/客户端代码：
+    ```java
+	//ClientDemo.java
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.io.OutputStream;
+	import java.net.InetAddress;
+	import java.net.Socket;
+
+	public class ClientDemo {
+		public static void main(String[] args) throws IOException{
+			//创建发送端Socket对象
+			Socket s = new Socket(InetAddress.getByName("Mac_liuxuan"),9999);
+			//获取输出流对象
+			OutputStream os = s.getOutputStream();
+			//发送数据
+			os.write("tcp, im coming again!!".getBytes());
+
+			//接收返回的大写数据: 与接收端接收数据的步骤相同
+			//获取输入流对象
+			InputStream is = s.getInputStream();
+			byte[] bys = new byte[1024];//接收数据
+			int len;//存储读取到的字节个数
+			//获取数据
+			len = is.read(bys);
+
+			//输出数据
+			System.out.println(new String(bys,0,len));//TCP, IM COMING AGAIN!!
+
+			//释放资源
+			s.close();
+		}
+	}    
+    ```
+    - 接收端/服务端代码：
+    ```java
+	//ServerDemo.java
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.io.OutputStream;
+	import java.net.ServerSocket;
+	import java.net.Socket;
+
+	public class ServerDemo {
+		public static void main(String[] args) throws IOException {
+			//创建接收端Socket对象
+			ServerSocket ss = new ServerSocket(9999);
+			//监听
+			Socket s = ss.accept();
+			//获取输入流对象
+			InputStream is = s.getInputStream();
+			//获取数据
+			byte[] bys = new byte[1024];
+			int len;
+			len = is.read(bys);
+			String str = new String(bys,0,len);
+			//输出数据
+			System.out.println(str);//tcp, im coming again!!
+
+			//转换数据
+			String upperStr = str.toUpperCase();//s中的内容转换为大写
+
+			//获取输出流对象：传输数据是通过IO流
+			OutputStream os = s.getOutputStream();
+			//返回数据(即发出数据)
+			os.write(upperStr.getBytes());
+
+			//释放资源
+			s.close();
+			ss.close();//服务端一般不关闭
+		}
+	}    
+    ```
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -371,7 +533,219 @@
 
 
 
+## 模拟用户登录
+- ### 题目：
+  - 模拟用户登录
 
+- ### 收发的步骤
+  - 客户端/发送端的步骤：
+    - 创建客户端Socket对象
+    - 获取用户名和密码
+    - 写出数据
+    - 获取输入流对象
+    - 获取服务器返回的数据
+    - 释放资源
+  - 服务端/接收端的步骤： 
+    - 创建服务器端Socket对象
+    - 监听
+    - 获取输入流对象
+    - 获取用户名和密码
+    - 判断用户名和密码是否正确
+    - 返回判断信息
+    - 释放资源 
+
+- ### 收发代码示例：
+  - 客户端/发送端代码：
+      ```java
+	//ClientTest.java
+	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.io.PrintWriter;
+	import java.net.Socket;
+
+	public class ClientTest {
+		public static void main(String[] args) throws IOException{
+			//创面客户端Socket对象
+			//Socket s = new Socket(InetAddress(),8888);
+			Socket s = new Socket("Mac_liuxuan",8888);//查看底层代码可知，直接传入主机名也可，会自动传入上一行代码所示InetAddress()中
+
+			//获取用户名和密码：使用输入流
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));//标准格式，可以记下来直接用
+			System.out.println("请输入用户名：");
+			String username = br.readLine();
+			System.out.println("请输入密码：");
+			String password = br.readLine();
+
+			//获取输出流对象
+			//BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+			//嫌麻烦的话，下述打印流可以直接打印数据，且可以换行
+			PrintWriter out = new PrintWriter(s.getOutputStream(),true);//参数true表示自动换行
+			//写出数据
+			out.println(username);
+			out.println(password);
+
+			//获取输入流对象
+			BufferedReader serverBr = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			//获取服务器返回的数据
+			String result = serverBr.readLine();
+			System.out.println(result);
+			//释放资源
+			s.close();
+			/*
+				请输入用户名：
+				admin
+				请输入密码：
+				123456
+				登录失败
+
+				请输入用户名：
+				itheima
+				请输入密码：
+				123456
+				登录成功
+			 * */
+		}
+	}  
+      ```
+  - 服务端/接收端代码：
+      ```java
+	//ServerTest.java
+	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.io.PrintWriter;
+	import java.net.ServerSocket;
+	import java.net.Socket;
+
+	public class ServerTest {
+		public static void main(String[] args) throws IOException {
+			//创建服务器端Socket对象
+			ServerSocket ss = new ServerSocket(8888);
+			//监听
+			Socket s = ss.accept();
+			//获取输入流对象
+			BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			//获取用户名和密码
+			String username = br.readLine();
+			String password = br.readLine();
+			//判断用户名和密码是否正确
+			boolean flag = false;
+			if("itheima".equals(username) && "123456".equals(password)) {
+				flag = true;
+			}
+			//获取输出流对象
+			PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+
+			//返回判断信息
+			if(flag) {
+				out.println("登录成功");
+			}else {
+				out.println("登录失败");
+			}
+
+			//释放资源
+			s.close();
+			//ss.close();//服务器端不关闭，你不用别人可能还要用
+		}
+	}  
+      ```
+
+- ### 改进
+  - 上述代码中，对正确的用户名和密码进行了写死，不符合实际需求。
+  - 改进：
+    - 加入数据库思想，另建User类和UserDB类，放入若干用户名和密码 
+  - User类：
+      ```java
+	public class User {
+		private String username;//用户名
+		private String password;//密码
+		public User() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		public User(String username, String password) {
+			super();
+			this.username = username;
+			this.password = password;
+		}
+		public String getUsername() {
+			return username;
+		}
+		public void setUsername(String username) {
+			this.username = username;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			User other = (User) obj;
+			if (password == null) {
+				if (other.password != null)
+					return false;
+			} else if (!password.equals(other.password))
+				return false;
+			if (username == null) {
+				if (other.username != null)
+					return false;
+			} else if (!username.equals(other.username))
+				return false;
+			return true;
+		}
+	}  
+      ```
+  - UserDB类：
+      ```java
+	import java.util.ArrayList;
+	import java.util.List;
+
+	public class UserDB {
+		private static List<User> users = new ArrayList<User>();//因为要用下面的静态代码块初始化，这里也定义为static
+
+		static {//在类加载时初始化
+			users.add(new User("zhangsan","123456"));
+			users.add(new User("lisi","888888"));
+			users.add(new User("itheima","123456"));
+			users.add(new User("admin","password"));
+
+		}
+
+		public static List<User> getUsers(){
+			return users;
+		}
+	}  
+      ```
+  - ServerSocket改进代码：
+      ```java
+	/*
+	if("itheima".equals(username) && "123456".equals(password)) {//写死的用户名和密码
+		flag = true;
+	}*/
+
+	//改进代码：
+	List<User> users = UserDB.getUsers();
+	User user = new User(username, password);
+	if(users.contains(user)) {//查看contains方法的实现源码发现涉及equals，需要重写此equals()方法
+				//ctrl+contains -- implement -- ArrayList -- ..
+		//匹配成功
+		flag = true;
+	}  
+      ```
+
+<!--GFM-TOC -->
+* ### [返回目录](#目录)
+<!--GFM-TOC -->
 
 
 
