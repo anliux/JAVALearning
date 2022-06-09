@@ -15,7 +15,7 @@
 - [Git的图形化工具：SourceTree](#git的图形化工具sourcetree)
 - [Git流管理](#git流管理)
 - [常用命令](#常用命令)
-- [参考教程推荐](#参考教程推荐)
+- [参考链接](#参考链接)
 <!--GFM-TOC -->
 
 
@@ -560,9 +560,10 @@
 
 
 
-## 参考教程推荐：
+## 参考链接：
 - [廖雪峰：Git教程](https://www.liaoxuefeng.com/wiki/896043488029600)
 - [远古学习笔记](https://www.cnblogs.com/anliux/p/9825219.html)
+- [博客笔记：Git小结 (Mac版)](https://www.cnblogs.com/anliux/p/16343061.html)：同本文
 
 <!--GFM-TOC -->
 ### [返回目录](#目录)
