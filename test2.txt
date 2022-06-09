@@ -1,6 +1,0 @@
-test vim new file
-master branch test
-dev branch test
-no ff test
-ff test now
-no ff test again
