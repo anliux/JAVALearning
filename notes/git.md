@@ -15,6 +15,7 @@
 - [Git的图形化工具：SourceTree](#git的图形化工具sourcetree)
 - [Git流管理](#git流管理)
 - [常用命令](#常用命令)
+- [常见问题](#常见问题)
 - [参考链接](#参考链接)
 <!--GFM-TOC -->
 
@@ -559,6 +560,22 @@
 <!--GFM-TOC -->
 
 
+   
+## 常见问题：
+#### 1. 如果在远程库添加了文件A，然后在本地删除了文件B，现在想同步远程和本地，如何操作
+- 此时，远程库和本地不同步，先同步
+- 1. 首先本地pull远程库，把远程库添加的文件A同步到本地：
+   - 此时status：会显示远程库添加和修改的文件，并且本地删除而远程库还在的文件B仍是删除状态；
+- 2. 本地查看status：会显示有删除文件，并且会提示可以add/rm或restore，此时add/rm，并commit
+- 3. 此时本地status：干净，无修改文件
+- 4. push修改到远程库：可以`git push origin master`等
+- 5. 此时再次查看status：working tree clean
+
+<!--GFM-TOC -->
+### [返回目录](#目录)
+<!--GFM-TOC -->
+
+   
 
 ## 参考链接：
 - [廖雪峰：Git教程](https://www.liaoxuefeng.com/wiki/896043488029600)
