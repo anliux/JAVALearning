@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="../04-网站首页/网站首页.html">
+			<!-- 文本输入框 -->
+			姓名：<input type="text" name="username" placeholder="请输入用户名"/><br />
+			<!-- 密码框 -->
+			密码：<input type="password"/><br />
+			确认密码：<input type="password"/><br />
+			邮箱：<input type="text"/><br />
+			手机号码：<input type="text"/><br />
+			<!-- 上传文件 -->
+			照片：<input type="file"/><br />
+			<!-- 单选框: 不加name可多选，要想单选，需name相同为一组 -->
+			性别：
+				<input type="radio" name="sex"/>男
+				<input type="radio" name="sex"/>女
+				<br />
+			<!-- 复选框 -->
+			爱好：
+				<input type="checkbox"/>敲代码
+				<input type="checkbox"/>滑雪
+				<input type="checkbox"/>宅在家
+				<input type="checkbox"/>蹦迪
+			<br />
+			<!-- 文本框 -->
+			自我介绍：
+				<textarea cols="40" rows="4"></textarea>
+				<br />
+			<!-- 下拉 -->
+			籍贯：
+				<select>
+					<option>---请选择---</option>
+					<option>北京</option>
+					<option>上海</option>
+					<option>河北</option>
+					<option>火星</option>
+				</select>
+				<br />
+			出生日期：
+				<input type="datetime-local"/><br />
+			验证码：<input type="text"/><br />
+			
+			<!-- 提交 -->
+			<input type="submit" value="注册"/><!--不指定value则默认为提交等，不同浏览器解析不同-->
+			<input type="button" value="普通按钮"/>
+			<input type="reset" value="重置按钮"/>
+		</form>	
+	</body>
+</html>

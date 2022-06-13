@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!-- 
+		 步骤分析
+		 1. logo部分
+		 2. 导航栏
+		 3. 注册部分
+		 4. 页脚图片
+		 5. 网站声明信息
+		 -->
+		<table width="100%">
+		<!-- 注：可显示表格边框，调整大小位置等，最后去掉边框 -->
+			<!-- 1. logo部分 -->
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td>
+								<img src="../img/logo2.png"/>
+							</td>
+							<td>
+								<img src="../img/header.jpg"/>
+							</td>
+							<td>
+								<a href="#">登录</a>
+								<a href="#">注册</a>
+								<a href="#">购物车</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- 2. 导航栏 -->
+			<tr bgcolor="black">
+				<td>
+					<a href="#"><font color="white">首页</font></a>
+					<a href="#"><font color="white">手机数码</font></a>
+					<a href="#"><font color="white">电脑办公</font></a>
+					<a href="#"><font color="white">鞋靴箱包</font></a>
+					<a href="#"><font color="white">米面粮油</font></a>
+				</td>
+			</tr>
+			<!-- 3. 注册部分: 重点！ 
+			- 背景图片：backgroud=".../xx.jpg", 表格大小不会随着插入的图片改变，因此根据图片的实际大小手动调整单元格宽高
+			- 注册表的表格：10行2列，居中，需要在背景表格里再次内嵌一个表格，方便后续操作
+				- 否则：边框和对齐方式的调整会有问题，背景有边框而注册信息的表格没边框是最大的问题
+			- 表头的“用户注册”是蓝色的字体，并大于默认的3号字号
+			- 注册表信息：有placeholder信息的需要写入
+			-->
+			<tr>
+				<td background="../img/regist_bg.jpg" height="600px">
+				<!--整个单元格视为背景的范围-->
+					<table border="6px" width="60%" height="80%" align="center" bgcolor="white">
+					<!-- 居中的较小注册表范围视为带背景图的单元格中内嵌的表格，并划分行列写注册表的内容 -->
+						<tr>
+							<td>
+								<table width="70%" align="center"><!-- 新建一个控制注册信息的表格，方便操作 -->
+									<tr>
+										<td colspan="2"><font color="blue" size="5">会员注册</font> USER REGISTER</td>
+									</tr>
+									<tr>
+										<td>用户名</td>
+										<td><input type="text" placeholder="请输入用户名"/></td>
+									</tr>
+									<tr>
+										<td>密码</td>
+										<td><input type="password" placeholder="请输入密码"/></td>
+									</tr>
+									<tr>
+										<td>确认密码</td>
+										<td><input type="password" placeholder="请输入确认密码"/></td>
+									</tr>
+									<tr>
+										<td>Email</td>
+										<td><input type="email" placeholder="Email"/></td>
+									</tr>
+									<tr>
+										<td>姓名</td>
+										<td><input type="text" placeholder="请输入姓名"/></td>
+									</tr>
+									<tr>
+										<td>性别</td>
+										<td><input type="radio" name="sex"/>男<input type="radio" name="sex"/>女</td>
+									</tr>
+									<tr>
+										<td>出生日期</td>
+										<td><input type="date"/></td>
+									</tr>
+									<tr>
+										<td>验证码</td>
+										<td><input type="text"/></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="submit" value="注册"/></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- 4. 页脚图片 -->
+			<tr>
+				<td>
+					<img src="../img/footer.jpg"/ width="100%">
+				</td>
+			</tr>
+			<!-- 5. 网站声明信息 -->
+			<tr>
+				<td align="center">
+					<a href="#">关于我们</a>
+					<a href="#">联系我们</a>
+					<a href="#">法律声明</a>
+					<a href="#">支付方式</a>
+					<a href="#">关于我们</a>
+					<a href="#">联系我们</a>
+					<a href="#">法律声明</a>
+					<a href="#">配送方式</a>
+					<a href="#">广告声明</a><br />
+					Copyright © 2005-2016 传智商城 版权所有
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

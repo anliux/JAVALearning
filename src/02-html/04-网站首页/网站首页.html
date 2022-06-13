@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网站首页-静态</title>
+	</head>
+	
+	<body>
+		<!-- 
+		1. 创建一个8行一列的表格
+		2. 第一部份: LOGO部分: 嵌套一个一行三列的表格
+		3. 第二部分: 导航栏部分 : 放置5个超链接
+		4. 第三部分: 轮播图 
+		5. 第四部分: 嵌套一个三行7列表格
+		6. 第五部分: 直接放一张图片
+		7. 第六部分: 抄第四部分的
+		8. 第七部分: 放置一张图片
+		9. 第八部分: 放一堆超链接
+		最后：检查网页，去掉表格边框等不必要信息(整体,1 4 6)
+		-->
+		<table width="100%">
+			<!-- 第一部份: LOGO部分: 嵌套一个一行三列的表格 -->
+			<!-- 
+			 - 需要在td内重新内嵌表格，而不是改变最外层表格的结构，否则下面都会受影响
+			 - 最外层和第一层表格的width都可设置为100%
+			 - 三列分别填充图片、图片和超链接 (超链接暂时指向#)
+			 -->
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td><img src="../img/logo2.png"/></td>
+							<td><img src="../img/header.jpg"/></td>
+							<td>
+								<a href="#">登录</a>
+								<a href="#">注册</a>
+								<a href="#">购物车</a>								
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- 第二部分: 导航栏部分 : 放置5个超链接 -->
+			<!-- 
+			 - 这一行的表格底色是黑色(bgcolor)，只有单行单列，在tr/td设置均可
+			 - 超链接文本字体可设为白色(font color)
+			 - 这行的高度可以设置更高一些，太挤了 (height="50px")
+			 -->
+			<tr bgcolor="black" height="50px">
+				<td>
+					<a href="#"><font color="white">首页</font></a>
+					<a href="#"><font color="white">手机数码</font></a>
+					<a href="#"><font color="white">电脑办公</font></a>
+					<a href="#"><font color="white">香烟酒水</font></a>
+					<a href="#"><font color="white">鞋靴箱包</font></a>					
+				</td>
+			</tr>
+			<!-- 第三部分: 轮播图 -->
+			<!-- 
+			 - 静态网页，先直接贴图
+			 - 图片大小和表格不太一致的问题：width="100%"
+			 -->
+			<tr>
+				<td>
+					<img src="../img/part3.jpg" width="100%"/>
+				</td>
+			</tr>
+			<!-- 第四部分: 嵌套一个三行7列表格 -->
+			<!-- 
+			 - 首先调整表格，实现需求的合并格式
+			 - 第一行：header似乎是自带换行，因此需要把图片写在header文本的位置，才能显示在同一行 
+			 - 贴大图：
+			   左侧大图：按图片大小设置单元格的宽高，否则会把单元格撑很大(注意是单元格宽高，不是图片宽高)
+			   中间长图：默认给的单元格太大，宽可以先放后面的小图后调整，高可以设置为此图的高度,宽可以(图片)100%
+			 - 同一行既有大图又有小图：可以先把图片放入单元格，然后让小图居中，大图填充为(图片)100%，略拉伸
+			   - 大图拉伸填充：宽和高都设为100% ，否则还是会变形
+			 - 小图：小三行，一行放图片，后两行p标签，价格需要给font标签红色字体
+			 -->
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td colspan="7">
+								<h3>最新商品<img src="../img/title2.jpg" /></h3> 
+							</td>
+						</tr>
+						<tr align="center">
+							<td rowspan="2" width="206px" height="480px">
+								<img src="../img/big01.jpg" />
+							</td>
+							<td colspan="3" height="240px">
+								<img src="../img/middle01.jpg" width="100%" height="100%"/>
+							</td>
+							<td>
+								<img src="../img/small01.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small02.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small03.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<img src="../img/small04.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small05.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small06.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small07.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small08.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small09.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- 第五部分: 直接放一张图片 -->
+			<!-- 
+			 - 图片没有填满单元格，可以拉伸一下width 100%
+			 -->
+			<tr>
+				<td>
+					<img src="../img/ad.jpg" width="100%"/>
+				</td>
+			</tr>
+			<!-- 第六部分: 抄第四部分的 -->
+			<!-- 
+			- 直接复制第四部分
+			- 第一行："最新商品”修改为"热门商品"
+			 -->
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td colspan="7">
+								<h3>热门商品<img src="../img/title2.jpg" /></h3> 
+							</td>
+						</tr>
+						<tr align="center">
+							<td rowspan="2" width="206px" height="480px">
+								<img src="../img/big01.jpg" />
+							</td>
+							<td colspan="3" height="240px">
+								<img src="../img/middle01.jpg" width="100%" height="100%"/>
+							</td>
+							<td>
+								<img src="../img/small01.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small02.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small03.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<img src="../img/small04.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small05.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small06.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small07.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small08.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+							<td>
+								<img src="../img/small09.jpg"/>
+								<p>冬瓜</p>
+								<p><font color="red">￥299</font></p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- 第七部分: 放置一张图片 -->
+			<!-- 
+			 - 图片没有填满单元格，可以拉伸一下width 100%
+			 -->
+			<tr>
+				<td>
+					<img src="../img/footer.jpg"/ width="100%">
+				</td>
+			</tr>
+			<!-- 第八部分: 放一堆超链接 -->
+			<!-- 
+			 - 友情链接：超链接，不加换行
+			 - 版权信息：是文字，直接粘过来
+			 - 友情链接和版权分两行，中间加入换行
+			 - 两行都居中
+			 -->
+			<tr align="center">
+				<td>
+					<a href="#">关于我们</a>
+					<a href="#">联系我们</a>
+					<a href="#">招贤纳士</a>
+					<a href="#">法律声明</a>
+					<a href="#">友情链接</a>
+					<a href="#">支付方式</a>
+					<a href="#">配送方式</a>
+					<a href="#">广告声明</a>
+					<a href="#">联系我们</a>
+					<br />
+					Copyright © 2005-2016 传智商城 版权所有
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
