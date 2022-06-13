@@ -10,7 +10,7 @@
 - [网站注册页面](#网站注册页面): 表单标签form, 跳转方式get/post, input的type参数, 背景图片插入等
 - [网站后台页面展示](#网站后台页面展示): 框架标签frameset, frame常用属性, 框架中点击跳转的实现
 - [内容回顾](#内容回顾): 简单回顾涉及到的标签
-- [参考链接](#参考链接): 菜鸟HBuilder和HTML；w3school
+- [参考链接](#参考链接): 菜鸟HBuilder和HTML, w3school
 <!--GFM-TOC -->
 
 
