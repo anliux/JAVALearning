@@ -3,14 +3,14 @@
 ## 目录
 <!--GFM-TOC -->
 - [案例导航](#案例导航): 汇总所有案例
-- [网站信息页面](#网站信息页面): HTML概述, HTML语法规范, HBuilder, 需求分析, 代码实现
+- [网站信息页面](#网站信息页面): HTML概述, HTML语法规范, HBuilderX, 需求分析, 代码实现
 - [网站图片信息页面](#网站图片信息页面): img标签, 文件路径, 代码实现
 - [网站友情链接页面](#网站友情链接页面): 列表标签ul/ol, 超链接标签a, 代码实现
 - [网站首页](#网站首页): 表格标签table, 合并单元格, 表格嵌套, 网站首页实现思路分析(以表格划分后分步填充实现)
 - [网站注册页面](#网站注册页面): 表单标签form, 跳转方式get/post, input的type参数, 背景图片插入等
 - [网站后台页面展示](#网站后台页面展示): 框架标签frameset, frame常用属性, 框架中点击跳转的实现
 - [内容回顾](#内容回顾): 简单回顾涉及到的标签
-- [参考链接](#参考链接): 菜鸟HBuilder和HTML, w3school
+- [参考链接](#参考链接): 菜鸟HBuilderX和HTML, w3school
 <!--GFM-TOC -->
 
 
@@ -81,11 +81,11 @@
 
 - ### HBuilderX
   - #### 简介
-    - HBuilder是DCloud（数字天堂）推出的一款支持HTML5的Web开发IDE。 
-    - HBuilder的编写用到了Java、C、Web和Ruby。
-    - HBuilder本身主体是由Java编写。它基于Eclipse，所以顺其自然地兼容了Eclipse的插件
+    - HBuilderX是DCloud（数字天堂）推出的一款支持HTML5的Web开发IDE。 
+    - HBuilderX的编写用到了Java、C、Web和Ruby。
+    - HBuilderX本身主体是由Java编写。它基于Eclipse，所以顺其自然地兼容了Eclipse的插件
     - 是HTML5的常用编辑工具
-    - HBuilder: 官网下载即可
+    - HBuilderX: 官网下载即可
     - 学习参考链接: [菜鸟教程：HBuilderX 使用教程](https://www.runoob.com/w3cnote/hbuilder-intro.html)
   - #### 使用
     - 文件 -- 新建 -- web项目, 或新建 -- 项目 -- 基本的HTML项目(包含初始css,js,img等文件)
@@ -896,7 +896,7 @@
 
 
 ## 参考链接
-- [菜鸟教程：HBuilder的使用](https://www.runoob.com/w3cnote/hbuilder-intro.html)
+- [菜鸟教程：HBuilderX的使用](https://www.runoob.com/w3cnote/hbuilder-intro.html)
 - [菜鸟教程：HTML](https://www.runoob.com/html/html-tutorial.html)
 - [w3school](https://www.w3school.com.cn/)
 
