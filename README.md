@@ -8,7 +8,7 @@
 - [Git使用小结 (Mac版)](https://github.com/anliux/JAVALearning/blob/master/notes/git.md)
 - [Linux常用命令小结..待整理]
 - [软件工程小结..待整理]
-- [软件测试小结..待整理](https://github.com/anliux/JAVALearning/blob/master/notes/softwareTest.md)
+- [软件测试小结](https://github.com/anliux/JAVALearning/blob/master/notes/softwareTest.md)
 
 ### 01-Java基础
 - [Java介绍](https://github.com/anliux/JAVALearning/blob/master/notes/01-java-base/Java%E4%BB%8B%E7%BB%8D.md)
