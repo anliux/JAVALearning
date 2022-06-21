@@ -93,6 +93,7 @@
     - 运行: 在默认浏览器运行，快捷键ctrl+R
     - 注：之前好像运行才会更新到浏览器显示，现版本保存后会自动更新显示到浏览器
   - #### 常用的快捷键
+    - 参考：[菜鸟教程：HTML常用快捷键 win & mac](https://www.runoob.com/tags/html-keyboardshortcuts.html) 
     ```html
     Ctrl + R  					运行当前网页/刷新当前网页
     Ctrl + Shift + /            注释当前行
