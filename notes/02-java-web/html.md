@@ -162,7 +162,7 @@
   ```
 
 - ### 代码链接
-  - [网站信息页面.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/01-%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E9%A1%B5%E9%9D%A2/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E9%A1%B5%E9%9D%A2.html)
+  - [网站信息页面.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/01-%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E9%A1%B5%E9%9D%A2/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E9%A1%B5%E9%9D%A2.html)
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -232,7 +232,7 @@
     ```
 
 - ### 代码链接
-  - [图片demo.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/02-%E7%BD%91%E9%A1%B5%E5%9B%BE%E7%89%87%E4%BF%A1%E6%81%AF/%E5%9B%BE%E7%89%87demo.html)
+  - [图片demo.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/02-%E7%BD%91%E9%A1%B5%E5%9B%BE%E7%89%87%E4%BF%A1%E6%81%AF/%E5%9B%BE%E7%89%87demo.html)
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -297,7 +297,7 @@
     ```
 
 - ### 代码链接
-  - [demo.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/03-%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/demo.html): 列表标签和超链接标签
+  - [demo.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/03-%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/demo.html): 列表标签和超链接标签
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -581,8 +581,8 @@
     ```
 
 - ### 代码链接
-  - [表格标签.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/04-%E7%BD%91%E7%AB%99%E9%A6%96%E9%A1%B5/%E8%A1%A8%E6%A0%BC%E6%A0%87%E7%AD%BE.html)
-  - [网站首页.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/04-%E7%BD%91%E7%AB%99%E9%A6%96%E9%A1%B5/%E7%BD%91%E7%AB%99%E9%A6%96%E9%A1%B5.html)
+  - [表格标签.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/04-%E7%BD%91%E7%AB%99%E9%A6%96%E9%A1%B5/%E8%A1%A8%E6%A0%BC%E6%A0%87%E7%AD%BE.html)
+  - [网站首页.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/04-%E7%BD%91%E7%AB%99%E9%A6%96%E9%A1%B5/%E7%BD%91%E7%AB%99%E9%A6%96%E9%A1%B5.html)
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -708,8 +708,8 @@
     ```
 
 - ### 代码链接
-  - [表单demo.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/05-%E7%BD%91%E7%AB%99%E6%B3%A8%E5%86%8C%E6%A1%88%E4%BE%8B/%E8%A1%A8%E5%8D%95demo.html)
-  - [网站注册案例.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/05-%E7%BD%91%E7%AB%99%E6%B3%A8%E5%86%8C%E6%A1%88%E4%BE%8B/%E7%BD%91%E7%AB%99%E6%B3%A8%E5%86%8C%E6%A1%88%E4%BE%8B.html)
+  - [表单demo.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/05-%E7%BD%91%E7%AB%99%E6%B3%A8%E5%86%8C%E6%A1%88%E4%BE%8B/%E8%A1%A8%E5%8D%95demo.html)
+  - [网站注册案例.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/05-%E7%BD%91%E7%AB%99%E6%B3%A8%E5%86%8C%E6%A1%88%E4%BE%8B/%E7%BD%91%E7%AB%99%E6%B3%A8%E5%86%8C%E6%A1%88%E4%BE%8B.html)
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
@@ -794,8 +794,8 @@
     ```
 
 - ### 代码链接
-  - [框架标签.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/06-%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E9%A1%B5%E9%9D%A2/%E6%A1%86%E6%9E%B6%E6%A0%87%E7%AD%BE.html)
-  - [网站后台.html](https://github.com/anliux/JAVALearning/blob/master/src/02-html/06-%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E9%A1%B5%E9%9D%A2/%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0.html): 涉及到的其他文件在相同路径下
+  - [框架标签.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/06-%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E9%A1%B5%E9%9D%A2/%E6%A1%86%E6%9E%B6%E6%A0%87%E7%AD%BE.html)
+  - [网站后台.html](https://github.com/anliux/JAVALearning/blob/master/src/Java-web/01-html/06-%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E9%A1%B5%E9%9D%A2/%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0.html): 涉及到的其他文件在相同路径下
 
 <!--GFM-TOC -->
 * ### [返回目录](#目录)
