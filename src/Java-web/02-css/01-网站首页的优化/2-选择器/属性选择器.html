@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			a[title]{
+				color: red;
+			}
+			a[href]{
+				color: green;
+			}/*就近：href更近，优先变绿*/
+			a[title='bbb']{
+				color: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<a>第1段</a>
+		<a title="aaa">第2段</a>
+		<a title="aaa" href="#">第3段aaa</a>
+		<a title="bbb" href="#">第3段bbb</a>
+		<a href="#">第4段</a>
+	</body>
+</html>

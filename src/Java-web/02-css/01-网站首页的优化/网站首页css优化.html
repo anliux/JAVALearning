@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.logo{
+				float: left;
+				width: 33%;
+				height: 60px;
+				/* border-style: solid;
+				border-width: 1px;
+				border-color: red; */
+				/* border: 1px red solid; */
+				line-height: 60px;
+			}
+			
+			.amenu{
+				color: white;
+				text-decoration: none;<!--去掉下划线：文字装饰为none-->
+				height: 50px;
+				line-height: 50px;
+			}
+			
+			.product{
+				width: 16.4%; 
+				height: 240px; 
+				float: left; 
+				text-align: center; 
+				/* border: 1px solid orange; */
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 
+		 1. 创一个最外层div: 用div块代替之前的表格
+		 2. 第一部份: LOGO部分: 嵌套三个div
+		 3. 第二部分: 导航栏部分 : 放置5个超链接
+		 4. 第三部分: 轮播图 
+		 5. 第四部分: 原三行7列商品图
+		 6. 第五部分: 直接放一张图片
+		 7. 第六部分: 抄第四部分的
+		 8. 第七部分: 放置一张图片
+		 9. 第八部分: 放一堆超链接
+		 -->
+		 
+		 <!-- 1. 创一个最外层div -->
+		 <div>
+			 
+			<!-- 2. 第一部份: LOGO部分: 嵌套三个div 
+			- 这部分是一个div整体，然后又下分了三个div
+			  - div是默认换行的，所以会用到浮动
+			- img标签是写在div标签中间的，相当于在div里包含了其他标签，而样式(class, style等)是写在div属性里的
+			- div默认换行：要显示在同一行，必须浮动
+			- 挤在一起：指定宽度width为33%
+			- 高度不一致：指定高度为60px
+			- 设置边框border：可以分开指定边框的各个属性，也可以直接在border里空格隔开指定每种属性。
+			-->
+			<div>
+				<div class="logo">
+					<img src="../img/logo2.png"/>
+				</div>
+				<div class="logo">
+					<img src="../img/header.jpg"/>
+				</div>
+				<div class="logo">
+					<a href="#">登录</a>
+					<a href="#">注册</a>
+					<a href="#">购物车</a>
+				</div>
+			</div>
+			
+			<!-- 清除浮动的空模块：否则第二部分会和第一部分叠在一起 -->
+			<div style="clear: both;"></div>
+			
+			<!-- 3. 第二部分: 导航栏部分 : 放置5个超链接 
+			- 不在第一部分和第二部分之间添加一个清除浮动的空模块的话，两个部分会叠在一起
+			- 背景颜色的关键字：background-color是样式关键字，而bgcolor是属性关键字，注意区分
+			- 超链接字体样式：可以指定class，并在上方style里统一修改
+			- 超链接的下划线可以去掉：text-decoration: none;
+			- 超链接文字显示贴上边框，想要上下居中：line-height, 设置行间距
+			  - 一般浏览器的默认行间距是：20 px
+			  - 这里取个巧：行间距设置为同height同样的值，则可以上下居中，相当于本文字的基准线距离虚无的上一行或下一行都是height的高度
+			-->
+			<div style="background-color: black; height: 50px;">
+				<a href="#" class="amenu">首页</a>
+				<a href="#" class="amenu">手机数据</a>
+				<a href="#" class="amenu">电脑办公</a>
+				<a href="#" class="amenu">鞋靴箱包</a>
+				<a href="#" class="amenu">米面粮油</a>
+			</div>
+			
+			<!-- 4. 第三部分: 轮播图 
+			- 不是本部分重点，仍然按静态图片
+			- 图片放缩：图片超出页面，可width 100% 放缩
+			-->
+			<div>
+				<img src="../img/part3.jpg" width="100%"/>
+			</div>
+			
+			<!-- 5. 第四部分: 原三行7列商品图
+			划分大区域(3div)：上面一行独立div，下面一行的两部分div需要浮动放在同一行
+			-->
+			<div>
+				<!-- 第一行：文字+图片 -->
+				<div><h2>最新商品<img src="../img/title2.jpg"/></h2></div>
+				
+				<!-- 第二行左侧图片 
+				- 设置这个div占比：大概15% (width)
+				- 设置高：根据图片高度
+				- 需要和第三部分在一行：设置浮动left
+				- 如果设置显示边框：可以看到图片并没有填满，设置图片宽高100%填满次div
+				  - 注意：当写入width="100%"后，图片会变高超出边框，这里先不写
+				-->
+				<div style="width: 15%; heigth: 480px; float: left; ">
+					<!-- <img src="../img/big01.jpg" width="100%" height="100%" /> -->
+					<img src="../img/big01.jpg" height="100%"/>
+				</div>
+				
+				<!-- 第二行右侧多图 
+				- 设置这个div的宽度占比：84% (对应上一部分是15%)
+				  - 注意：如果是85%，严丝合缝，会因为有边框在而顶到第二行，因此可以稍小一点不影响
+				- 设置高度：可以和上一部分一致
+				- 设置浮动：可以和第二部分放在同一行
+				- 写代码时显示边框：更好地把控细节
+				
+				第一个大图:
+				- 宽：差不多是一半，因此设为百分比 50%；高：按照左侧大图的高的一半设置像素值
+				
+				剩余小图：
+				- 宽：按50%的三等分；高：与第一个大图的高一致
+				-->
+				<div style="width: 84%; height: 480px; float: left;">
+					<div style="width: 50%; height: 240px; float: left;">
+						<img src="../img/middle01.jpg" width="100%" height="100%"/>
+					</div>
+					
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					
+				</div>
+			</div>
+			
+			<!-- 6. 第五部分: 直接放一张图片 -->
+			<div>
+				<img src="../img/ad.jpg" width="100%"/>
+			</div>
+			
+			<!-- 7. 第六部分: 抄第四部分的 -->
+			<div>
+				<!-- 第一行：文字+图片 -->
+				<div><h2>热门商品<img src="../img/title2.jpg"/></h2></div>
+				
+				<!-- 第二行左侧图片 
+				- 设置这个div占比：大概15% (width)
+				- 设置高：根据图片高度
+				- 需要和第三部分在一行：设置浮动left
+				- 如果设置显示边框：可以看到图片并没有填满，设置图片宽高100%填满次div
+				  - 注意：当写入width="100%"后，图片会变高超出边框，这里先不写
+				-->
+				<div style="width: 15%; heigth: 480px; float: left; ">
+					<!-- <img src="../img/big01.jpg" width="100%" height="100%" /> -->
+					<img src="../img/big01.jpg" height="100%"/>
+				</div>
+				
+				<!-- 第二行右侧多图 
+				- 设置这个div的宽度占比：84% (对应上一部分是15%)
+				  - 注意：如果是85%，严丝合缝，会因为有边框在而顶到第二行，因此可以稍小一点不影响
+				- 设置高度：可以和上一部分一致
+				- 设置浮动：可以和第二部分放在同一行
+				- 写代码时显示边框：更好地把控细节
+				
+				第一个大图:
+				- 宽：差不多是一半，因此设为百分比 50%；高：按照左侧大图的高的一半设置像素值
+				
+				剩余小图：
+				- 宽：按50%的三等分；高：与第一个大图的高一致
+				-->
+				<div style="width: 84%; height: 480px; float: left;">
+					<div style="width: 50%; height: 240px; float: left; ">
+						<img src="../img/middle01.jpg" width="100%" height="100%"/>
+					</div>
+					
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					<div class="product">
+						<img src="../img/small06.jpg" /><br />
+						<p>洗衣机</p>
+						<p>￥999</p>
+					</div>
+					
+				</div>
+			</div>
+			
+			<!-- 8. 第七部分: 放置一张图片 -->
+			<div>
+				<img src="../img/footer.jpg" width="100%"/>
+			</div>
+			
+			<!-- 9. 第八部分: 放一堆超链接 
+			- 文字需要居中：style="text-align: center;"
+			-->
+			<div style="text-align: center;">
+				<a href="#">关于我们</a>
+				<a href="#">联系我们</a>
+				<a href="#">招贤纳士</a>
+				<a href="#">法律声明</a>
+				<a href="#">友情链接</a>
+				<a href="#">支付方式</a>
+				<a href="#">配送方式</a>
+				<a href="#">服务声明</a>
+				<a href="#">广告声明</a>
+				<br />
+				Copyright © 2005-2016 传智商城 版权所有
+			</div>
+			
+		 </div>
+		 <!-- 编写完成后：删掉辅助的border -->
+	</body>
+</html>

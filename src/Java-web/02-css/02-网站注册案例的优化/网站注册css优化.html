@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.logo{
+				float: left;
+				width: 33%;
+				height: 60px;
+				/* border-style: solid;
+				border-width: 1px;
+				border-color: red; */
+				/* border: 1px red solid; */
+				line-height: 60px;
+			}
+			
+			.amenu{
+				color: white;
+				text-decoration: none;<!--去掉下划线：文字装饰为none-->
+				height: 50px;
+				line-height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 步骤分析：
+		1. 总共是5部分
+		2. 第一部分是logo部分
+		3. 第二部分是导航菜单
+		4. 第三部分是注册部分：重点 (其余部分可以直接复制现成的)
+		5. 第四部分是footer图片
+		6. 第五部分是一堆超链接 
+		-->
+		
+		<div>
+			<!-- 第一部分是logo部分 -->
+			<div>
+				<div class="logo">
+					<img src="../img/logo2.png"/>
+				</div>
+				<div class="logo">
+					<img src="../img/header.jpg"/>
+				</div>
+				<div class="logo">
+					<a href="#">登录</a>
+					<a href="#">注册</a>
+					<a href="#">购物车</a>
+				</div>
+			</div>
+			
+			<!-- 清除浮动的空模块：否则第二部分会和第一部分叠在一起 -->
+			<div style="clear: both;"></div>
+			
+			<!-- 第二部分是导航菜单 -->
+			<div style="background-color: black; height: 50px;">
+				<a href="#" class="amenu">首页</a>
+				<a href="#" class="amenu">手机数据</a>
+				<a href="#" class="amenu">电脑办公</a>
+				<a href="#" class="amenu">鞋靴箱包</a>
+				<a href="#" class="amenu">米面粮油</a>
+			</div>
+			
+			<!-- 第三部分是注册部分 
+			结构分析：一共三层：
+			- 最外层的div；中间层的白色背景框；里层的注册信息模块。
+			
+			最外层：
+			style的背景图片格式：background:url(../xx.jpg);
+			style的背景颜色设置：background-color:xx;
+			
+			中间层：
+			设置宽高、背景颜色、边框等
+			设置绝对位置：距离上、左外边框的距离，使中间盒子位于正确的位置
+			
+			最里层：
+			信息多：要整齐，还是表格的格式更好，可以内嵌 10*2 表格
+			调整表格位置：设置边框；
+				- align：只能调整左右居中
+				- 上下居中：可以通过盒子padding调整，这时表格会撑大，需要调整其他数值；或者调整中间层的大小，把表格正好放在中间。
+			-->
+			<div style="background: url(../img/regist_bg.jpg); height: 600px;">
+				<div style="width: 40%; height: 50%; border: 5px solid grey; background-color: white; position: absolute; top: 180px; left: 350px; padding: 60px;">
+					<table width="80%" height="80%" align="center">
+						<tr>
+							<td colspan="2"><font color="blue" size="5">用户注册</font> USER REGISTER</td>
+						</tr>
+						<tr>
+							<td>用 户 名：</td>
+							<td>
+								<input type="text" placeholder="请输入姓名"/>
+							</td>
+						</tr>
+						<tr>
+							<td>密 码：</td>
+							<td>
+								<input type="password" placeholder="请输入密码"/>
+							</td>
+						</tr>
+						<tr>
+							<td>确认密码：</td>
+							<td>
+								<input type="password" placeholder="请再次输入密码"/>
+							</td>
+						</tr>
+						<tr>
+							<td>email：</td>
+							<td>
+								<input type="email" placeholder="请输入邮箱"/>
+							</td>
+						</tr>
+						<tr>
+							<td>姓 名：</td>
+							<td>
+								<input type="text" placeholder="请输入姓名"/>
+							</td>
+						</tr>
+						<tr>
+							<td>性 别：</td>
+							<td>
+								<input type="radio" name="sex"/>男
+								<input type="radio" name="sex"/>女
+							</td>
+						</tr>
+						<tr>
+							<td>出生日期：</td>
+							<td>
+								<input type="date"/>
+							</td>
+						</tr>
+						<tr>
+							<td>验 证 码：</td>
+							<td>
+								<input type="text"/>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="submit" value="注册"/>
+							</td>
+						</tr>
+						
+					</table>
+				</div>
+			</div>
+			
+			<!-- 第四部分是footer图片 -->
+			<div>
+				<img src="../img/footer.jpg" width="100%"/>
+			</div>
+			
+			<!-- 第五部分是一堆超链接 -->
+			<div style="text-align: center;">
+				<a href="#">关于我们</a>
+				<a href="#">联系我们</a>
+				<a href="#">招贤纳士</a>
+				<a href="#">法律声明</a>
+				<a href="#">友情链接</a>
+				<a href="#">支付方式</a>
+				<a href="#">配送方式</a>
+				<a href="#">服务声明</a>
+				<a href="#">广告声明</a>
+				<br />
+				Copyright © 2005-2016 传智商城 版权所有
+			</div>
+		</div> 
+	</body>
+</html>
