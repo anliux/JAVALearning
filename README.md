@@ -4,7 +4,7 @@
 ## 目录
 
 ### 00-基础知识
-- [数据结构小结..待整理]
+- [数据结构与算法小结..待整理]
 - [Git使用小结 (Mac版)](https://github.com/anliux/JAVALearning/blob/master/notes/git.md)
 - [Linux常用命令小结..待整理]
 - [软件工程小结..待整理]
